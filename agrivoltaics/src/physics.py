@@ -206,6 +206,9 @@ RUE_COMP = {"wheat": 0.0, "rice": 0.0, "maize": 0.0, "soybean": 0.0, "potato": 0
 if VARIANT == "calibrated":
     RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp.json"))))
 HI_SHADE = {"wheat": 0.4, "rice": 0.5, "maize": 0.6, "soybean": 0.5, "potato": 0.2}
+if VARIANT == "field":      # fitted to the field trials themselves (optimistic bound), maize HI unaffected
+    RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp_field.json"))))
+    HI_SHADE["maize"] = 0.0
 CRIT_WINDOW = (0.45, 0.65)   # fraction of the thermal-time requirement
 PARAM_NAMES = ["Tsum", "HI", "I50A", "I50B", "Tbase", "Topt", "RUE", "I50maxH", "I50maxW",
                "Theat", "Text", "SCO2", "Swater", "root"]

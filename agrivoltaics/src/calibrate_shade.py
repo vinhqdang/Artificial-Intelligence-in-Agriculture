@@ -55,7 +55,24 @@ def interp(df, c, s):
     return float(np.interp(s, x.shading, x.rel))
 
 
+FIELD = {"wheat": (0.30, 0.92), "rice": (0.25, 0.842), "maize": (0.35, 0.833), "potato": (0.30, 0.964),
+         "soybean": (0.40, 0.50)}   # soybean: Laub legumes (no field trial supplied)
+
+
+def fit_field(dt):
+    saved = P.HI_SHADE["maize"]; P.HI_SHADE["maize"] = 0.0
+    cand = np.round(np.arange(0.0, 2.01, 0.1), 2); out = {}
+    allr = pd.concat([curve(dt, {c: v for c in CROPS}).assign(c=v) for v in cand])
+    for c in CROPS:
+        err = [(interp(allr[allr.c == v], c, FIELD[c][0]) - FIELD[c][1]) ** 2 for v in cand]
+        out[c] = float(cand[int(np.argmin(err))])
+    P.HI_SHADE["maize"] = saved
+    json.dump(out, open(f"{ROOT}/data/rue_comp_field.json", "w"), indent=1); print("field", out)
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "field":
+        fit_field(subset()); sys.exit()
     dt = subset()
     cand = np.round(np.arange(0.0, 1.61, 0.1), 2)
     res = {}
