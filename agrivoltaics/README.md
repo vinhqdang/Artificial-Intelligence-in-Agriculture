@@ -1,21 +1,16 @@
-# SALS: stress-aware light sharing for climate-resilient agrivoltaics
+# Learning when to share sunlight: differentiable simulation and learned tracker control for agrivoltaics
 
-Code, data pipeline and manuscript for the study *"Learning to share sunlight:
-differentiable-simulation design and control of climate-resilient agrivoltaics
-across the world's staple croplands"* (prepared for *Artificial Intelligence in
-Agriculture*).
+Code, data pipeline and manuscript for a study prepared for *Artificial Intelligence in
+Agriculture*.
 
-SALS learns, end-to-end through a differentiable agrivoltaic simulator,
-
-* a **design network** that chooses the ground coverage ratio of single-axis
-  tracker rows for a site from its crop and climate, and
-* a **control network** that sets the daily light-sharing level of the trackers
-  from the crop's phenological stage, soil water and the same-day weather
-  forecast,
-
-so that electricity is maximised while at least 90 % of the open-field crop
-yield is retained, across 400 cropland sites (wheat, rice, maize, soybean,
-potato), 19 seasons and four warming levels (baseline, +1.5, +2, +3 °C).
+A differentiable agrivoltaic simulator (solar geometry, single-axis trackers with backtracking,
+PV output, crop light and microclimate, soil water, SIMPLE crop model with a flowering-stage
+shade penalty) is used to train a neural controller (SALS) that sets the daily light-sharing
+level of the trackers, maximising electricity under a 90 % yield-retention floor. All
+controllers are compared under the same deployable protocol: the array density (GCR) of a site
+is chosen from its 2001-2014 seasons only, and performance is measured on geographically
+held-out sites and on the years 2015-2019, for 400 crop-site pairs (wheat, rice, maize,
+soybean, potato) in baseline, +1.5, +2 and +3 degC climates.
 
 ## Layout
 
@@ -25,28 +20,25 @@ potato), 19 seasons and four warming levels (baseline, +1.5, +2, +3 °C).
 | `src/download_weather.py` | NASA POWER daily weather 2001-2020 |
 | `src/physics.py` | solar geometry, trackers, PV, crop light, FAO-56 ET0, SIMPLE crop model (PyTorch) |
 | `src/data.py` | season tensors for the four climates |
-| `src/simulate.py` | differentiable day-by-day rollout |
-| `src/sals.py` | SALS networks, training objective and references |
-| `src/run_train.py` | training of SALS and ablations |
-| `src/evaluate.py` | baselines, oracle and held-out evaluation |
-| `src/global_assess.py` | global assessment, canopy-cooling sensitivity, trajectories |
-| `src/analysis.py` | tables and figures |
+| `src/simulate.py` | differentiable day-by-day rollout, forecast noise |
+| `src/sals.py` | controller, training objective, rule baselines, behaviour-cloning warm start |
+| `src/run_train.py` | training (seeds, spatial splits, ablations, floor-conditioned and chance-constrained variants) |
+| `src/evaluate_grid.py` | evaluation of all controllers over a GCR grid on held-out sites (restartable) |
+| `src/analysis.py`, `src/trajectories.py`, `src/run_extra.py` | history-based design selection, tables, statistics, figures, extra experiments |
+| `src/validate_pv.py` | benchmark of the PV model against PVGIS |
+| `src/run_all_training.sh`, `src/run_all_eval.sh`, `src/run_all_extra.sh` | experiment queues |
 | `data/sites.csv` | the 400 crop-site pairs |
-| `results/` | evaluation outputs (CSV) and trained models |
+| `results/` | result tables (CSV) |
 | `manuscript/` | LaTeX source (elsarticle) and figures |
 
 ## Reproduction
 
 ```bash
-pip install torch numpy pandas scipy xarray netCDF4 matplotlib cartopy
-# inputs: SPAM 2010 v2r0 harvested area CSV, GGCMI Phase 3 calendars (see select_sites.py)
-python src/select_sites.py
-python src/download_weather.py
-python src/data.py
-python src/run_train.py sals_main
-bash src/run_queue.sh
-python src/analysis.py
+pip install torch numpy pandas scipy pyarrow xarray netCDF4 matplotlib cartopy
+# inputs: SPAM 2010 v2r0 harvested / physical area CSV, GGCMI Phase 3 calendars (see select_sites.py)
+python src/select_sites.py && python src/download_weather.py && python src/data.py
+bash src/run_all_training.sh && bash src/run_all_eval.sh && bash src/run_all_extra.sh
 cd manuscript && pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
 
-Everything runs on a 4-core CPU; the main training takes about one hour.
+The pipeline runs on a 4-core CPU; each training run takes about 20 minutes.

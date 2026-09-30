@@ -1,0 +1,61 @@
+crop,scenario,system,change
+wheat,baseline,Open field,0.0
+wheat,+1.5C,Open field,-0.011497521844128222
+wheat,+2C,Open field,1.0994212391305602
+wheat,+3C,Open field,2.6907295613254556
+wheat,baseline,Stress rule,-8.894869462189881
+wheat,+1.5C,Stress rule,-8.906964911771965
+wheat,+2C,Stress rule,-7.915185565881333
+wheat,+3C,Stress rule,-6.527568679507323
+wheat,baseline,SALS,-9.253779593371036
+wheat,+1.5C,SALS,-9.315276937604999
+wheat,+2C,SALS,-8.337777868442476
+wheat,+3C,SALS,-6.86139305247141
+rice,baseline,Open field,0.0
+rice,+1.5C,Open field,-9.40896114854175
+rice,+2C,Open field,-11.597661264282412
+rice,+3C,Open field,-18.10934498481922
+rice,baseline,Stress rule,-9.46602351574991
+rice,+1.5C,Stress rule,-18.55783459720134
+rice,+2C,Stress rule,-20.63145263931816
+rice,+3C,Stress rule,-26.98167464046568
+rice,baseline,SALS,-9.270402461580108
+rice,+1.5C,SALS,-18.665191153586058
+rice,+2C,SALS,-21.002227126786178
+rice,+3C,SALS,-27.021949157103563
+maize,baseline,Open field,0.0
+maize,+1.5C,Open field,-11.096539373941727
+maize,+2C,Open field,-15.028951487180109
+maize,+3C,Open field,-23.171689642225147
+maize,baseline,Stress rule,-9.63436698558382
+maize,+1.5C,Stress rule,-19.750997818779492
+maize,+2C,Stress rule,-23.17738945729563
+maize,+3C,Stress rule,-30.74102722387082
+maize,baseline,SALS,-10.067001701933542
+maize,+1.5C,SALS,-19.975601426103562
+maize,+2C,SALS,-23.470671846222167
+maize,+3C,SALS,-30.8828466570889
+soybean,baseline,Open field,0.0
+soybean,+1.5C,Open field,-0.9077052787577422
+soybean,+2C,Open field,-0.40132850341677573
+soybean,+3C,Open field,-0.9388296737464108
+soybean,baseline,Stress rule,-10.03144411109117
+soybean,+1.5C,Stress rule,-10.64525367605843
+soybean,+2C,Stress rule,-10.304370130290996
+soybean,+3C,Stress rule,-10.749563326264688
+soybean,baseline,SALS,-11.501675915710162
+soybean,+1.5C,SALS,-12.213849317318026
+soybean,+2C,SALS,-11.912080052901874
+soybean,+3C,SALS,-12.47477981001348
+potato,baseline,Open field,0.0
+potato,+1.5C,Open field,5.453842603062498
+potato,+2C,Open field,7.520405876738345
+potato,+3C,Open field,10.20735015346077
+potato,baseline,Stress rule,-8.653342988393254
+potato,+1.5C,Stress rule,-3.831258797456649
+potato,+2C,Stress rule,-1.9265488336698722
+potato,+3C,Stress rule,0.4681366597059977
+potato,baseline,SALS,-9.011607110312292
+potato,+1.5C,SALS,-4.07944935034632
+potato,+2C,SALS,-2.206210546997356
+potato,+3C,SALS,0.05540900838392204

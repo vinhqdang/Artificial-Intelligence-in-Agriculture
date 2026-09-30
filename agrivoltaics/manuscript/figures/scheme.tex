@@ -9,36 +9,32 @@
 \begin{tikzpicture}[font=\small, >=Latex,
   box/.style={draw, rounded corners=2pt, inner sep=4pt, fill=white, minimum height=0.9cm},
   in/.style={box, fill=blue!6}, net/.style={box, fill=orange!15}, phys/.style={box, fill=green!8}, out/.style={box, fill=red!6}]
-% inputs
 \node[in] (w) {\tb{Daily weather\\ NASA POWER}};
 \node[in, below=0.35cm of w] (s) {\tb{Site \& crop\\ SPAM, GGCMI}};
 \node[in, below=0.35cm of s] (c) {\tb{Warming level\\ $\Delta T$, CO$_2$}};
-% networks
-\node[net, right=1.0cm of s, yshift=1.1cm] (D) {\tb{Design network\\ $g=D_\theta(\mathbf{z})$}};
-\node[net, below=0.9cm of D] (pi) {\tb{Control network\\ $u_t=\pi_\omega(\mathbf{x}_t)$}};
-% physics chain
+\node[box, right=1.0cm of s, yshift=1.25cm, minimum width=3.3cm] (D) {\tb{Design rule (history)\\ $g$: largest GCR with\\ mean $r\ge\rho$ in 2001--2014}};
+\node[net, below=0.9cm of D, minimum width=3.3cm] (pi) {\tb{Control network\\ $u_t=\pi_\omega(\mathbf{x}_t;g)$}};
 \node[phys, right=1.1cm of D, minimum width=3.6cm] (pv) {\tb{Trackers: $\phi=(1-u)\phi_{\rm bt}+u\,\phi_{\rm sh}$\\ PV electricity $E_t$}};
 \node[phys, below=0.35cm of pv, minimum width=3.6cm] (li) {\tb{Crop light $s_t$, canopy $T_{\max}$,\\ ET$_0$ under the modules}};
-\node[phys, below=0.35cm of li, minimum width=3.6cm] (cr) {\tb{Soil water (ARID) +\\ SIMPLE crop model}};
+\node[phys, below=0.35cm of li, minimum width=3.6cm] (cr) {\tb{Soil water (ARID), SIMPLE crop\\ model + flowering shade penalty}};
 \draw[->] (pv) -- (li); \draw[->] (li) -- (cr);
 \begin{scope}[on background layer]
 \node[draw=green!50!black, dashed, rounded corners, inner sep=6pt, fit=(pv)(cr), label={[font=\small\bfseries]above:Differentiable simulator (hourly/daily)}] (sim) {};
 \end{scope}
 \draw[->] (w.east) -- ++(0.4,0) |- (D.west);
-\draw[->] (s.east) -- (D.west);
-\draw[->] (s.east) -- (pi.west);
+\draw[->] (s.east) -- ++(0.4,0) |- (D.west);
+\draw[->] (s.east) -- ++(0.4,0) |- (pi.west);
 \draw[->] (c.east) -- ++(0.4,0) |- (pi.west);
+\draw[->] (D.south) -- node[right, font=\footnotesize]{$g$} (pi.north);
 \draw[->] (D.east) -- (pv.west);
 \draw[->] (pi.east) -- (pv.west);
-\draw[->, thick, blue!60!black] (cr.west) -- ++(-0.6,0) |- node[pos=0.8, below, font=\footnotesize]{state $\mathbf{x}_{t+1}$} (pi.south);
-% outputs
-\node[out, right=1.0cm of li] (o) {\tb{Season outcome\\ retention $r=Y/Y^{\rm open}$\\ electricity $e=E/E_{\rm PV}$}};
+\draw[->, thick, blue!60!black] (cr.west) -- ++(-0.6,0) |- node[pos=0.8, below, font=\footnotesize]{state, noisy forecast} (pi.south);
+\node[out, anchor=west] (o) at ($(sim.east |- li)+(0.9,0.3)$) {\tb{Season outcome\\ retention $r=Y/Y^{\rm open}$\\ electricity $e=E/E_{\rm PV}$}};
 \draw[->] (sim.east |- o.west) -- (o.west);
-\node[out, below=0.45cm of o, draw] (L) {\tb{$\mathcal{L}=-e+\mu_1[\rho-r]_+ +\mu[\rho-r]_+^2$}};
+\node[out, below=0.45cm of o, draw] (L) {\tb{$\mathcal{L}=-e+\mu_1[\rho-r]_++\mu_2[\rho-r]_+^2$}};
 \draw[->] (o) -- (L);
-\coordinate (gx) at ($(D.west)+(-0.2,0)$);
-\draw[dashed, red!70!black, thick] (L.south) -- ++(0,-0.6) coordinate (gb) -| node[pos=0.25, below, font=\footnotesize]{exact gradients: back-propagation through the 365-day season} ($(gx)+(0,-3.3)$) coordinate (gl);
-\draw[->, dashed, red!70!black, thick] (gl) -- ($(gx |- pi.south)+(0,-0.1)$) -- ++(0,0.1) |- ($(pi.west)+(0,-0.2)$);
-\draw[->, dashed, red!70!black, thick] (gl) -- ($(gx)+(0,-0.2)$) -- ($(D.west)+(0,-0.2)$);
+\coordinate (gx) at ($(pi.west)+(-0.2,0)$);
+\draw[dashed, red!70!black, thick] (L.south) -- ++(0,-0.6) -| node[pos=0.25, below, font=\footnotesize]{exact gradients: back-propagation through the 365-day season} ($(gx)+(0,-2.1)$) coordinate (gl);
+\draw[->, dashed, red!70!black, thick] (gl) -- ($(gx)+(0,-0.05)$) -- ($(pi.west)+(0,-0.05)$);
 \end{tikzpicture}
 \end{document}

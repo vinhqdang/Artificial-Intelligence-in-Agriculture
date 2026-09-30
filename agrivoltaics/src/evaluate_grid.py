@@ -43,7 +43,8 @@ if __name__ == "__main__":
         methods[m] = load_ctrl(m)
     D = A.load_all(); refs = get_refs(D)
     test_site = A.site_split(split)
-    out = []
+    cache = f"{ROOT}/results/grid_cache/{tag}"          # one file per (scenario, kappa, method): restartable
+    os.makedirs(cache, exist_ok=True)
     t0 = time.time()
     for scen in scens:
         d = D[scen]
@@ -54,14 +55,21 @@ if __name__ == "__main__":
                     y_open=refs[scen][0][idx].numpy(), e_pv=refs[scen][1][idx].numpy())
         for kappa in kappas:
             for name, ctrl in methods.items():
+                fn = f"{cache}/{scen}_{kappa}_{name.replace(' ', '_')}.parquet"
+                if os.path.exists(fn):
+                    continue
+                parts = []
                 for g in GRID:
                     gg = torch.full((len(idx),), g)
                     if ctrl is None:
                         y, e = A.evaluate(dt, gg, kappa=kappa)
                     else:
                         y, e = A.evaluate(dt, gg, controller=ctrl, kappa=kappa)
-                    out.append(pd.DataFrame(dict(base, method=name, scenario=scen, kappa=kappa, g=g,
-                                                 y=y.numpy(), e=e.numpy())))
+                    parts.append(pd.DataFrame(dict(base, method=name, scenario=scen, kappa=kappa, g=g,
+                                                   y=y.numpy(), e=e.numpy())))
+                pd.concat(parts).to_parquet(fn + ".tmp", index=False); os.replace(fn + ".tmp", fn)
                 print(f"{scen} kappa={kappa} {name} done {time.time() - t0:.0f}s", flush=True)
-        pd.concat(out).to_parquet(f"{ROOT}/results/grid_{tag}.parquet", index=False)
+    files = sorted(os.listdir(cache))
+    pd.concat([pd.read_parquet(f"{cache}/{f}") for f in files if f.endswith(".parquet")]).to_parquet(
+        f"{ROOT}/results/grid_{tag}.parquet", index=False)
     print("saved", tag)

@@ -225,7 +225,7 @@ def upscale(pool, fraction=0.05):
                 cap += a * (2.1 * xc.g).mean() / 1e6                         # TWp
                 prod += a * xc.y.mean(); prod_open += a * xc.y_open.mean()
             rows.append(dict(scenario=scen, method=m, area_Mha=area.sum() * fraction / 1e6, TWh=tw, TWp=cap,
-                             CF=tw / (cap * 8.76) if cap > 0 else np.nan, retention_prod=prod / prod_open))
+                             CF=tw / (cap * 8760.0) if cap > 0 else np.nan, retention_prod=prod / prod_open))
     u = pd.DataFrame(rows); u.to_csv(f"{RES}/upscale.csv", index=False)
     return u
 
@@ -244,7 +244,7 @@ def fig_supply(pool):
         cum_e = (x.w * x.e).cumsum() / 1e6
         ax.plot(cum_a, cum_e / 1000, color=COL[m], lw=1.2, label="SALS (ours)" if m == SALS else m)
         out.append(pd.DataFrame(dict(method=m, area_pct=cum_a.values, PWh=(cum_e / 1000).values)))
-    ax.set_xlim(0, 10); ax.set_xlabel("Share of staple cropland equipped (%)")
+    ax.set_xlim(0, 10); ax.set_xlabel("Staple cropland equipped, best sites first (%)")
     ax.set_ylabel("Electricity (PWh yr$^{-1}$)")
     ymax = max(o[o.area_pct <= 10].PWh.max() for o in out); ax.set_ylim(0, ymax * 1.05)
     ax.legend(fontsize=6, frameon=False)
@@ -285,7 +285,7 @@ def fig_warming(pool):
             ax.plot(range(4), vals, "-o", ms=3, color=col, label=lab, lw=1)
         ax.axhline(0, color="k", lw=0.4); ax.set_xticks(range(4)); ax.set_xticklabels(["0", "1.5", "2", "3"])
         ax.set_title(c, fontsize=8); ax.set_xlabel("Warming (\u00b0C)")
-    axs[0].set_ylabel("Production vs. baseline open field (%)"); axs[-1].legend(fontsize=6, frameon=False)
+    axs[0].set_ylabel("Production vs. baseline (%)"); axs[-1].legend(fontsize=6, frameon=False)
     fig.tight_layout(); fig.savefig(f"{FIG}/warming.pdf", bbox_inches="tight"); fig.savefig(f"{FIG}/warming.png", dpi=200)
     pd.DataFrame(rows).to_csv(f"{RES}/warming_production.csv", index=False)
 
