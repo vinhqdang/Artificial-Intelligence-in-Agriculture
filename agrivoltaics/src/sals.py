@@ -64,7 +64,8 @@ class Controller(nn.Module):
         self.net = nn.Sequential(nn.Linear(n_in, h), nn.SiLU(), nn.Linear(h, h), nn.SiLU(), nn.Linear(h, 1))
 
     def forward(self, f):
-        return torch.sigmoid(self.net(f)[:, 0])
+        # bounded logit keeps a non-vanishing gradient at the extremes (u in [0.007, 0.993])
+        return torch.sigmoid(5.0 * torch.tanh(self.net(f)[:, 0] / 5.0))
 
 
 # ----------------------------------------------------------------------------
@@ -113,25 +114,30 @@ def loss_fn(ret, eratio, rho, mu, mu1=5.0):
 
 
 def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, seed=0,
-          scenarios=SCEN, stress_features=True, log=None, g_range=(0.10, G_MAX)):
-    """Train the density-conditioned controller. Each training season gets a
-    random ground coverage ratio in g_range."""
+          scenarios=SCEN, stress_features=True, log=None, g_site=None, jitter=(-0.05, 0.10),
+          warm_start=True, bc_batches=2, bc_steps=1500):
+    """Train the density-conditioned controller. Each training season is simulated
+    with a GCR close to the density that is sustainable at its site: g_site[s] is a
+    (B,) tensor per scenario (from calibrate_training_gcr), perturbed by a uniform
+    jitter so that the network learns to control a range of densities."""
     torch.manual_seed(seed); np.random.seed(seed)
     ctrl = Controller()
     params = list(ctrl.parameters())
-    opt = torch.optim.Adam(params, lr=lr)
-    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
     pools = {s: torch.where(train_mask[s])[0] for s in scenarios}
     mask_stress = torch.ones(18)
     if not stress_features:  # keep only phenology/time/design/crop information
         mask_stress[[2, 3, 4, 5, 9, 10]] = 0.0
+    if warm_start:
+        behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, bc_batches, bc_steps, seed, log)
+    opt = torch.optim.Adam(params, lr=lr)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
     t0 = time.time()
     n_skipped = 0
     for step in range(steps):
         s = scenarios[step % len(scenarios)]
         idx = pools[s][torch.randint(len(pools[s]), (batch,))]
         d = S._sel(D[s], idx)
-        g = g_range[0] + (g_range[1] - g_range[0]) * torch.rand(batch)
+        g = (g_site[s][idx] + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch)).clamp(G_MIN, G_MAX)
         dd, irr, w = expand_irrigation(d)
         y, e = S.rollout(dd, torch.cat([g, g]), controller=lambda f: ctrl(f * mask_stress), irrigated=irr,
                          noise_seed=seed * 100000 + step)
@@ -155,5 +161,79 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
     return ctrl
 
 
+def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, n_batches, steps, seed, log):
+    """Warm start: imitate the phenology rule (soft targets 0.95 / 0.05) on the
+    states visited by that rule, before fine-tuning through the simulator."""
+    feats, targets = [], []
+    gen = torch.Generator().manual_seed(seed)
+
+    def recorder(f):
+        u = u_phenology(f)
+        keep = f[:, 8] > 0
+        feats.append((f * mask_stress)[keep]); targets.append(u[keep])
+        return u
+    with torch.no_grad():
+        for s in scenarios:
+            for b in range(n_batches):
+                idx = pools[s][torch.randint(len(pools[s]), (batch,), generator=gen)]
+                d = S._sel(D[s], idx)
+                g = (g_site[s][idx] + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch, generator=gen)).clamp(G_MIN, G_MAX)
+                dd, irr, w = expand_irrigation(d)
+                S.rollout(dd, torch.cat([g, g]), controller=recorder, irrigated=irr, noise_seed=seed * 7 + b)
+    X, Y = torch.cat(feats), torch.cat(targets) * 0.9 + 0.05
+    opt = torch.optim.Adam(ctrl.parameters(), lr=3e-3)
+    for it in range(steps):
+        j = torch.randint(len(X), (8192,), generator=gen)
+        loss = nn.functional.binary_cross_entropy(ctrl(X[j]), Y[j])
+        opt.zero_grad(); loss.backward(); opt.step()
+    if log is not None:
+        print(json.dumps(dict(warm_start="phenology rule", samples=len(X), bce=float(loss.detach()))), file=log, flush=True)
+
+
 def wrap(ctrl):
     return lambda f: ctrl(f * ctrl.mask)
+
+
+def u_season(f):
+    """Seasonal sharing: light-sharing rotation during the whole cropping window."""
+    return f[:, 8]
+
+
+def u_phenology(f):
+    """Phenology rule: share light only while the crop is growing (from canopy
+    onset to physiological maturity)."""
+    tt, active = f[:, 0], f[:, 8]
+    return active * ((tt > 0.05) & (tt < 1.0)).float()
+
+
+def u_stress(f):
+    """Expert stress rule: share light in the main growth phase, except on days
+    with a heat-stress forecast or drought, when the trackers shade the crop."""
+    tt, arid, heat, active = f[:, 0], f[:, 3], f[:, 4], f[:, 8]
+    return active * ((tt > 0.1) & (tt < 0.9) & (heat < 0) & (arid < 0.5)).float()
+
+
+@torch.no_grad()
+def calibrate_training_gcr(D, refs, train_mask, rho=0.9, grid=None):
+    """Per training site and climate: largest GCR at which seasonal sharing keeps
+    the mean retention of the site's training seasons >= rho (0.05 if none)."""
+    grid = grid or [0.05 + 0.05 * i for i in range(10)]
+    out = {}
+    for s, d in D.items():
+        idx = torch.where(train_mask[s])[0]
+        dt = _sel_local(d, idx)
+        site = dt["site"].long()
+        best = torch.full((int(d["site"].max()) + 1,), 0.05)
+        for g in grid:
+            y, _ = evaluate(dt, torch.full((len(idx),), g), u_rule=u_season)
+            r = y / refs[s][0][idx].clamp(min=0.05)
+            sums = torch.zeros_like(best).index_add_(0, site, r)
+            cnt = torch.zeros_like(best).index_add_(0, site, torch.ones_like(r))
+            ok = (sums / cnt.clamp(min=1) >= rho) & (cnt > 0)
+            best = torch.where(ok, torch.full_like(best, g), best)
+        out[s] = best[d["site"].long()]            # per season row of the full set
+    return out
+
+
+def _sel_local(d, idx):
+    return S._sel(d, idx)

@@ -234,3 +234,4 @@ agrivoltaics/results/models/*.out
 agrivoltaics/results/models/*.log
 agrivoltaics/results/models/*.done
 agrivoltaics/results/*.out
+agrivoltaics/results/old_saturated/

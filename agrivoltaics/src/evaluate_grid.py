@@ -19,16 +19,7 @@ torch.set_num_threads(4)
 GRID = [round(0.05 + 0.025 * i, 3) for i in range(19)]      # 0.05 ... 0.50
 
 
-def u_season(f):
-    """Seasonal sharing: light-sharing rotation during the whole cropping season."""
-    return f[:, 8]
-
-
-def u_stress(f):
-    """Expert stress rule: share light in the main growth phase, except on days
-    with a heat-stress forecast or drought, when the trackers shade the crop."""
-    tt, arid, heat, active = f[:, 0], f[:, 3], f[:, 4], f[:, 8]
-    return active * ((tt > 0.1) & (tt < 0.9) & (heat < 0) & (arid < 0.5)).float()
+from sals import u_season, u_phenology, u_stress
 
 
 def load_ctrl(name):
@@ -46,7 +37,8 @@ if __name__ == "__main__":
     tag = kw.get("tag", f"split{split}")
     methods = {}
     if kw.get("rules", "1") == "1":
-        methods.update({"AV static": None, "Seasonal sharing": u_season, "Stress rule": u_stress})
+        methods.update({"AV static": None, "Seasonal sharing": u_season, "Phenology rule": u_phenology,
+                        "Stress rule": u_stress})
     for m in models:
         methods[m] = load_ctrl(m)
     D = A.load_all(); refs = get_refs(D)

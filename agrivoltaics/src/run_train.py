@@ -35,14 +35,20 @@ if __name__ == "__main__":
     kw = dict(a.split("=") for a in sys.argv[2:])
     split = int(kw.get("split", 0))
     cfg = dict(rho=0.9, steps=int(kw.get("steps", 300)), batch=512, seed=int(kw.get("seed", 0)),
+               lr=float(kw.get("lr", 1e-3)), warm_start=kw.get("warm", "1") == "1",
                stress_features=kw.get("stress", "1") == "1", scenarios=kw.get("scen", ",".join(A.SCEN)).split(","))
     os.makedirs(f"{ROOT}/results/models", exist_ok=True)
     D = A.load_all()
     refs = get_refs(D)
     tm = train_mask(D, refs, A.site_split(split))
+    fn = f"{ROOT}/results/models/train_gcr_split{split}.pt"
+    if os.path.exists(fn):
+        g_site = torch.load(fn)
+    else:
+        g_site = A.calibrate_training_gcr(D, refs, tm); torch.save(g_site, fn)
     with open(f"{ROOT}/results/models/{name}.log", "w") as log:
         print(json.dumps(dict(cfg, split=split)), file=log, flush=True)
-        ctrl = A.train(D, refs, tm, log=log, **cfg)
+        ctrl = A.train(D, refs, tm, log=log, g_site=g_site, **cfg)
     torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict(cfg, split=split)),
                f"{ROOT}/results/models/{name}.pt")
     print("saved", name)

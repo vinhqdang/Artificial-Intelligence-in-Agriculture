@@ -20,11 +20,11 @@ SCEN = ["baseline", "+1.5C", "+2C", "+3C"]
 SCEN_TEX = {"baseline": "Baseline", "+1.5C": "+1.5\\,\\textdegree C", "+2C": "+2\\,\\textdegree C",
             "+3C": "+3\\,\\textdegree C"}
 RHO, MIN_OPEN, HIST, TEST = 0.9, 0.2, 2014, 2015
-RULES = ["AV static", "Seasonal sharing", "Stress rule"]
+RULES = ["AV static", "Seasonal sharing", "Phenology rule", "Stress rule"]
 SALS = "SALS"
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.spines.top": False,
                      "axes.spines.right": False})
-COL = {"AV static": "#6b7280", "Seasonal sharing": "#059669", "Stress rule": "#7c3aed", SALS: "#c2410c"}
+COL = {"AV static": "#6b7280", "Seasonal sharing": "#059669", "Phenology rule": "#0369a1", "Stress rule": "#7c3aed", SALS: "#c2410c"}
 
 
 # ----------------------------------------------------------------------------
