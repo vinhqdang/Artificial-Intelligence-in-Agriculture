@@ -1,0 +1,17 @@
+static rule GCR per crop {0: 0.15, 1: 0.2, 2: 0.3, 3: 0.25, 4: 0.15}
+baseline AV static (oracle GCR) done
+baseline Seasonal sharing done
+baseline Stress rule done
+baseline SALS (ours) done
++1.5C AV static (oracle GCR) done
++1.5C Seasonal sharing done
++1.5C Stress rule done
++1.5C SALS (ours) done
++2C AV static (oracle GCR) done
++2C Seasonal sharing done
++2C Stress rule done
++2C SALS (ours) done
++3C AV static (oracle GCR) done
++3C Seasonal sharing done
++3C Stress rule done
++3C SALS (ours) done

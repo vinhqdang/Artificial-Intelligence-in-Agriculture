@@ -1,1 +1,33 @@
-To isolate the contribution of the stress-aware inputs, we trained a variant whose control network sees only phenology, time, design and crop, with soil water, ARID, the maximum-temperature, irradiance and ET$_0$ forecasts masked. Both variants were trained for the same budget of 200 steps and evaluated on the held-out seasons. At similar mean retention (0.898 vs 0.897 at present climate), removing the stress inputs reduced the relative electricity from 0.69 to 0.50 and the LER from 1.59 to 1.40. Under +3\,\textdegree C the drop was from 1.67 to 1.42. The stress-blind policy performs like the expert rules: it can learn \emph{when} in the season to share light, but not to respond to the heat and drought of a particular season. Training longer (400 vs 200 steps) added a further 0.04--0.08 to the LER.
+Table~\ref{tab:ablation} reports three ablations. Each variant was trained with the same budget of 200 steps as a reference SALS model and evaluated on the held-out seasons.
+
+\begin{itemize}
+\item \emph{Without stress features}: the control network sees only phenology, time, design and crop, with soil water, ARID and the maximum-temperature, irradiance and ET$_0$ forecasts masked. At similar mean retention, this variant produced 28\% less electricity (700 vs 971\,MWh\,ha$^{-1}$\,yr$^{-1}$) and lowered the LER from 1.59 to 1.40 at present climate and from 1.67 to 1.42 at +3\,\textdegree C. A stress-blind policy performs like the expert rules: it learns \emph{when} in the season to share light, but it cannot respond to the heat and drought of a particular season.
+\item \emph{Without the design network}: every site uses a GCR of 0.3, close to the mean GCR chosen by SALS, and only the controller is learned. The LER fell to 1.42 and 1.43, and compliance dropped to 31--38\%. The benefit of SALS therefore comes from matching the array density to the site's climate and crop: denser at hot, dry sites where shade is cheap, sparser where light limits growth. The same mean density everywhere does not achieve this.
+\item \emph{Trained on the baseline climate only}: the networks were trained on the present climate alone and evaluated in all four climates. They did not learn to exploit the heat-protection value of shade. Their electricity stayed at about 670\,MWh\,ha$^{-1}$\,yr$^{-1}$ and their LER at 1.38--1.40 under all warming levels, whereas the multi-climate model's LER rose from 1.59 to 1.67. This variant was weaker even under the present climate. With a single training seed we cannot separate a regularising effect of the more diverse multi-climate data from optimisation variance, but the result shows that training on projected climates is needed for a policy that remains effective as the climate warms.
+\end{itemize}
+
+Training longer (400 instead of 200 steps) added a further 0.04--0.08 to the LER.
+
+\begin{table}[t]
+\centering
+\caption{Ablation on held-out seasons. $E$: electricity (MWh\,ha$^{-1}$\,yr$^{-1}$); $r$: mean yield retention; C: compliance (\% of seasons with $r\ge0.9$). All ablations were trained for 200 steps and should be compared with SALS (200 steps).}
+\label{tab:ablation}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{Baseline climate} & \multicolumn{4}{c}{+3\,\textdegree C}\\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Variant & $E$ & $r$ & C (\%) & LER & $E$ & $r$ & C (\%) & LER\\
+\midrule
+SALS, full training (400 steps) & 1019 & 0.909 & 49.5 & 1.63 & 1173 & 0.901 & 45.1 & 1.75\\
+\midrule
+SALS (200 steps) & 971 & 0.897 & 47.3 & 1.59 & 1079 & 0.892 & 43.5 & 1.67\\
+w/o stress features & 700 & 0.898 & 33.4 & 1.40 & 706 & 0.906 & 42.7 & 1.42\\
+w/o design network (GCR 0.3) & 734 & 0.889 & 31.2 & 1.42 & 719 & 0.900 & 38.1 & 1.43\\
+trained on baseline climate only & 668 & 0.904 & 41.4 & 1.38 & 676 & 0.910 & 46.6 & 1.40\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Finally, we retrained SALS (200 steps) with a softer floor of $\rho=0.8$ and re-evaluated all baselines with the same floor. The baselines' GCR grids and rules were recalibrated for $\rho=0.8$; the static rule then selects GCR 0.15--0.30. Under the present climate, the static design reached an LER of 1.35--1.36, seasonal sharing 1.59 and the stress rule 1.68 (1184\,MWh\,ha$^{-1}$\,yr$^{-1}$). SALS chose much denser arrays (mean GCR 0.55) and produced 1604\,MWh\,ha$^{-1}$\,yr$^{-1}$, 15\% more than a conventional PV plant with GCR 0.4, at a mean retention of 0.815. Its LER was 1.97, rising to 2.03 at +3\,\textdegree C. The ranking of the methods is therefore robust to the choice of the food-security floor. So is the main weakness of SALS: only 38--41\% of its seasons met the 80\% floor, against 74--85\% for the rules. The floor thus steers where SALS operates on the energy--food frontier, but a penalised average does not guarantee it season by season.

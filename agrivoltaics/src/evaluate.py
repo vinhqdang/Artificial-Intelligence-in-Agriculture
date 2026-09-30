@@ -145,4 +145,5 @@ if __name__ == "__main__":
     models = json.loads(sys.argv[1]) if len(sys.argv) > 1 else {"sals_main": "SALS (ours)"}
     tag = sys.argv[2] if len(sys.argv) > 2 else "main"
     oracle = (sys.argv[3] == "1") if len(sys.argv) > 3 else True
-    main(models, do_oracle=oracle, tag=tag)
+    rho = float(sys.argv[4]) if len(sys.argv) > 4 else 0.9
+    main(models, rho=rho, do_oracle=oracle, tag=tag)
