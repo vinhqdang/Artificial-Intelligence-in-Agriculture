@@ -65,7 +65,7 @@ def precompute(d):
 
 
 def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kappa=KAPPA, record=False,
-            forecast_noise=True, noise_seed=0):
+            forecast_noise=True, noise_seed=0, rho=None, noise_scale=1.0):
     """Simulate a batch. g: (B,) ground-coverage ratio. controller(features)->u (B,),
     or u_seq (B, 365). Returns yield (t ha-1 dry matter), electricity (MWh ha-1),
     and optional daily records."""
@@ -82,7 +82,7 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
     gen = torch.Generator().manual_seed(noise_seed)
     T = d["ghi"].shape[1]
     if forecast_noise and controller is not None:
-        nz = {k: torch.randn(B, T, generator=gen) * sd for k, sd in FORECAST_SD.items()}
+        nz = {k: torch.randn(B, T, generator=gen) * sd * noise_scale for k, sd in FORECAST_SD.items()}
     else:
         nz = None
     rec = {"u": [], "shade": [], "fheat": [], "fwater": []} if record else None
@@ -103,7 +103,11 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
                     fday["tmax"] = day["tmax"] + nz["tmax"][:, t]
                     fday["ghi"] = day["ghi"] * (1 + nz["ghi"][:, t]).clamp(min=0)
                     fday["et0"] = day["et0"] * (1 + nz["et0"][:, t]).clamp(min=0)
-                u = controller(features(st, p, fday, t, g, irrigated, crop_onehot, d["lat"])) * day["active"]
+                fin = features(st, p, fday, t, g, irrigated, crop_onehot, d["lat"])
+                if rho is not None:   # food-security floor as an extra controller input
+                    rcol = rho if torch.is_tensor(rho) else torch.full((B,), float(rho))
+                    fin = torch.cat([fin, rcol[:, None]], 1)
+                u = controller(fin) * day["active"]
             elif u_seq is not None:
                 u = u_seq[:, t] * day["active"]
             else:

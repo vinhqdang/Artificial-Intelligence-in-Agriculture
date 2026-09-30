@@ -87,7 +87,7 @@ def references(d, chunk=4000):
     return y_open, e_pv
 
 
-def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None):
+def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=None, noise_scale=1.0):
     """Area-weighted yield and electricity for a design g (B,) and controller."""
     B = d["lat"].shape[0]
     y_out, e_out = torch.zeros(B), torch.zeros(B)
@@ -97,7 +97,8 @@ def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None):
             dd, irr, w = expand_irrigation(S._sel(d, idx))
             gg = torch.cat([g[idx], g[idx]])
             ctrl = controller if controller is not None else u_rule
-            y, e = S.rollout(dd, gg, controller=ctrl, irrigated=irr, kappa=S.KAPPA if kappa is None else kappa)
+            y, e = S.rollout(dd, gg, controller=ctrl, irrigated=irr, kappa=S.KAPPA if kappa is None else kappa,
+                             rho=rho, noise_scale=noise_scale)
             # rainfed and irrigated sub-fields each carry their own array:
             # both yield and electricity are area-weighted
             y_out[idx] = combine(y, w); e_out[idx] = combine(e, w)
@@ -107,28 +108,36 @@ def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None):
 # ----------------------------------------------------------------------------
 # Training
 # ----------------------------------------------------------------------------
-def loss_fn(ret, eratio, rho, mu, mu1=5.0):
-    """Exact-penalty (hinge) plus quadratic penalty for the retention floor."""
+def loss_fn(ret, eratio, rho, mu, mu1=5.0, chance=None):
+    """Exact-penalty (hinge) plus quadratic penalty for the retention floor.
+    chance=(share, mu_c): additionally penalise a batch share of seasons below the
+    floor that exceeds 1 - share (smooth indicator, temperature 0.01)."""
     short = torch.relu(rho - ret)
-    return (-eratio + mu1 * short + mu * short ** 2).mean()
+    loss = (-eratio + mu1 * short + mu * short ** 2).mean()
+    if chance is not None:
+        viol = torch.sigmoid((rho - ret) / 0.01).mean()
+        loss = loss + chance[1] * torch.relu(viol - (1 - chance[0]))
+    return loss
 
 
 def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, seed=0,
           scenarios=SCEN, stress_features=True, log=None, g_site=None, jitter=(-0.05, 0.10),
-          warm_start=True, bc_batches=2, bc_steps=1500):
+          warm_start=True, bc_batches=2, bc_steps=1500, rho_levels=None, g_site_by_rho=None, chance=None):
     """Train the density-conditioned controller. Each training season is simulated
     with a GCR close to the density that is sustainable at its site: g_site[s] is a
     (B,) tensor per scenario (from calibrate_training_gcr), perturbed by a uniform
     jitter so that the network learns to control a range of densities."""
     torch.manual_seed(seed); np.random.seed(seed)
-    ctrl = Controller()
+    n_in = 19 if rho_levels else 18           # rho-conditioned controllers get the floor as input
+    ctrl = Controller(n_in=n_in)
     params = list(ctrl.parameters())
     pools = {s: torch.where(train_mask[s])[0] for s in scenarios}
-    mask_stress = torch.ones(18)
+    mask_stress = torch.ones(n_in)
     if not stress_features:  # keep only phenology/time/design/crop information
         mask_stress[[2, 3, 4, 5, 9, 10]] = 0.0
     if warm_start:
-        behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, bc_batches, bc_steps, seed, log)
+        behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, bc_batches, bc_steps, seed, log,
+                        rho_levels=rho_levels, g_site_by_rho=g_site_by_rho)
     opt = torch.optim.Adam(params, lr=lr)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
     t0 = time.time()
@@ -137,13 +146,20 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
         s = scenarios[step % len(scenarios)]
         idx = pools[s][torch.randint(len(pools[s]), (batch,))]
         d = S._sel(D[s], idx)
-        g = (g_site[s][idx] + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch)).clamp(G_MIN, G_MAX)
+        if rho_levels:
+            lev = torch.randint(len(rho_levels), (batch,))
+            rho_b = torch.tensor(rho_levels)[lev]
+            base = torch.stack([g_site_by_rho[r][s][idx] for r in rho_levels])[lev, torch.arange(batch)]
+            rho_in = torch.cat([rho_b, rho_b])
+        else:
+            rho_b, base, rho_in = rho, g_site[s][idx], None
+        g = (base + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch)).clamp(G_MIN, G_MAX)
         dd, irr, w = expand_irrigation(d)
         y, e = S.rollout(dd, torch.cat([g, g]), controller=lambda f: ctrl(f * mask_stress), irrigated=irr,
-                         noise_seed=seed * 100000 + step)
+                         noise_seed=seed * 100000 + step, rho=rho_in)
         ret = combine(y, w) / refs[s][0][idx].clamp(min=0.05)
         eratio = combine(e, w) / refs[s][1][idx]
-        loss = loss_fn(ret, eratio, rho, mu)
+        loss = loss_fn(ret, eratio, rho_b, mu, chance=chance)
         opt.zero_grad(); loss.backward()
         finite = torch.isfinite(loss) and all(torch.isfinite(q.grad).all() for q in params if q.grad is not None)
         if finite:
@@ -154,14 +170,15 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
         sched.step()
         if log is not None and step % 10 == 0:
             msg = dict(step=step, scen=s, loss=float(loss.detach()), ret=float(ret.detach().mean()),
-                       comply=float((ret >= rho).float().mean()), eratio=float(eratio.detach().mean()),
+                       comply=float((ret >= rho_b).float().mean()), eratio=float(eratio.detach().mean()),
                        skipped=n_skipped, t=round(time.time() - t0))
             print(json.dumps(msg), flush=True, file=log)
     ctrl.mask = mask_stress
     return ctrl
 
 
-def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, n_batches, steps, seed, log):
+def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, n_batches, steps, seed, log,
+                    rho_levels=None, g_site_by_rho=None):
     """Warm start: imitate the phenology rule (soft targets 0.95 / 0.05) on the
     states visited by that rule, before fine-tuning through the simulator."""
     feats, targets = [], []
@@ -177,9 +194,16 @@ def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batc
             for b in range(n_batches):
                 idx = pools[s][torch.randint(len(pools[s]), (batch,), generator=gen)]
                 d = S._sel(D[s], idx)
-                g = (g_site[s][idx] + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch, generator=gen)).clamp(G_MIN, G_MAX)
+                if rho_levels:
+                    lev = torch.randint(len(rho_levels), (batch,), generator=gen)
+                    rho_b = torch.tensor(rho_levels)[lev]
+                    base = torch.stack([g_site_by_rho[r][s][idx] for r in rho_levels])[lev, torch.arange(batch)]
+                    rho_in = torch.cat([rho_b, rho_b])
+                else:
+                    base, rho_in = g_site[s][idx], None
+                g = (base + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch, generator=gen)).clamp(G_MIN, G_MAX)
                 dd, irr, w = expand_irrigation(d)
-                S.rollout(dd, torch.cat([g, g]), controller=recorder, irrigated=irr, noise_seed=seed * 7 + b)
+                S.rollout(dd, torch.cat([g, g]), controller=recorder, irrigated=irr, noise_seed=seed * 7 + b, rho=rho_in)
     X, Y = torch.cat(feats), torch.cat(targets) * 0.9 + 0.05
     opt = torch.optim.Adam(ctrl.parameters(), lr=3e-3)
     for it in range(steps):

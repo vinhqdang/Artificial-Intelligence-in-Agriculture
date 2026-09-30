@@ -41,14 +41,21 @@ if __name__ == "__main__":
     D = A.load_all()
     refs = get_refs(D)
     tm = train_mask(D, refs, A.site_split(split))
-    fn = f"{ROOT}/results/models/train_gcr_split{split}.pt"
-    if os.path.exists(fn):
-        g_site = torch.load(fn)
-    else:
-        g_site = A.calibrate_training_gcr(D, refs, tm); torch.save(g_site, fn)
+    def gcr_for(rho):
+        fn = f"{ROOT}/results/models/train_gcr_split{split}" + ("" if rho == 0.9 else f"_rho{rho}") + ".pt"
+        if os.path.exists(fn):
+            return torch.load(fn)
+        g = A.calibrate_training_gcr(D, refs, tm, rho=rho); torch.save(g, fn); return g
+    g_site = gcr_for(0.9)
+    extra = {}
+    if kw.get("rho_cond", "0") == "1":
+        levels = [0.8, 0.85, 0.9, 0.95]
+        extra = dict(rho_levels=levels, g_site_by_rho={r: gcr_for(r) for r in levels})
+    if kw.get("chance", "0") == "1":
+        extra["chance"] = (0.8, 20.0)
     with open(f"{ROOT}/results/models/{name}.log", "w") as log:
         print(json.dumps(dict(cfg, split=split)), file=log, flush=True)
-        ctrl = A.train(D, refs, tm, log=log, g_site=g_site, **cfg)
-    torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict(cfg, split=split)),
+        ctrl = A.train(D, refs, tm, log=log, g_site=g_site, **cfg, **extra)
+    torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict(cfg, split=split, rho_cond=bool(extra.get('rho_levels')), chance=bool(extra.get('chance')))),
                f"{ROOT}/results/models/{name}.pt")
     print("saved", name)

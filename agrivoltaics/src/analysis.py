@@ -28,13 +28,13 @@ COL = {"AV static": "#6b7280", "Seasonal sharing": "#059669", "Phenology rule": 
 
 
 # ----------------------------------------------------------------------------
-def calibrate(g, criterion="mean"):
+def calibrate(g, criterion="mean", rho=RHO):
     """Choose one GCR per (method, scenario, kappa, site) from historical seasons."""
     h = g[g.year <= HIST]
     if criterion == "mean":
-        feas = h.groupby(["method", "scenario", "kappa", "site", "g"]).r.mean() >= RHO
+        feas = h.groupby(["method", "scenario", "kappa", "site", "g"]).r.mean() >= rho
     else:
-        feas = h.groupby(["method", "scenario", "kappa", "site", "g"]).r.apply(lambda x: (x >= RHO).mean()) >= 0.8
+        feas = h.groupby(["method", "scenario", "kappa", "site", "g"]).r.apply(lambda x: (x >= rho).mean()) >= 0.8
     feas = feas[feas].reset_index()
     best = feas.groupby(["method", "scenario", "kappa", "site"]).g.max().rename("g_sel").reset_index()
     t = g[g.year >= TEST]

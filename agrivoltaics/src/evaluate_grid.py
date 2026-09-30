@@ -24,7 +24,7 @@ from sals import u_season, u_phenology, u_stress
 
 def load_ctrl(name):
     m = torch.load(f"{ROOT}/results/models/{name}.pt")
-    c = A.Controller(); c.load_state_dict(m["ctrl"]); c.mask = m["mask"]; c.eval()
+    c = A.Controller(n_in=len(m["mask"])); c.load_state_dict(m["ctrl"]); c.mask = m["mask"]; c.eval()
     return A.wrap(c)
 
 
