@@ -230,3 +230,7 @@ agrivoltaics/manuscript/figures/*.aux
 agrivoltaics/manuscript/figures/*.log
 agrivoltaics/results/grid_*.parquet
 agrivoltaics/src/__pycache__/
+agrivoltaics/results/models/*.out
+agrivoltaics/results/models/*.log
+agrivoltaics/results/models/*.done
+agrivoltaics/results/*.out
