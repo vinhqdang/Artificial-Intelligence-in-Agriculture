@@ -48,7 +48,11 @@ if __name__ == "__main__":
     t0 = time.time()
     for scen in scens:
         d = D[scen]
-        idx = torch.where(torch.tensor(test_site[d["site"].numpy().astype(int)]))[0]
+        sel = test_site[d["site"].numpy().astype(int)]
+        sub = int(kw.get("sub", 1))
+        if sub > 1:      # thinned site sample (sensitivity runs)
+            sel = sel & (d["site"].numpy().astype(int) % sub == 0)
+        idx = torch.where(torch.tensor(sel))[0]
         dt = S._sel(d, idx)
         base = dict(site=dt["site"].numpy().astype(int), year=dt["year"].numpy().astype(int),
                     crop=dt["crop"].numpy().astype(int), irr=dt["irr_frac"].numpy(),
