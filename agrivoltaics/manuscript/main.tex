@@ -1,0 +1,55 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\linenumbers
+\biboptions{authoryear}
+
+\journal{Artificial Intelligence in Agriculture}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Learning to share sunlight: differentiable-simulation design and control of climate-resilient agrivoltaics across the world's staple croplands}
+
+\author{Quang-Vinh Dang\corref{cor1}}
+\ead{vinh.dq4@buv.edu.vn}
+\cortext[cor1]{Corresponding author.}
+\address{British University Vietnam, Hung Yen, Vietnam}
+
+\input{sections/abstract}
+
+\end{frontmatter}
+
+\input{sections/intro}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{CRediT authorship contribution statement}
+\textbf{Quang-Vinh Dang:} Conceptualization, Methodology, Software, Formal analysis, Investigation, Data curation, Visualization, Writing -- original draft, Writing -- review \& editing.
+
+\section*{Declaration of competing interest}
+The author has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data and code availability}
+All data used are public: SPAM 2010 v2r0 harvested areas \citep{yu2020}, the GGCMI Phase~3 crop calendar \citep{jagermeyr2021}, NASA POWER daily weather \citep{sparks2018} and the SIMPLE crop parameters \citep{zhao2019}. The code of the simulator, of SALS and of all experiments, together with the site list, is available from the author's public repository (\url{https://github.com/vinhqdang/Artificial-Intelligence-in-Agriculture}).
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+
+\end{document}

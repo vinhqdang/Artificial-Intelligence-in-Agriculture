@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# agrivoltaics: large regenerable artefacts
+agrivoltaics/data/cache/
+agrivoltaics/results/*.pt
+agrivoltaics/results/models/*.pt
+agrivoltaics/manuscript/*.aux
+agrivoltaics/manuscript/*.log
+agrivoltaics/manuscript/*.bbl
+agrivoltaics/manuscript/*.blg
+agrivoltaics/manuscript/*.out
+agrivoltaics/manuscript/figures/*.aux
+agrivoltaics/manuscript/figures/*.log
