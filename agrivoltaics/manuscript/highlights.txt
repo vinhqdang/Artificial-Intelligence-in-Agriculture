@@ -1,0 +1,6 @@
+Highlights
+- SALS learns agrivoltaic array design and daily tracker control end-to-end.
+- A differentiable simulator couples PV, crop light, microclimate and crop growth.
+- On held-out sites, the land-equivalent ratio rose from 1.42 (expert rule) to 1.63.
+- The learned policy shades crops in heat; its advantage grows under +3 °C warming.
+- 5% of staple cropland could supply about 31,000 TWh of electricity per year.

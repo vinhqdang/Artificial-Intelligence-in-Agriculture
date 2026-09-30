@@ -135,7 +135,7 @@ def main(models, rho=0.9, do_oracle=True, tag="main"):
             print(scen, label, "done", flush=True)
         if do_oracle and scen in ("baseline", "+3C"):
             g, y, e = oracle_openloop(dt, rs, rho)
-            out.append(rows_for("Oracle open-loop", scen, d, idx, g.detach(), y.detach(), e.detach(), refs[scen]))
+            out.append(rows_for("Open-loop (foresight)", scen, d, idx, g.detach(), y.detach(), e.detach(), refs[scen]))
             print(scen, "oracle done", flush=True)
         pd.concat(out).to_csv(f"{ROOT}/results/eval_{tag}.csv", index=False)
     json.dump({int(k): v for k, v in rule_g.items()}, open(f"{ROOT}/results/rule_g_{tag}.json", "w"))

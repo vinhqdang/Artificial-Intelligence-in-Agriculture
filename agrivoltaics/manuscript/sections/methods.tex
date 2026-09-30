@@ -46,7 +46,7 @@ where $\rho$ is the food-security floor ($\rho=0.9$ unless stated otherwise). It
 \mathcal{L}(\theta,\omega)=\mathbb{E}_{i\sim\mathcal{B}}\Big[-e_i+\mu\,\max\{0,\rho-r_i\}^2\Big],\qquad \mu=30.
 \label{eq:loss}
 \end{equation}
-Because $r_i$ and $e_i$ are outputs of the differentiable simulator, the exact gradient of Eq.~\eqref{eq:loss} with respect to $(\theta,\omega)$ is obtained by back-propagation through the 365 daily steps of every season (back-propagation through time). This is the key difference from reinforcement learning with black-box simulators \citep{gautron2022}, which estimates gradients from sampled returns. Each minibatch contains 512 site-seasons, each duplicated into a rainfed and an irrigated field, drawn from one of the four climates in turn. The networks are trained with Adam \citep{kingma2015} (learning rate $3\times10^{-3}$, cosine decay, gradient-norm clipping at 1) for 800 steps. The rare updates with a non-finite gradient are skipped.
+Because $r_i$ and $e_i$ are outputs of the differentiable simulator, the exact gradient of Eq.~\eqref{eq:loss} with respect to $(\theta,\omega)$ is obtained by back-propagation through the 365 daily steps of every season (back-propagation through time). This is the key difference from reinforcement learning with black-box simulators \citep{gautron2022}, which estimates gradients from sampled returns. Each minibatch contains 512 site-seasons, each duplicated into a rainfed and an irrigated field, drawn from one of the four climates in turn. The networks are trained with Adam \citep{kingma2015} (learning rate $3\times10^{-3}$, cosine decay, gradient-norm clipping at 1) for 400 steps, i.e.\ about 50 passes over the training seasons. Growth-stage logistic functions are evaluated in a numerically stable form, so that gradients remain finite even under extreme heat.
 
 \begin{algorithm}[t]
 \caption{SALS training}\label{alg:sals}
@@ -76,9 +76,28 @@ We compared SALS with the following references and baselines.
 \item \emph{AV static (oracle GCR)}: backtracking trackers with the largest GCR that meets $\rho$ on average over each test site's own seasons. The GCR is chosen with knowledge of the test weather.
 \item \emph{Seasonal sharing}: the light-sharing rotation ($u=1$) throughout the cropping season, with the per-site oracle GCR.
 \item \emph{Stress rule}: an expert rule that shares light ($u=1$) during the main growth phase ($0.1<\mathrm{TT}/T_{\mathrm{sum}}<0.9$) except on days with a heat-stress forecast ($T_{\max}\ge T_{\mathrm{heat}}$) or drought (ARID\,$>0.5$), when the modules track the sun and shade the crop. It uses the per-site oracle GCR.
-\item \emph{Oracle open-loop}: the GCR and all 365 daily controls of every test season are optimised directly by gradient descent (150 Adam steps) with perfect knowledge of that season's weather. This is an upper bound that no deployable controller can reach.
+\item \emph{Open-loop optimisation (perfect foresight)}: the GCR and all 365 daily controls of every test season are optimised directly by gradient descent through the simulator (150 Adam steps, learning rate 0.1) with perfect knowledge of that season's weather. It is a per-season trajectory optimisation that no deployable controller could implement. Because the problem is non-convex and each season is optimised in isolation, it is not guaranteed to be an upper bound.
 \end{itemize}
-The three oracle-GCR baselines therefore have access to the test weather, whereas SALS chooses its design from climate descriptors alone.
+The three oracle-GCR baselines and the open-loop optimisation therefore have access to the test weather, whereas SALS chooses its design from climate descriptors alone.
 
 \subsection{Evaluation protocol and metrics}\label{sec:protocol}
 Sites were split spatially: 10\textdegree{}$\times$10\textdegree{} blocks were randomly assigned to training (70\%) or test (30\%), so that no test site has a training site in the same block. Seasons sown in 2001--2014 at training sites were used for training, and seasons sown in 2015--2019 at test sites for evaluation, so that the test set is out of sample in both space and time. We report the mean electricity (MWh\,ha$^{-1}$\,yr$^{-1}$) and relative electricity $e$, the mean yield retention $r$, the \emph{compliance} (share of test seasons with $r\ge\rho$), and the land-equivalent ratio LER $=r+e$ \citep{dupraz2011}. Differences between methods were tested with paired Wilcoxon signed-rank tests over test seasons, and uncertainty is given as bootstrap 95\% confidence intervals over sites.
+
+\begin{table}[t]
+\centering
+\caption{SIMPLE crop parameters \citep[Table 1a]{zhao2019}. $T_{\mathrm{sum}}$, $I_{50A}$ and $I_{50B}$ are rescaled per site to the local crop calendar (Section~\ref{sec:sim}). Units: temperatures in \textdegree C, thermal times in \textdegree C\,d, RUE in g\,MJ$^{-1}$; $S_{\mathrm{CO_2}}$ is the relative RUE increase per 100\,ppm above 350\,ppm.}
+\label{tab:params}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccccccccccccc}
+\toprule
+Crop (cultivar) & $T_{\mathrm{sum}}$ & HI & $I_{50A}$ & $I_{50B}$ & $T_{\mathrm{base}}$ & $T_{\mathrm{opt}}$ & RUE & $I_{50\max H}$ & $I_{50\max W}$ & $T_{\mathrm{heat}}$ & $T_{\mathrm{ext}}$ & $S_{\mathrm{CO_2}}$ & $S_{\mathrm{water}}$\\
+\midrule
+Wheat (Batten) & 2150 & 0.34 & 280 & 50 & 0 & 15 & 1.24 & 100 & 25 & 34 & 45 & 0.08 & 0.4\\
+Rice (IR72) & 2300 & 0.47 & 850 & 200 & 9 & 26 & 1.24 & 100 & 10 & 34 & 50 & 0.08 & 1.0\\
+Maize (McCurdy 84aa) & 2050 & 0.50 & 500 & 50 & 8 & 28 & 2.10 & 100 & 12 & 34 & 50 & 0.01 & 1.2\\
+Soybean (Williams 82) & 2350 & 0.40 & 600 & 200 & 6 & 27 & 0.86 & 120 & 20 & 36 & 50 & 0.07 & 0.9\\
+Potato (Sebago) & 2400 & 0.85 & 500 & 350 & 4 & 22 & 1.30 & 50 & 30 & 34 & 45 & 0.10 & 0.4\\
+\bottomrule
+\end{tabular}
+\end{table}

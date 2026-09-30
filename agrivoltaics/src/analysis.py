@@ -14,11 +14,12 @@ SCEN_TEX = {"baseline": "Baseline", "+1.5C": "+1.5\\,\\textdegree C", "+2C": "+2
 RHO, MIN_OPEN = 0.9, 0.2
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.spines.top": False, "axes.spines.right": False})
 COL = {"SALS (ours)": "#c2410c", "AV static (rule)": "#6b7280", "AV static (oracle GCR)": "#1d4ed8",
-       "Seasonal sharing": "#059669", "Stress rule": "#7c3aed", "Oracle open-loop": "#111827"}
+       "Seasonal sharing": "#059669", "Stress rule": "#7c3aed", "Open-loop (foresight)": "#111827"}
 
 
 def add_metrics(df):
     df = df.copy()
+    df["method"] = df.method.replace({"Oracle open-loop": "Open-loop (foresight)"})
     df["ret"] = df.y / df.y_open.clip(lower=0.05)
     df["erel"] = df.e / df.e_pv
     df["ler"] = df.ret + df.erel
@@ -54,11 +55,11 @@ def main_table(ev, order):
         for scen in SCEN:
             f.write(f"\\multicolumn{{7}}{{l}}{{\\textit{{{SCEN_TEX[scen]}}}}}\\\\\n")
             ts = t[t.scenario == scen]
-            best_e = ts[ts.method != "Oracle open-loop"].E.max()
+            best_e = ts[ts.method != "Open-loop (foresight)"].E.max()
             for _, r in ts.iterrows():
                 name = r.method.replace("(ours)", "(ours)")
                 e_str = f"{r.E:.0f}"
-                if r.method != "Oracle open-loop" and r.E == best_e:
+                if r.method != "Open-loop (foresight)" and r.E == best_e:
                     e_str = f"\\textbf{{{e_str}}}"
                 f.write(f"{name} & {r.GCR:.2f} & {e_str} & {r.erel:.2f} & {r.ret:.3f} & {r.comply:.1f} & "
                         f"{r.LER:.2f} [{r.LER_lo:.2f}, {r.LER_hi:.2f}]\\\\\n")
@@ -152,15 +153,16 @@ def fig_tradeoff(ev):
             ax.scatter(x.erel.mean(), x.ret.mean(), color=col, s=30, label=m, zorder=3)
             ax.errorbar(x.erel.mean(), x.ret.mean(), xerr=x.erel.std() / np.sqrt(len(x)) * 1.96,
                         yerr=x.ret.std() / np.sqrt(len(x)) * 1.96, color=col, lw=0.8)
-        for L in [1.2, 1.4, 1.6]:
+        for L in [1.2, 1.4, 1.6, 1.8]:
             xx = np.linspace(0, 1, 20); ax.plot(xx, L - xx, ":", color="#9ca3af", lw=0.6)
-            ax.text(L - 0.86, 0.86, f"LER={L}", fontsize=6, color="#6b7280")
+            ax.text(L - 0.815, 0.815, f"LER={L}", fontsize=6, color="#6b7280", rotation=-52)
         ax.axhline(RHO, color="k", lw=0.5, ls="--")
-        ax.set_xlim(0.2, 0.8); ax.set_ylim(0.8, 1.05)
+        ax.set_xlim(0.2, 0.95); ax.set_ylim(0.8, 1.0)
         ax.set_xlabel("Electricity relative to PV plant, $e$"); ax.set_ylabel("Yield retention, $r$")
         ax.set_title(f"{'a  Baseline climate' if scen == 'baseline' else 'b  +3 °C'}", loc="left", fontsize=8)
-    axs[1].legend(fontsize=6, frameon=False, loc="lower left")
-    fig.tight_layout(); fig.savefig(f"{FIG}/tradeoff.pdf", bbox_inches="tight"); fig.savefig(f"{FIG}/tradeoff.png", dpi=200)
+    h, l = axs[0].get_legend_handles_labels()
+    fig.legend(h, l, fontsize=6.5, frameon=False, loc="lower center", ncol=6, bbox_to_anchor=(0.5, -0.04))
+    fig.tight_layout(rect=(0, 0.06, 1, 1)); fig.savefig(f"{FIG}/tradeoff.pdf", bbox_inches="tight"); fig.savefig(f"{FIG}/tradeoff.png", dpi=200)
 
 
 def fig_trajectory(sites):
@@ -177,12 +179,13 @@ def fig_trajectory(sites):
         ax.fill_between(days, 0, act * 1.0, color="#f3f4f6", step="mid")
         ax.plot(days, tb["u"][i], color="#c2410c", lw=0.9, label="light sharing $u_t$")
         ax.plot(days, tb["shade"][i], color="#059669", lw=0.7, label="crop light fraction $s_t$")
-        ax2 = ax.twinx(); ax2.plot(days, tb["tmax"][i], color="#6b7280", lw=0.5, label="$T_{max}$")
+        ax2 = ax.twinx(); ax2.plot(days, tb["tmax"][i], color="#6b7280", lw=0.5, label="$T_{max}$ (right axis)")
         ax2.set_ylabel("$T_{max}$ (\u00b0C)"); ax2.spines["top"].set_visible(False)
         ax.set_ylim(0, 1.05); ax.set_ylabel("fraction")
         ax.set_title(f"{name}, {s.country} ({s.lat:.1f}, {s.lon:.1f}), GCR {tb['g'][i]:.2f}, +3 \u00b0C, 2017 season",
                      loc="left", fontsize=8)
-    axs[0].legend(fontsize=6, frameon=False, loc="upper right"); axs[1].set_xlabel("Day after sowing")
+    h1, l1 = axs[0].get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
+    axs[0].legend(h1 + h2, l1 + l2, fontsize=6, frameon=False, loc="upper right"); axs[1].set_xlabel("Day after sowing")
     fig.tight_layout(); fig.savefig(f"{FIG}/trajectory.pdf", bbox_inches="tight"); fig.savefig(f"{FIG}/trajectory.png", dpi=200)
 
 
@@ -211,7 +214,7 @@ if __name__ == "__main__":
     import sals as A
     np.save(f"{RES}/test_sites.npy", A.site_split())
     ev = add_metrics(pd.read_csv(f"{RES}/eval_main.csv"))
-    order = ["AV static (rule)", "AV static (oracle GCR)", "Seasonal sharing", "Stress rule", "SALS (ours)", "Oracle open-loop"]
+    order = ["AV static (rule)", "AV static (oracle GCR)", "Seasonal sharing", "Stress rule", "SALS (ours)", "Open-loop (foresight)"]
     print(main_table(ev, order).round(3).to_string())
     print(stats(ev).round(4).to_string())
     fig_sites(sites); fig_tradeoff(ev)
