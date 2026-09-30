@@ -195,6 +195,16 @@ CROP_PARAMS = {
 # flowering (grain number / tuber set), after Fischer (1985) and Andrade et al.
 # (1999): HI is multiplied by 1 - HI_SHADE * (mean relative radiation deficit in
 # the window). The open field has no deficit and is unaffected.
+# Shade compensation of radiation-use efficiency (diffuse-light RUE, light saturation): the
+# crop's biomass growth is multiplied by 1 + RUE_COMP * (1 - s), s being the fraction of
+# open-field irradiance reaching the crop. The 'conservative' variant has no compensation
+# (proportional response); the 'calibrated' variant fits RUE_COMP for rice, wheat and potato
+# to published field results (see calibrate_shade.py and data/rue_comp.json).
+import json as _json, os as _os
+VARIANT = _os.environ.get("AV_VARIANT", "conservative")
+RUE_COMP = {"wheat": 0.0, "rice": 0.0, "maize": 0.0, "soybean": 0.0, "potato": 0.0}
+if VARIANT == "calibrated":
+    RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp.json"))))
 HI_SHADE = {"wheat": 0.4, "rice": 0.5, "maize": 0.6, "soybean": 0.5, "potato": 0.2}
 CRIT_WINDOW = (0.45, 0.65)   # fraction of the thermal-time requirement
 PARAM_NAMES = ["Tsum", "HI", "I50A", "I50B", "Tbase", "Topt", "RUE", "I50maxH", "I50maxW",
@@ -220,7 +230,7 @@ def hi_factor(st, hi_shade):
     return 1 - hi_shade * mean_def * (st.wsum > 0).float()
 
 
-def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, wcap, shade=None):
+def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, wcap, shade=None, rue_comp=None):
     """Advance SIMPLE by one day. All inputs (B,). `p` is a dict of (B,) params.
     `active` is 1 while the crop is in the field (sowing to harvest window)."""
     # soil water balance and ARID index
@@ -253,6 +263,8 @@ def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, 
     f_solar = torch.where(f_water < 0.1, f_solar * (0.9 + f_water), f_solar)
     st.fsolar = f_solar
     growth = rad_c * p["RUE"] * f_solar * f_co2 * f_temp * torch.minimum(f_heat, f_water)  # g m-2 d-1
+    if shade is not None and rue_comp is not None:
+        growth = growth * (1 + rue_comp * (1 - shade))
     st.biomass = st.biomass + growth * growing
     if shade is not None:
         rel = st.tt / p["Tsum"]

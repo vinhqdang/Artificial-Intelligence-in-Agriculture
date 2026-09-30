@@ -239,3 +239,4 @@ agrivoltaics/results/extra_*.parquet
 agrivoltaics/results/grid_cache/
 agrivoltaics/results/*.done
 agrivoltaics/results/*.out
+agrivoltaics/data/papers/

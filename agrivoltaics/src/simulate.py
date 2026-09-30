@@ -79,6 +79,7 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
     crop_onehot = torch.nn.functional.one_hot(d["crop"].long(), 5).float()
     energy = torch.zeros(B)
     hi_shade = torch.tensor([P.HI_SHADE[c] for c in P.CROP_PARAMS])[d["crop"].long()]
+    rue_comp = torch.tensor([P.RUE_COMP[c] for c in P.CROP_PARAMS])[d["crop"].long()]
     gen = torch.Generator().manual_seed(noise_seed)
     T = d["ghi"].shape[1]
     if forecast_noise and controller is not None:
@@ -123,7 +124,7 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
         tmax_c = day["tmax"] - kappa * (1 - shade)
         et0_c = P.et0_fao56(tmax_c, day["tmin"], day["tdew"], rad_c, rso, day["u2"], d["elev"])
         tmean = (day["tmax"] + day["tmin"]) / 2
-        fh, fw = P.crop_step(st, p, tmean, tmax_c, rad_c, day["rain"], et0_c, d["co2"], irrigated, day["active"], wcap, shade=shade)
+        fh, fw = P.crop_step(st, p, tmean, tmax_c, rad_c, day["rain"], et0_c, d["co2"], irrigated, day["active"], wcap, shade=shade, rue_comp=rue_comp)
         if record:
             rec["u"].append(u); rec["shade"].append(shade); rec["fheat"].append(fh); rec["fwater"].append(fw)
     matured = torch.sigmoid((st.tt - p["Tsum"]) / 20.0)
