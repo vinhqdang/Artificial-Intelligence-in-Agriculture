@@ -1,4 +1,7 @@
-"""Train SALS and its ablations. Usage: python src/run_train.py NAME [options as key=value]"""
+"""Train the SALS controller.
+
+Usage: python src/run_train.py NAME [split=0] [seed=0] [steps=300] [stress=1] [scen=baseline,+1.5C,+2C,+3C]
+"""
 import os, sys, json
 import numpy as np, torch
 sys.path.insert(0, os.path.dirname(__file__))
@@ -6,6 +9,7 @@ import sals as A
 
 ROOT = A.ROOT
 torch.set_num_threads(4)
+MIN_OPEN = 0.2   # seasons with open-field yield below this (crop failure) are excluded
 
 
 def get_refs(D):
@@ -17,32 +21,28 @@ def get_refs(D):
     return refs
 
 
-def train_mask(D, test_site):
+def train_mask(D, refs, test_site):
     out = {}
     for s, d in D.items():
         site = d["site"].numpy().astype(int)
-        out[s] = torch.tensor((~test_site[site]) & np.isin(d["year"].numpy(), A.TRAIN_YEARS))
+        ok = (refs[s][0] >= MIN_OPEN).numpy()
+        out[s] = torch.tensor((~test_site[site]) & np.isin(d["year"].numpy(), A.TRAIN_YEARS) & ok)
     return out
 
 
 if __name__ == "__main__":
     name = sys.argv[1]
     kw = dict(a.split("=") for a in sys.argv[2:])
-    cfg = dict(rho=float(kw.get("rho", 0.9)), steps=int(kw.get("steps", 700)), batch=int(kw.get("batch", 512)),
-               use_design=kw.get("design", "1") == "1", fixed_g=float(kw["fixed_g"]) if "fixed_g" in kw else None,
-               stress_features=kw.get("stress", "1") == "1", seed=int(kw.get("seed", 0)),
-               scenarios=kw.get("scen", ",".join(A.SCEN)).split(","))
+    split = int(kw.get("split", 0))
+    cfg = dict(rho=0.9, steps=int(kw.get("steps", 300)), batch=512, seed=int(kw.get("seed", 0)),
+               stress_features=kw.get("stress", "1") == "1", scenarios=kw.get("scen", ",".join(A.SCEN)).split(","))
     os.makedirs(f"{ROOT}/results/models", exist_ok=True)
     D = A.load_all()
     refs = get_refs(D)
-    test_site = A.site_split()
-    tm = train_mask(D, test_site)
+    tm = train_mask(D, refs, A.site_split(split))
     with open(f"{ROOT}/results/models/{name}.log", "w") as log:
-        print(json.dumps(cfg), file=log, flush=True)
-        def save(step, ctrl, des):
-            torch.save(dict(ctrl=ctrl.state_dict(), des=des.state_dict(), mask=ctrl.mask, cfg=cfg),
-                       f"{ROOT}/results/models/{name}_step{step}.pt")
-        ctrl, des = A.train(D, refs, tm, log=log, checkpoint=({200}, save), **cfg)
-    torch.save(dict(ctrl=ctrl.state_dict(), des=des.state_dict(), mask=ctrl.mask, cfg=cfg),
+        print(json.dumps(dict(cfg, split=split)), file=log, flush=True)
+        ctrl = A.train(D, refs, tm, log=log, **cfg)
+    torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict(cfg, split=split)),
                f"{ROOT}/results/models/{name}.pt")
     print("saved", name)

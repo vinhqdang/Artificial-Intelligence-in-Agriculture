@@ -191,6 +191,12 @@ CROP_PARAMS = {
     "soybean": (2350, 0.40, 600, 200, 6,  27, 0.86, 120, 20, 36, 50, 0.07, 0.9, 1400),
     "potato":  (2400, 0.85, 500, 350, 4,  22, 1.30, 50,  30, 34, 45, 0.10, 0.4, 825),
 }
+# Sensitivity of the harvest index to shading during the critical window around
+# flowering (grain number / tuber set), after Fischer (1985) and Andrade et al.
+# (1999): HI is multiplied by 1 - HI_SHADE * (mean relative radiation deficit in
+# the window). The open field has no deficit and is unaffected.
+HI_SHADE = {"wheat": 0.4, "rice": 0.5, "maize": 0.6, "soybean": 0.5, "potato": 0.2}
+CRIT_WINDOW = (0.45, 0.65)   # fraction of the thermal-time requirement
 PARAM_NAMES = ["Tsum", "HI", "I50A", "I50B", "Tbase", "Topt", "RUE", "I50maxH", "I50maxW",
                "Theat", "Text", "SCO2", "Swater", "root"]
 AWC = 0.13      # plant-available water per mm of soil (mm mm-1)
@@ -205,9 +211,16 @@ class CropState:
         self.wat = wcap.clone()           # start at field capacity
         self.fsolar = z.clone()
         self.arid = z.clone()
+        self.defsum, self.wsum = z.clone(), z.clone()   # shade deficit in the critical window
 
 
-def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, wcap):
+def hi_factor(st, hi_shade):
+    """Harvest-index multiplier from shading in the critical window."""
+    mean_def = st.defsum / torch.clamp(st.wsum, min=1e-6)
+    return 1 - hi_shade * mean_def * (st.wsum > 0).float()
+
+
+def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, wcap, shade=None):
     """Advance SIMPLE by one day. All inputs (B,). `p` is a dict of (B,) params.
     `active` is 1 while the crop is in the field (sowing to harvest window)."""
     # soil water balance and ARID index
@@ -241,4 +254,9 @@ def crop_step(st, p, tmean, tmax_c, rad_c, rain, et0_c, co2, irrigated, active, 
     st.fsolar = f_solar
     growth = rad_c * p["RUE"] * f_solar * f_co2 * f_temp * torch.minimum(f_heat, f_water)  # g m-2 d-1
     st.biomass = st.biomass + growth * growing
+    if shade is not None:
+        rel = st.tt / p["Tsum"]
+        w = active * torch.sigmoid((rel - CRIT_WINDOW[0]) * 50) * torch.sigmoid((CRIT_WINDOW[1] - rel) * 50)
+        st.defsum = st.defsum + w * (1 - shade)
+        st.wsum = st.wsum + w
     return f_heat, f_water

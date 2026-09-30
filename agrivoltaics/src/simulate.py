@@ -10,7 +10,9 @@ import math
 import torch
 import physics as P
 
-KAPPA = 2.0     # canopy Tmax reduction (degC) under full shade
+KAPPA = 1.0     # canopy Tmax reduction (degC) under full shade (main case)
+# forecast errors seen by controllers: Tmax (degC), relative irradiance and ET0
+FORECAST_SD = {"tmax": 2.0, "ghi": 0.20, "et0": 0.15}
 SVF = None
 
 
@@ -62,7 +64,8 @@ def precompute(d):
     return d
 
 
-def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kappa=KAPPA, record=False):
+def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kappa=KAPPA, record=False,
+            forecast_noise=True, noise_seed=0):
     """Simulate a batch. g: (B,) ground-coverage ratio. controller(features)->u (B,),
     or u_seq (B, 365). Returns yield (t ha-1 dry matter), electricity (MWh ha-1),
     and optional daily records."""
@@ -75,6 +78,13 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
     st = P.CropState(B, wcap)
     crop_onehot = torch.nn.functional.one_hot(d["crop"].long(), 5).float()
     energy = torch.zeros(B)
+    hi_shade = torch.tensor([P.HI_SHADE[c] for c in P.CROP_PARAMS])[d["crop"].long()]
+    gen = torch.Generator().manual_seed(noise_seed)
+    T = d["ghi"].shape[1]
+    if forecast_noise and controller is not None:
+        nz = {k: torch.randn(B, T, generator=gen) * sd for k, sd in FORECAST_SD.items()}
+    else:
+        nz = None
     rec = {"u": [], "shade": [], "fheat": [], "fwater": []} if record else None
     for t in range(d["ghi"].shape[1]):
         day = {k: d[k][:, t] for k in ["ghi", "dhi", "tmax", "tmin", "tdew", "rain", "u2", "doy", "active", "et0", "rso"]}
@@ -87,7 +97,13 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
             gg = g[:, None]
             phi_bt = P.backtracking_angle(psi, gg)
             if controller is not None:
-                u = controller(features(st, p, day, t, g, irrigated, crop_onehot, d["lat"])) * day["active"]
+                fday = day
+                if nz is not None:  # the controller sees noisy forecasts, the physics the true weather
+                    fday = dict(day)
+                    fday["tmax"] = day["tmax"] + nz["tmax"][:, t]
+                    fday["ghi"] = day["ghi"] * (1 + nz["ghi"][:, t]).clamp(min=0)
+                    fday["et0"] = day["et0"] * (1 + nz["et0"][:, t]).clamp(min=0)
+                u = controller(features(st, p, fday, t, g, irrigated, crop_onehot, d["lat"])) * day["active"]
             elif u_seq is not None:
                 u = u_seq[:, t] * day["active"]
             else:
@@ -103,11 +119,11 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
         tmax_c = day["tmax"] - kappa * (1 - shade)
         et0_c = P.et0_fao56(tmax_c, day["tmin"], day["tdew"], rad_c, rso, day["u2"], d["elev"])
         tmean = (day["tmax"] + day["tmin"]) / 2
-        fh, fw = P.crop_step(st, p, tmean, tmax_c, rad_c, day["rain"], et0_c, d["co2"], irrigated, day["active"], wcap)
+        fh, fw = P.crop_step(st, p, tmean, tmax_c, rad_c, day["rain"], et0_c, d["co2"], irrigated, day["active"], wcap, shade=shade)
         if record:
             rec["u"].append(u); rec["shade"].append(shade); rec["fheat"].append(fh); rec["fwater"].append(fw)
     matured = torch.sigmoid((st.tt - p["Tsum"]) / 20.0)
-    yld = st.biomass * p["HI"] * matured / 100.0             # g m-2 -> t ha-1
+    yld = st.biomass * p["HI"] * P.hi_factor(st, hi_shade) * matured / 100.0             # g m-2 -> t ha-1
     if record:
         rec = {k: torch.stack(v, 1) for k, v in rec.items()}
         return yld, energy, rec

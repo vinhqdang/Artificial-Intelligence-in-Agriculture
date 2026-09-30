@@ -1,7 +1,7 @@
 \section{Materials and methods}\label{sec:methods}
 
 \subsection{Global cropland sites, weather and crop calendars}\label{sec:data}
-We studied five staple crops that together cover about 670\,Mha of harvested area: wheat, rice, maize, soybean and potato. Harvested areas (rainfed and irrigated) were taken from the SPAM 2010 gridded production maps \citep{yu2020} and aggregated to 1\textdegree{} cells. For each crop, 80 cells with at least 5000\,ha of the crop were drawn without replacement with probability proportional to harvested area. An unweighted average over the sample therefore approximates an area-weighted average over global production. The 400 crop--site pairs lie in 381 distinct cells in 50 countries (Fig.~\ref{fig:map}). Sowing and maturity dates came from the GGCMI Phase~3 crop calendar at 0.5\textdegree{} \citep{jagermeyr2021}. For wheat we used the winter-wheat calendar unless the coldest-month mean temperature was below $-8$\,\textdegree C, in which case the spring-wheat calendar was used. Daily weather for 2001--2020 was retrieved from NASA POWER \citep{sparks2018}: global and diffuse shortwave irradiance, maximum, minimum and dew-point temperature, precipitation and wind speed at 2\,m. Each site contributes 19 seasons (sowing years 2001--2019), each simulated as the 365 days after sowing, which gives 7600 site-seasons.
+We studied five staple crops that together cover about 670\,Mha of harvested area and 580\,Mha of physical cropland: wheat, rice, maize, soybean and potato. Harvested areas (rainfed and irrigated) were taken from the SPAM 2010 gridded production maps \citep{yu2020} and aggregated to 1\textdegree{} cells. For each crop, 80 cells with at least 5000\,ha of the crop were drawn without replacement with probability proportional to harvested area. An unweighted average over the sample therefore approximates an area-weighted average over global production. The 400 crop--site pairs lie in 381 distinct cells in 50 countries (Fig.~\ref{fig:map}). Sowing and maturity dates came from the GGCMI Phase~3 crop calendar at 0.5\textdegree{} \citep{jagermeyr2021}. For wheat we used the winter-wheat calendar unless the coldest-month mean temperature was below $-8$\,\textdegree C, in which case the spring-wheat calendar was used. Daily weather for 2001--2020 was retrieved from NASA POWER \citep{sparks2018}: global and diffuse shortwave irradiance, maximum, minimum and dew-point temperature, precipitation and wind speed at 2\,m. Each site contributes 19 seasons (sowing years 2001--2019), each simulated as the 365 days after sowing, which gives 7600 site-seasons.
 
 Climate change was represented by the global warming levels +1.5, +2 and +3\,\textdegree C relative to 2001--2020. Daily maximum, minimum and dew-point temperatures were shifted uniformly, which keeps relative humidity approximately constant and raises the vapour-pressure deficit. The atmospheric CO$_2$ concentration was set to 390, 450, 500 and 600\,ppm for the baseline and the three warming levels. Precipitation and irradiance were left unchanged. This delta approach isolates the thermal signal of warming; its limitations are discussed in Section~\ref{sec:limits}.
 
@@ -12,15 +12,20 @@ The simulator advances all site-seasons in parallel with a daily time step for t
 Daily global and diffuse irradiance were disaggregated into hourly values with the \citet{collares1979} and \citet{liu1960} ratios and renormalised to the daily totals. Beam irradiance on the horizontal is the difference between the two. Solar position follows the standard declination and hour-angle equations.
 
 \paragraph{Array geometry and PV electricity}
-We consider elevated horizontal single-axis trackers with north--south axes. The axis height is $1.25$ module widths, which leaves space for machinery under the modules. The rotation $\phi$ is limited to $\pm60^\circ$, and the ground coverage ratio $g$ is the module width divided by the row pitch. Let $\psi$ be the solar zenith angle projected onto the east--west vertical plane. The energy-optimal rotation with backtracking \citep{lorenzo2011} is $\phi_{\mathrm{bt}}=\psi-\mathrm{sgn}(\psi)\arccos(\cos\psi/g)$ when $\cos\psi<g$, and $\phi_{\mathrm{bt}}=\psi$ otherwise. The \emph{light-sharing} rotation $\phi_{\mathrm{sh}}$ is the feasible angle closest to edge-on to the sun, which minimises the shadow on the crop. Given a light-sharing level $u\in[0,1]$ chosen once per day, the rotation in every hour is
+We consider elevated horizontal single-axis trackers with north--south axes. The axis height is $1.25$ module widths, e.g.\ 2.75\,m for the common 2.2-m single-module-high (1P) tracker. The rotation $\phi$ is limited to $\pm60^\circ$. The ground coverage ratio $g$ is the module width divided by the row pitch and is restricted to $g\le0.5$. For 2.2-m modules this keeps a pitch of at least 4.4\,m, and a free strip of at least 2.2\,m between the rows when the modules are horizontal, which is the stow position during field operations. Let $\psi$ be the solar zenith angle projected onto the east--west vertical plane. The energy-optimal rotation with backtracking \citep{lorenzo2011} is $\phi_{\mathrm{bt}}=\psi-\mathrm{sgn}(\psi)\arccos(\cos\psi/g)$ when $\cos\psi<g$, and $\phi_{\mathrm{bt}}=\psi$ otherwise. The \emph{light-sharing} rotation $\phi_{\mathrm{sh}}$ is the feasible angle closest to edge-on to the sun, which minimises the shadow on the crop. Given a light-sharing level $u\in[0,1]$ chosen once per day, the rotation in every hour is
 \begin{equation}
 \phi = (1-u)\,\phi_{\mathrm{bt}} + u\,\phi_{\mathrm{sh}}.
 \label{eq:phi}
 \end{equation}
-Plane-of-array irradiance combines beam irradiance on the module (reduced by the fraction of the module shaded by the neighbouring row, $\max\{0,1-\cos\psi/(g\,|\cos(\phi-\psi)|)\}$), isotropic sky diffuse and ground-reflected light (albedo 0.2). The cell temperature follows the NOCT model (45\,\textdegree C), with an hourly air temperature interpolated sinusoidally between the daily extremes. Electricity per unit land is plane-of-array irradiance $\times\,\eta\times g$, with $\eta=0.21\,[1-0.0035(T_{\mathrm{cell}}-25)]\,(1-0.14)$ for module efficiency, temperature losses and system losses. A conventional ground-mounted PV plant ($g=0.4$, backtracking, no crop) is the energy reference $E_{\mathrm{PV}}$.
+Plane-of-array irradiance combines three terms: beam irradiance on the module, reduced by the fraction of the module shaded by the neighbouring row, $\max\{0,1-\cos\psi/(g\,|\cos(\phi-\psi)|)\}$; isotropic sky diffuse; and ground-reflected light (albedo 0.2). The cell temperature follows the NOCT model (45\,\textdegree C), with an hourly air temperature interpolated sinusoidally between the daily extremes. Electricity per unit land is plane-of-array irradiance $\times\,\eta\times g$, with $\eta=0.21\,[1-0.0035(T_{\mathrm{cell}}-25)]\,(1-0.14)$ for module efficiency, temperature losses and system losses. The installed capacity is $2.1\,g$\,MWp\,ha$^{-1}$. A conventional ground-mounted PV plant ($g=0.4$, backtracking, no crop) is the energy reference $E_{\mathrm{PV}}$.
+
+\paragraph{Validation of the PV model}
+We compared the simulated specific yield of an isolated tracker row ($g=0.05$, negligible row-to-row shading) with PVGIS~5.2 \citep{pvgis}, for a horizontal north--south single-axis tracker with 14\% losses, at 30 randomly chosen sites (29 returned data). Across sites, the simulated and PVGIS specific yields were correlated with $r=0.971$. The simulator was on average 4.9\% lower (mean absolute deviation 5.5\%). This is consistent with its $\pm60^\circ$ rotation limit and with the different irradiance databases (NASA POWER vs.\ SARAH2, ERA5 and NSRDB). Electricity estimates are therefore, if anything, conservative.
 
 \paragraph{Light and microclimate at the crop}
-Averaged over the row pitch, the fraction of ground reached by beam light is $1-\min\{1,\,g\,|\cos(\phi-\psi)|/\cos\psi\}$. The fraction of sky diffuse reaching the ground is a two-dimensional isotropic sky-view factor. We pre-computed it for 25 values of $g$ and 13 rotation angles by ray casting over 31 neighbouring rows, and interpolate it bilinearly (differentiably). The daily ratio $s$ of the irradiance at the crop to that of the open field defines the crop's shading. Following observations of cooler canopies under PV modules \citep{marrou2013,barron2019}, the canopy maximum temperature is lowered by $\kappa(1-s)$ with $\kappa=2$\,\textdegree C (a sensitivity analysis over $\kappa$ is reported in Section~\ref{sec:sensitivity}). The reference evapotranspiration under the modules, ET$_0$, is recomputed with the FAO-56 Penman--Monteith equation \citep{allen1998} from the reduced radiation and canopy temperature. Soil water conservation under the modules \citep{adeh2018,elamri2018} therefore emerges from the model and is not imposed.
+Averaged over the row pitch, the fraction of ground reached by beam light is $1-\min\{1,\,g\,|\cos(\phi-\psi)|/\cos\psi\}$. The fraction of sky diffuse reaching the ground is a two-dimensional isotropic sky-view factor. We pre-computed it for 25 values of $g$ and 13 rotation angles by ray casting over 31 neighbouring rows, and interpolate it bilinearly (differentiably). The daily ratio $s$ of the irradiance at the crop to that of the open field defines the crop's shading. The canopy maximum temperature is lowered by $\kappa(1-s)$.
+
+$\kappa$ is uncertain. Field studies under PV modules report small reductions of daytime crop or canopy temperature and little change in air temperature \citep{marrou2013,barron2019}, and heat-stress thresholds calibrated on air temperature do not transfer directly to canopy temperature \citep{siebert2014,webber2018}. We therefore use a moderate $\kappa=1$\,\textdegree C as the main case and report $\kappa=0$ (no cooling) and $\kappa=2$\,\textdegree C for all methods (Section~\ref{sec:sensitivity}). Nocturnal warming under the modules is not represented. The reference evapotranspiration under the modules, ET$_0$, is recomputed with the FAO-56 Penman--Monteith equation \citep{allen1998} from the reduced radiation and canopy temperature. Soil water conservation under the modules \citep{adeh2018,elamri2018} therefore emerges from the model, but rain redistribution by the modules \citep{marrou2013water} is ignored.
 
 \paragraph{Crop growth}
 Crop growth follows the SIMPLE model \citep{zhao2019} with the species parameters of its Table~1a (Table~\ref{tab:params}). Daily biomass growth is
@@ -28,76 +33,94 @@ Crop growth follows the SIMPLE model \citep{zhao2019} with the species parameter
 \Delta B = R_{\mathrm{crop}}\cdot \mathrm{RUE}\cdot f_{\mathrm{Solar}}\cdot f_{\mathrm{CO_2}}\cdot f_{\mathrm{Temp}}\cdot \min\{f_{\mathrm{Heat}},f_{\mathrm{Water}}\},
 \label{eq:simple}
 \end{equation}
-where $R_{\mathrm{crop}}=s\,R$ is the radiation received by the crop. $f_{\mathrm{Solar}}$ is the canopy's radiation interception, driven by thermal time and accelerated senescence under heat and drought stress. $f_{\mathrm{Heat}}$ decreases linearly between the heat threshold $T_{\mathrm{heat}}$ and the extreme temperature $T_{\mathrm{ext}}$ of the canopy maximum temperature. $f_{\mathrm{Water}}=1-S_{\mathrm{water}}\,\mathrm{ARID}$, with the agricultural reference index for drought \citep{woli2012} computed from a daily soil-water balance with curve-number runoff, drainage and root water uptake. Irrigated fields have $f_{\mathrm{Water}}=1$. Yields of the rainfed and irrigated parts of a site are combined with the SPAM irrigated fraction. The thermal-time requirement to maturity was calibrated for every site as the mean thermal time between the GGCMI sowing and maturity dates under the 2001--2020 climate, and the canopy parameters were scaled accordingly. The cultivar is thus adapted to the present climate, and warming shortens the season. Growth stops smoothly once the thermal-time requirement is met, and yield is biomass multiplied by the harvest index. Because SIMPLE uses a linear radiation-use efficiency, it does not credit the higher light-use efficiency of shaded canopies. Shading losses are therefore, if anything, overestimated.
+where $R_{\mathrm{crop}}=s\,R$ is the radiation received by the crop. The terms are as follows.
+\begin{itemize}
+\item $f_{\mathrm{Solar}}$ is the canopy's radiation interception. In SIMPLE it depends only on thermal time, with senescence accelerated by heat and drought stress. Shade therefore reduces the daily biomass increment but not leaf-area development.
+\item $f_{\mathrm{Heat}}$ decreases linearly between the heat threshold $T_{\mathrm{heat}}$ and the extreme temperature $T_{\mathrm{ext}}$ of the canopy maximum temperature.
+\item $f_{\mathrm{Water}}=1-S_{\mathrm{water}}\,\mathrm{ARID}$, where the agricultural reference index for drought \citep{woli2012} is computed from a daily soil-water balance with curve-number runoff, drainage and root water uptake. Irrigated fields have $f_{\mathrm{Water}}=1$.
+\end{itemize}
+
+SIMPLE has a fixed harvest index and therefore ignores the high sensitivity of grain number to shading around flowering \citep{fischer1985,andrade1999}. It also ignores the differences in shade tolerance between crop types. In the meta-analysis of \citet{laub2022}, maize and grain legumes lost yield strongly even at low shade levels, whereas C3 cereals and tuber crops initially lost less than proportionally; shading trials also show marked effects of shade on maize development \citep{ramosfuentes2023}. We added a stage-dependent penalty. During a critical window ($0.45\le\mathrm{TT}/T_{\mathrm{sum}}\le0.65$), the harvest index is multiplied by $1-h\,\bar d$, where $\bar d$ is the mean relative radiation deficit $1-s$ in that window. The sensitivity $h$ is highest for maize (0.6) and soybean (0.5), the crop types that \citet{laub2022} found most shade-sensitive, lower for the C3 cereals (wheat 0.4; rice 0.5, for which no specific curve was available) and lowest for potato (0.2). These values are assumptions that reproduce this ranking; they are not calibrated estimates. Section~\ref{sec:shade} shows the resulting shade-response curves. Because RUE is linear, SIMPLE does not credit the higher light-use efficiency of shaded canopies under more diffuse light. The penalty, conversely, makes shading around flowering more damaging than proportional. The net effect is closer to the field evidence than either assumption alone.
+
+The thermal-time requirement to maturity was calibrated for every site as the mean thermal time between the GGCMI sowing and maturity dates under the 2001--2020 climate, and the canopy parameters were scaled accordingly. The cultivar is thus adapted to the present climate, and warming shortens the season. Growth stops smoothly once the thermal-time requirement is met. Yield is biomass multiplied by the (shade-adjusted) harvest index. Each site is represented by a rainfed and an irrigated sub-field in proportion to its SPAM irrigated fraction. Each sub-field carries its own array, so both yield \emph{and} electricity are area-weighted over the two sub-fields.
 
 \subsection{SALS: stress-aware light sharing}\label{sec:sals}
-SALS learns two functions (Algorithm~\ref{alg:sals}):
+SALS learns a \emph{control network} $u_t=\pi_\omega(\mathbf{x}_t;g)$ (Algorithm~\ref{alg:sals}). It is a multilayer perceptron with two hidden layers of 64 units and a sigmoid output, and it chooses the daily light-sharing level of Eq.~\eqref{eq:phi}. Its inputs are the information available on day $t$:
 \begin{itemize}
-\item a \emph{design network} $g=D_\theta(\mathbf{z})$, a multilayer perceptron with two hidden layers of 32 units, which maps site descriptors $\mathbf{z}$ to a ground coverage ratio in $[0.05,0.60]$. The descriptors are the crop (one-hot), latitude, mean irradiance, growing-season maximum temperature, precipitation and vapour-pressure deficit, the frequency of heat-stress days and the irrigated fraction;
-\item a \emph{control network} $u_t=\pi_\omega(\mathbf{x}_t)$, a multilayer perceptron with two hidden layers of 64 units and a sigmoid output, which chooses the daily light-sharing level of Eq.~\eqref{eq:phi} from information available on day $t$: relative thermal time $\mathrm{TT}/T_{\mathrm{sum}}$, radiation interception $f_{\mathrm{Solar}}$, relative soil water, the previous day's ARID, the day's forecast of maximum temperature relative to $T_{\mathrm{heat}}$ and $T_{\mathrm{opt}}$, irradiance and ET$_0$, the irrigation status, the design $g$, latitude, day of season and the crop.
+\item the crop and soil state: relative thermal time $\mathrm{TT}/T_{\mathrm{sum}}$, radiation interception $f_{\mathrm{Solar}}$, relative soil water and the previous day's ARID;
+\item a \emph{forecast} of the day's maximum temperature (relative to $T_{\mathrm{heat}}$ and $T_{\mathrm{opt}}$), irradiance and ET$_0$;
+\item static information: the irrigation status of the sub-field, the array's GCR $g$, latitude, day of season and the crop.
 \end{itemize}
-Outside the cropping season the trackers backtrack for maximum electricity. For site-season $i$ with open-field yield $Y^{\mathrm{open}}_i$, let $r_i=Y_i/Y^{\mathrm{open}}_i$ be the yield retention and $e_i=E_i/E_{\mathrm{PV},i}$ the electricity relative to a conventional PV plant. SALS solves
+Forecasts are perturbed with random errors, independently every day: Gaussian with a standard deviation of 2\,\textdegree C for maximum temperature, and multiplicative with standard deviations of 20\% for irradiance and 15\% for ET$_0$. The physics always uses the true weather. The same forecast errors are applied to the rule-based controllers. The controller is conditioned on $g$. During training, every season is simulated with a GCR drawn uniformly from $[0.10,0.50]$, so that one network learns how to control arrays of any density. Outside the cropping season the trackers backtrack for maximum electricity.
+
+For site-season $i$ with open-field yield $Y^{\mathrm{open}}_i$, let $r_i=Y_i/Y^{\mathrm{open}}_i$ be the yield retention and $e_i=E_i/E_{\mathrm{PV},i}$ the electricity relative to a conventional PV plant. Training minimises the penalised objective
 \begin{equation}
-\max_{\theta,\omega}\;\mathbb{E}_i\big[e_i\big]\quad\text{s.t.}\quad r_i\ge\rho\;\;\forall i,
-\label{eq:problem}
-\end{equation}
-where $\rho$ is the food-security floor ($\rho=0.9$ unless stated otherwise). It does so with the penalty objective
-\begin{equation}
-\mathcal{L}(\theta,\omega)=\mathbb{E}_{i\sim\mathcal{B}}\Big[-e_i+\mu\,\max\{0,\rho-r_i\}^2\Big],\qquad \mu=30.
+\mathcal{L}(\omega)=\mathbb{E}_{i\sim\mathcal{B}}\Big[-e_i+\mu_1\max\{0,\rho-r_i\}+\mu_2\max\{0,\rho-r_i\}^2\Big],\quad \rho=0.9,\;\mu_1=5,\;\mu_2=30,
 \label{eq:loss}
 \end{equation}
-Because $r_i$ and $e_i$ are outputs of the differentiable simulator, the exact gradient of Eq.~\eqref{eq:loss} with respect to $(\theta,\omega)$ is obtained by back-propagation through the 365 daily steps of every season (back-propagation through time). This is the key difference from reinforcement learning with black-box simulators \citep{gautron2022}, which estimates gradients from sampled returns. Each minibatch contains 512 site-seasons, each duplicated into a rainfed and an irrigated field, drawn from one of the four climates in turn. The networks are trained with Adam \citep{kingma2015} (learning rate $3\times10^{-3}$, cosine decay, gradient-norm clipping at 1) for 400 steps, i.e.\ about 50 passes over the training seasons. Growth-stage logistic functions are evaluated in a numerically stable form, so that gradients remain finite even under extreme heat.
+which combines an exact (hinge) and a quadratic penalty for the food-security floor $\rho$. Because $r_i$ and $e_i$ are outputs of the differentiable simulator, the exact gradient of Eq.~\eqref{eq:loss} is obtained by back-propagation through the 365 daily steps of every season (back-propagation through time). This is the key difference from reinforcement learning with black-box simulators \citep{gautron2022}, which estimates gradients from sampled returns.
+
+Each minibatch contains 512 site-seasons, each simulated as a rainfed and an irrigated sub-field, drawn from one of the four climates in turn. Seasons with a failed open-field crop ($Y^{\mathrm{open}}<0.2$\,t\,ha$^{-1}$) are excluded from training and evaluation. The network is trained with Adam \citep{kingma2015} (learning rate $3\times10^{-3}$, cosine decay, gradient-norm clipping at 1) for 300 steps. Growth-stage logistic functions are evaluated in a numerically stable form, so that gradients remain finite even under extreme heat.
 
 \begin{algorithm}[t]
 \caption{SALS training}\label{alg:sals}
 \begin{algorithmic}[1]
-\Require training site-seasons in four climates; floor $\rho$; penalty $\mu$
-\State initialise design network $D_\theta$ and control network $\pi_\omega$
+\Require training site-seasons in four climates; floor $\rho$; penalties $\mu_1,\mu_2$
+\State initialise the control network $\pi_\omega$
 \For{step $=1,\dots,N$}
-  \State sample a climate and a minibatch $\mathcal{B}$ of site-seasons (rainfed and irrigated rows)
-  \State $g_i\gets D_\theta(\mathbf{z}_i)$; initialise crop and soil states
+  \State sample a climate and a minibatch $\mathcal{B}$ of site-seasons (rainfed and irrigated sub-fields)
+  \State draw $g_i\sim\mathcal{U}[0.10,0.50]$; initialise crop and soil states
   \For{day $t=1,\dots,365$}
-    \State $u_{it}\gets\pi_\omega(\mathbf{x}_{it})$ if the crop is in the field, else $0$
+    \State $u_{it}\gets\pi_\omega(\mathbf{x}_{it};g_i)$ from state and noisy forecast if the crop is in the field, else $0$
     \State hourly rotation (Eq.~\ref{eq:phi}), PV electricity, crop light, canopy temperature, ET$_0$
     \State advance the soil-water balance and the SIMPLE crop state (Eq.~\ref{eq:simple})
   \EndFor
-  \State $r_i\gets Y_i/Y_i^{\mathrm{open}}$, $e_i\gets E_i/E_{\mathrm{PV},i}$; loss $\mathcal{L}$ (Eq.~\ref{eq:loss})
-  \State back-propagate through the season; Adam update of $(\theta,\omega)$
+  \State $r_i\gets Y_i/Y_i^{\mathrm{open}}$, $e_i\gets E_i/E_{\mathrm{PV},i}$ (area-weighted); loss $\mathcal{L}$ (Eq.~\ref{eq:loss})
+  \State back-propagate through the season; Adam update of $\omega$
 \EndFor
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Baselines}\label{sec:baselines}
-We compared SALS with the following references and baselines.
+\subsection{Deployable design selection and baselines}\label{sec:baselines}
+A real array has one fixed density, which must be chosen before it is built. Every method, SALS included, therefore uses the same \emph{history-based design rule}. For a site, the GCR is the largest value on the grid $\{0.05,0.075,\dots,0.50\}$ for which the method's mean yield retention over the site's 2001--2014 seasons is at least $\rho=0.9$. If no value qualifies, no array is built and the site remains open field. A stricter \emph{chance-constrained} variant requires $r\ge0.9$ in at least 80\% of the historical seasons. The historical seasons of the test sites are never used for training, and the weather of the evaluation years is never used for design. We compare four controllers:
 \begin{itemize}
-\item \emph{Open field}: no modules ($r=1$, $e=0$, LER $=1$).
-\item \emph{PV plant}: conventional ground-mounted PV without a crop ($e=1$, LER $=1$).
-\item \emph{AV static (rule)}: backtracking trackers with one GCR per crop, the largest value on a grid $\{0.05,0.10,\dots,0.50\}$ whose mean retention on the training seasons reaches $\rho$. This mimics a design guideline.
-\item \emph{AV static (oracle GCR)}: backtracking trackers with the largest GCR that meets $\rho$ on average over each test site's own seasons. The GCR is chosen with knowledge of the test weather.
-\item \emph{Seasonal sharing}: the light-sharing rotation ($u=1$) throughout the cropping season, with the per-site oracle GCR.
-\item \emph{Stress rule}: an expert rule that shares light ($u=1$) during the main growth phase ($0.1<\mathrm{TT}/T_{\mathrm{sum}}<0.9$) except on days with a heat-stress forecast ($T_{\max}\ge T_{\mathrm{heat}}$) or drought (ARID\,$>0.5$), when the modules track the sun and shade the crop. It uses the per-site oracle GCR.
-\item \emph{Open-loop optimisation (perfect foresight)}: the GCR and all 365 daily controls of every test season are optimised directly by gradient descent through the simulator (150 Adam steps, learning rate 0.1) with perfect knowledge of that season's weather. It is a per-season trajectory optimisation that no deployable controller could implement. Because the problem is non-convex and each season is optimised in isolation, it is not guaranteed to be an upper bound.
+\item \emph{AV static}: backtracking trackers without light sharing ($u=0$);
+\item \emph{Seasonal sharing}: the light-sharing rotation ($u=1$) throughout the cropping season;
+\item \emph{Stress rule}: an expert rule that shares light ($u=1$) during the main growth phase ($0.1<\mathrm{TT}/T_{\mathrm{sum}}<0.9$) except on days with a heat-stress forecast ($T_{\max}\ge T_{\mathrm{heat}}$) or drought (ARID\,$>0.5$), when the modules track the sun and shade the crop;
+\item \emph{SALS}: the learned controller.
 \end{itemize}
-The three oracle-GCR baselines and the open-loop optimisation therefore have access to the test weather, whereas SALS chooses its design from climate descriptors alone.
+The open field and a conventional PV plant without crops (LER $=1$ each) are the references. Because the design rule is identical for all controllers, differences between methods reflect the quality of control and the array density that each controller can sustain under the food-security floor. We also compare the controllers at identical GCR over the whole grid (matched-density frontiers).
 
-\subsection{Evaluation protocol and metrics}\label{sec:protocol}
-Sites were split spatially: 10\textdegree{}$\times$10\textdegree{} blocks were randomly assigned to training (70\%) or test (30\%), so that no test site has a training site in the same block. Seasons sown in 2001--2014 at training sites were used for training, and seasons sown in 2015--2019 at test sites for evaluation, so that the test set is out of sample in both space and time. We report the mean electricity (MWh\,ha$^{-1}$\,yr$^{-1}$) and relative electricity $e$, the mean yield retention $r$, the \emph{compliance} (share of test seasons with $r\ge\rho$), and the land-equivalent ratio LER $=r+e$ \citep{dupraz2011}. Differences between methods were tested with paired Wilcoxon signed-rank tests over test seasons, and uncertainty is given as bootstrap 95\% confidence intervals over sites.
+\subsection{Evaluation protocol, statistics and upscaling}\label{sec:protocol}
+Sites were split spatially: 10\textdegree{}$\times$10\textdegree{} blocks were randomly assigned to training (70\%) or test (30\%), so that no test site has a training site in the same block. Training uses the 2001--2014 seasons of the training sites. Design selection uses the 2001--2014 seasons of the test sites. Evaluation uses the 2015--2019 seasons of the test sites. The same site-seasons are analysed in all four climates.
+
+We report the following metrics:
+\begin{itemize}
+\item the mean electricity (MWh\,ha$^{-1}$\,yr$^{-1}$) and the relative electricity $e$;
+\item the mean yield retention $r$ and the production-weighted retention $\sum Y/\sum Y^{\mathrm{open}}$;
+\item season-level compliance (share of seasons with $r\ge\rho$) and site-level compliance (share of sites whose mean test-season retention is $\ge\rho$);
+\item the lower tail (10th percentile of $r$, share of seasons with $r<0.8$);
+\item the land-equivalent ratio LER $=r+e$ \citep{dupraz2011}.
+\end{itemize}
+Statistical comparisons use site means as the unit of analysis. We report paired Wilcoxon signed-rank tests and cluster (site) bootstrap 95\% confidence intervals of the mean difference. SALS was trained with three random seeds on the main split, and with one seed on each of two further spatial splits.
+
+For the global estimate, every site is evaluated in the split in which it is held out. The mean electricity and yield per hectare of each crop are scaled to the \emph{physical} area of that crop in SPAM 2010, which avoids double counting multiple-cropped land \citep{waha2020}. We report the installed capacity (TWp), the capacity factor and a supply curve.
 
 \begin{table}[t]
 \centering
-\caption{SIMPLE crop parameters \citep[Table 1a]{zhao2019}. $T_{\mathrm{sum}}$, $I_{50A}$ and $I_{50B}$ are rescaled per site to the local crop calendar (Section~\ref{sec:sim}). Units: temperatures in \textdegree C, thermal times in \textdegree C\,d, RUE in g\,MJ$^{-1}$; $S_{\mathrm{CO_2}}$ is the relative RUE increase per 100\,ppm above 350\,ppm.}
+\caption{SIMPLE crop parameters \citep[Table 1a]{zhao2019} and the harvest-index shade sensitivity $h$ added in this study. $T_{\mathrm{sum}}$, $I_{50A}$ and $I_{50B}$ are rescaled per site to the local crop calendar (Section~\ref{sec:sim}). Units: temperatures in \textdegree C, thermal times in \textdegree C\,d, RUE in g\,MJ$^{-1}$; $S_{\mathrm{CO_2}}$ is the relative RUE increase per 100\,ppm above 350\,ppm.}
 \label{tab:params}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{lccccccccccccc}
+\begin{tabular}{lcccccccccccccc}
 \toprule
-Crop (cultivar) & $T_{\mathrm{sum}}$ & HI & $I_{50A}$ & $I_{50B}$ & $T_{\mathrm{base}}$ & $T_{\mathrm{opt}}$ & RUE & $I_{50\max H}$ & $I_{50\max W}$ & $T_{\mathrm{heat}}$ & $T_{\mathrm{ext}}$ & $S_{\mathrm{CO_2}}$ & $S_{\mathrm{water}}$\\
+Crop (cultivar) & $h$ & $T_{\mathrm{sum}}$ & HI & $I_{50A}$ & $I_{50B}$ & $T_{\mathrm{base}}$ & $T_{\mathrm{opt}}$ & RUE & $I_{50\max H}$ & $I_{50\max W}$ & $T_{\mathrm{heat}}$ & $T_{\mathrm{ext}}$ & $S_{\mathrm{CO_2}}$ & $S_{\mathrm{water}}$\\
 \midrule
-Wheat (Batten) & 2150 & 0.34 & 280 & 50 & 0 & 15 & 1.24 & 100 & 25 & 34 & 45 & 0.08 & 0.4\\
-Rice (IR72) & 2300 & 0.47 & 850 & 200 & 9 & 26 & 1.24 & 100 & 10 & 34 & 50 & 0.08 & 1.0\\
-Maize (McCurdy 84aa) & 2050 & 0.50 & 500 & 50 & 8 & 28 & 2.10 & 100 & 12 & 34 & 50 & 0.01 & 1.2\\
-Soybean (Williams 82) & 2350 & 0.40 & 600 & 200 & 6 & 27 & 0.86 & 120 & 20 & 36 & 50 & 0.07 & 0.9\\
-Potato (Sebago) & 2400 & 0.85 & 500 & 350 & 4 & 22 & 1.30 & 50 & 30 & 34 & 45 & 0.10 & 0.4\\
+Wheat (Batten) & 0.4 & 2150 & 0.34 & 280 & 50 & 0 & 15 & 1.24 & 100 & 25 & 34 & 45 & 0.08 & 0.4\\
+Rice (IR72) & 0.5 & 2300 & 0.47 & 850 & 200 & 9 & 26 & 1.24 & 100 & 10 & 34 & 50 & 0.08 & 1.0\\
+Maize (McCurdy 84aa) & 0.6 & 2050 & 0.50 & 500 & 50 & 8 & 28 & 2.10 & 100 & 12 & 34 & 50 & 0.01 & 1.2\\
+Soybean (Williams 82) & 0.5 & 2350 & 0.40 & 600 & 200 & 6 & 27 & 0.86 & 120 & 20 & 36 & 50 & 0.07 & 0.9\\
+Potato (Sebago) & 0.2 & 2400 & 0.85 & 500 & 350 & 4 & 22 & 1.30 & 50 & 30 & 34 & 45 & 0.10 & 0.4\\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -1,11 +1,12 @@
 """SALS: Stress-Aware Light Sharing for agrivoltaics.
 
-A design network maps site descriptors (crop, latitude, climate) to the ground
-coverage ratio of the array, and a control network maps the daily crop and soil
-state plus the same-day weather forecast to the light-sharing level of the
-trackers. Both are trained end-to-end through the differentiable simulator to
-maximise electricity subject to a yield-retention floor rho (penalty method),
-across sites, years and warming scenarios.
+A density-conditioned control network maps the daily crop and soil state, the
+array's ground coverage ratio and a noisy same-day weather forecast to the
+light-sharing level of the trackers. It is trained end-to-end through the
+differentiable simulator over randomly sampled array densities, sites, years and
+warming scenarios, to maximise electricity subject to a yield-retention floor
+(penalty method). At deployment, the array density of a site is chosen from the
+site's historical seasons only (see evaluate.py), exactly as for the baselines.
 """
 import os, sys, time, json
 import numpy as np, pandas as pd, torch
@@ -16,7 +17,7 @@ import simulate as S
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SCEN = ["baseline", "+1.5C", "+2C", "+3C"]
-G_MIN, G_MAX = 0.05, 0.60
+G_MIN, G_MAX = 0.05, 0.50   # 0.50 keeps >= 2 m between rows for 2-m-wide modules
 TRAIN_YEARS = list(range(2001, 2015))
 TEST_YEARS = list(range(2015, 2020))
 
@@ -37,20 +38,6 @@ def site_split(seed=0, test_frac=0.3):
     rng = np.random.default_rng(seed)
     test_blocks = set(rng.choice(ub, int(round(test_frac * len(ub))), replace=False))
     return np.array([b in test_blocks for b in block])
-
-
-def site_features(d):
-    """Static descriptors per season row: crop one-hot, latitude, climate."""
-    crop = nn.functional.one_hot(d["crop"].long(), 5).float()
-    act = d["active"]
-    n = act.sum(1).clamp(min=1)
-    ghi = d["ghi"].mean(1) / 25.0
-    tmax_gs = (d["tmax"] * act).sum(1) / n / 40.0
-    rain_gs = (d["rain"] * act).sum(1) / n / 10.0
-    vpd = (P.es(d["tmax"]) - P.es(d["tdew"])).clamp(min=0)
-    vpd_gs = (vpd * act).sum(1) / n / 3.0
-    heat = ((d["tmax"] > d["Theat"][:, None]).float() * act).sum(1) / n
-    return torch.cat([crop, torch.stack([d["lat"] / 90.0, ghi, tmax_gs, rain_gs, vpd_gs, heat, d["irr_frac"]], 1)], 1)
 
 
 def expand_irrigation(d):
@@ -78,15 +65,6 @@ class Controller(nn.Module):
 
     def forward(self, f):
         return torch.sigmoid(self.net(f)[:, 0])
-
-
-class Designer(nn.Module):
-    def __init__(self, n_in=12, h=32):
-        super().__init__()
-        self.net = nn.Sequential(nn.Linear(n_in, h), nn.SiLU(), nn.Linear(h, h), nn.SiLU(), nn.Linear(h, 1))
-
-    def forward(self, f):
-        return G_MIN + (G_MAX - G_MIN) * torch.sigmoid(self.net(f)[:, 0])
 
 
 # ----------------------------------------------------------------------------
@@ -119,7 +97,9 @@ def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None):
             gg = torch.cat([g[idx], g[idx]])
             ctrl = controller if controller is not None else u_rule
             y, e = S.rollout(dd, gg, controller=ctrl, irrigated=irr, kappa=S.KAPPA if kappa is None else kappa)
-            y_out[idx] = combine(y, w); e_out[idx] = e[: len(idx)]
+            # rainfed and irrigated sub-fields each carry their own array:
+            # both yield and electricity are area-weighted
+            y_out[idx] = combine(y, w); e_out[idx] = combine(e, w)
     return y_out, e_out
 
 
@@ -132,16 +112,16 @@ def loss_fn(ret, eratio, rho, mu, mu1=5.0):
     return (-eratio + mu1 * short + mu * short ** 2).mean()
 
 
-def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=384, lr=3e-3, seed=0,
-          use_design=True, fixed_g=None, scenarios=SCEN, stress_features=True, log=None,
-          checkpoint=None):
+def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, seed=0,
+          scenarios=SCEN, stress_features=True, log=None, g_range=(0.10, G_MAX)):
+    """Train the density-conditioned controller. Each training season gets a
+    random ground coverage ratio in g_range."""
     torch.manual_seed(seed); np.random.seed(seed)
-    ctrl, des = Controller(), Designer()
-    params = list(ctrl.parameters()) + (list(des.parameters()) if use_design else [])
+    ctrl = Controller()
+    params = list(ctrl.parameters())
     opt = torch.optim.Adam(params, lr=lr)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
     pools = {s: torch.where(train_mask[s])[0] for s in scenarios}
-    feats = {s: site_features(D[s]) for s in scenarios}
     mask_stress = torch.ones(18)
     if not stress_features:  # keep only phenology/time/design/crop information
         mask_stress[[2, 3, 4, 5, 9, 10]] = 0.0
@@ -151,11 +131,12 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=384, lr=3e-3, 
         s = scenarios[step % len(scenarios)]
         idx = pools[s][torch.randint(len(pools[s]), (batch,))]
         d = S._sel(D[s], idx)
-        g = des(feats[s][idx]) if use_design else torch.full((batch,), fixed_g if fixed_g else 0.3)
+        g = g_range[0] + (g_range[1] - g_range[0]) * torch.rand(batch)
         dd, irr, w = expand_irrigation(d)
-        y, e = S.rollout(dd, torch.cat([g, g]), controller=lambda f: ctrl(f * mask_stress), irrigated=irr)
+        y, e = S.rollout(dd, torch.cat([g, g]), controller=lambda f: ctrl(f * mask_stress), irrigated=irr,
+                         noise_seed=seed * 100000 + step)
         ret = combine(y, w) / refs[s][0][idx].clamp(min=0.05)
-        eratio = e[:batch] / refs[s][1][idx]
+        eratio = combine(e, w) / refs[s][1][idx]
         loss = loss_fn(ret, eratio, rho, mu)
         opt.zero_grad(); loss.backward()
         finite = torch.isfinite(loss) and all(torch.isfinite(q.grad).all() for q in params if q.grad is not None)
@@ -165,16 +146,13 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=384, lr=3e-3, 
         else:
             n_skipped += 1
         sched.step()
-        if checkpoint is not None and step + 1 in checkpoint[0]:
-            ctrl.mask = mask_stress
-            checkpoint[1](step + 1, ctrl, des)
         if log is not None and step % 10 == 0:
             msg = dict(step=step, scen=s, loss=float(loss.detach()), ret=float(ret.detach().mean()),
                        comply=float((ret >= rho).float().mean()), eratio=float(eratio.detach().mean()),
-                       g=float(g.detach().mean()), skipped=n_skipped, t=round(time.time() - t0))
+                       skipped=n_skipped, t=round(time.time() - t0))
             print(json.dumps(msg), flush=True, file=log)
     ctrl.mask = mask_stress
-    return ctrl, des
+    return ctrl
 
 
 def wrap(ctrl):
