@@ -1,2 +1,27 @@
-\subsection{Additional experiments}\label{sec:extra}
-Experiments on conditioning the controller on the food-security floor and on robustness to forecast errors are in progress and will be reported here.
+\subsection{Floor conditioning, chance-constrained training and forecast errors}\label{sec:extra}
+\textbf{One network for all floors.} Regulations and farmers set different floors. The network of the main experiments was trained at $\rho=0.9$ only. We evaluated it at floors of 0.80, 0.85, 0.90 and 0.95, re-running the historical design step for each floor (Table~\ref{tab:rho}). Its LER exceeds that of the phenology rule by 0.037, 0.036, 0.034 and 0.033 under the baseline climate (0.040, 0.037, 0.032 and 0.033 at +3\,\textdegree C), so the benefit carries over to other floors without retraining. A network that received the floor as an additional input and was trained over all four floors did not improve on it (differences in LER $\le0.001$). Because the design step already adapts the density to the floor, conditioning the controller on the floor is not needed.
+
+\begin{table}[t]
+\centering
+\caption{LER of the controllers at different yield-retention floors $\rho$ (main split; the historical design step is repeated for each floor).}
+\label{tab:rho}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{Baseline climate} & \multicolumn{4}{c}{+3\,\textdegree C}\\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Method & 0.80 & 0.85 & 0.90 & 0.95 & 0.80 & 0.85 & 0.90 & 0.95\\
+\midrule
+AV static & 1.159 & 1.115 & 1.072 & 1.011 & 1.174 & 1.128 & 1.083 & 1.013\\
+Stress rule & 1.380 & 1.282 & 1.182 & 1.077 & 1.364 & 1.269 & 1.172 & 1.071\\
+Phenology rule & 1.467 & 1.356 & 1.236 & 1.108 & 1.513 & 1.395 & 1.265 & 1.122\\
+SALS (trained at $\rho=0.9$) & 1.505 & 1.392 & 1.270 & 1.141 & 1.553 & 1.432 & 1.297 & 1.154\\
+SALS conditioned on $\rho$ & 1.504 & 1.391 & 1.269 & 1.141 & 1.553 & 1.431 & 1.296 & 1.154\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Chance-constrained training.} We also trained a network whose objective penalises a batch share of seasons below the floor that exceeds 20\%. It did not improve the tail. With the mean-based design step its LER was 1.263 (baseline) and 1.290 (+3\,\textdegree C) against 1.270 and 1.297, and with chance-constrained design it reached season-level compliance of 92.6\% against 92.0\% and an LER of 1.198 against 1.205. The season-level guarantee is obtained by the design step (Section~\ref{sec:main}), not by the training objective.
+
+\textbf{Forecast errors.} We raised the forecast errors seen by the controllers to 0, 1, 2 and 3 times the errors used in training. The LER of SALS and of the phenology rule was identical at all four error levels to three decimals (densities 0.2 and 0.3: SALS 1.307 and 1.457, phenology rule 1.278 and 1.416). Neither controller uses the weather forecast: both rely on the crop's thermal time, which is observable from on-farm temperature records. The stress rule, which depends on the forecast of maximum temperature, degrades with forecast error: at density 0.3 its retention falls from 0.778 to 0.751 and its LER from 1.432 to 1.418 as the errors triple.

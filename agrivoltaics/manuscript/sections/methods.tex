@@ -44,14 +44,14 @@ SIMPLE has a fixed harvest index and therefore ignores the high sensitivity of g
 
 The thermal-time requirement to maturity was calibrated for every site as the mean thermal time between the GGCMI sowing and maturity dates under the 2001--2020 climate, and the canopy parameters were scaled accordingly. The cultivar is thus adapted to the present climate, and warming shortens the season. Growth stops smoothly once the thermal-time requirement is met. Yield is biomass multiplied by the (shade-adjusted) harvest index. Each site is represented by a rainfed and an irrigated sub-field in proportion to its SPAM irrigated fraction. Each sub-field carries its own array, so both yield \emph{and} electricity are area-weighted over the two sub-fields.
 
-\subsection{SALS: stress-aware light sharing}\label{sec:sals}
-SALS learns a \emph{control network} $u_t=\pi_\omega(\mathbf{x}_t;g)$ (Algorithm~\ref{alg:sals}). It is a multilayer perceptron with two hidden layers of 64 units and a sigmoid output, and it chooses the daily light-sharing level of Eq.~\eqref{eq:phi}. Its inputs are the information available on day $t$:
+\subsection{SALS: simulation-trained adaptive light sharing}\label{sec:sals}
+SALS learns a \emph{control network} $u_t=\pi_\omega(\mathbf{x}_t;g)$ (Algorithm~\ref{alg:sals}). It is a multilayer perceptron with two hidden layers of 64 units and a bounded-logit output, $u=\sigma(5\tanh(z/5))\in[0.007,0.993]$, which keeps gradients non-zero at the extremes. It chooses the daily light-sharing level of Eq.~\eqref{eq:phi}. Its inputs are the information available on day $t$:
 \begin{itemize}
 \item the crop and soil state: relative thermal time $\mathrm{TT}/T_{\mathrm{sum}}$, radiation interception $f_{\mathrm{Solar}}$, relative soil water and the previous day's ARID;
 \item a \emph{forecast} of the day's maximum temperature (relative to $T_{\mathrm{heat}}$ and $T_{\mathrm{opt}}$), irradiance and ET$_0$;
 \item static information: the irrigation status of the sub-field, the array's GCR $g$, latitude, day of season and the crop.
 \end{itemize}
-Forecasts are perturbed with random errors, independently every day: Gaussian with a standard deviation of 2\,\textdegree C for maximum temperature, and multiplicative with standard deviations of 20\% for irradiance and 15\% for ET$_0$. The physics always uses the true weather. The same forecast errors are applied to the rule-based controllers. The controller is conditioned on $g$. During training, every season is simulated with a GCR drawn uniformly from $[0.10,0.50]$, so that one network learns how to control arrays of any density. Outside the cropping season the trackers backtrack for maximum electricity.
+Forecasts are perturbed with random errors, independently every day: Gaussian with a standard deviation of 2\,\textdegree C for maximum temperature, and multiplicative with standard deviations of 20\% for irradiance and 15\% for ET$_0$. The physics always uses the true weather. The same forecast errors are applied to the rule-based controllers. The controller is conditioned on $g$. During training, each season is simulated with a GCR close to the density that is sustainable at its training site. This is the largest value on a coarse grid ($0.05,0.10,\dots,0.50$) at which seasonal sharing keeps the mean retention of the site's training seasons at or above $\rho$, plus a uniform perturbation in $[-0.05,+0.10]$ truncated to $[0.05,0.50]$. The network therefore learns to control the densities that design selection will later pick. Outside the cropping season the trackers backtrack for maximum electricity.
 
 For site-season $i$ with open-field yield $Y^{\mathrm{open}}_i$, let $r_i=Y_i/Y^{\mathrm{open}}_i$ be the yield retention and $e_i=E_i/E_{\mathrm{PV},i}$ the electricity relative to a conventional PV plant. Training minimises the penalised objective
 \begin{equation}
@@ -60,16 +60,18 @@ For site-season $i$ with open-field yield $Y^{\mathrm{open}}_i$, let $r_i=Y_i/Y^
 \end{equation}
 which combines an exact (hinge) and a quadratic penalty for the food-security floor $\rho$. Because $r_i$ and $e_i$ are outputs of the differentiable simulator, the exact gradient of Eq.~\eqref{eq:loss} is obtained by back-propagation through the 365 daily steps of every season (back-propagation through time). This is the key difference from reinforcement learning with black-box simulators \citep{gautron2022}, which estimates gradients from sampled returns.
 
-Each minibatch contains 512 site-seasons, each simulated as a rainfed and an irrigated sub-field, drawn from one of the four climates in turn. Seasons with a failed open-field crop ($Y^{\mathrm{open}}<0.2$\,t\,ha$^{-1}$) are excluded from training and evaluation. The network is trained with Adam \citep{kingma2015} (learning rate $3\times10^{-3}$, cosine decay, gradient-norm clipping at 1) for 300 steps. Growth-stage logistic functions are evaluated in a numerically stable form, so that gradients remain finite even under extreme heat.
+Each minibatch contains 512 site-seasons, each simulated as a rainfed and an irrigated sub-field, drawn from one of the four climates in turn. Seasons with a failed open-field crop ($Y^{\mathrm{open}}<0.2$\,t\,ha$^{-1}$) are excluded from training and evaluation. The network is fine-tuned through the simulator with Adam \citep{kingma2015} (learning rate $10^{-3}$, cosine decay, gradient-norm clipping at 1) for 300 steps. Growth-stage logistic functions are evaluated in a numerically stable form, so that gradients remain finite even under extreme heat.
+
+\emph{Initialisation.} Trained from random weights, the controller converged to sharing light throughout the cropping window ($u>0.99$ on all days), i.e.\ to the seasonal-sharing rule, because the gradient of electricity with respect to $u$ is small and of the same sign for most days of a season. We therefore initialise the network by behaviour cloning of the phenology rule of Section~\ref{sec:baselines}: binary cross-entropy against the rule's output (soft targets 0.95 and 0.05) on about 1.7 million day-states visited by the rule in the training seasons, with 1500 Adam steps at a learning rate of $3\times10^{-3}$. Fine-tuning then moves the policy away from this initialisation wherever doing so improves the objective. Consequently, the gain of SALS over the phenology rule measures what fine-tuning through the simulator adds to that rule, not what can be learned without it.
 
 \begin{algorithm}[t]
 \caption{SALS training}\label{alg:sals}
 \begin{algorithmic}[1]
 \Require training site-seasons in four climates; floor $\rho$; penalties $\mu_1,\mu_2$
-\State initialise the control network $\pi_\omega$
+\State initialise $\pi_\omega$ by behaviour cloning of the phenology rule
 \For{step $=1,\dots,N$}
   \State sample a climate and a minibatch $\mathcal{B}$ of site-seasons (rainfed and irrigated sub-fields)
-  \State draw $g_i\sim\mathcal{U}[0.10,0.50]$; initialise crop and soil states
+  \State set $g_i$ to the site's sustainable density plus a perturbation; initialise crop and soil states
   \For{day $t=1,\dots,365$}
     \State $u_{it}\gets\pi_\omega(\mathbf{x}_{it};g_i)$ from state and noisy forecast if the crop is in the field, else $0$
     \State hourly rotation (Eq.~\ref{eq:phi}), PV electricity, crop light, canopy temperature, ET$_0$

@@ -235,3 +235,7 @@ agrivoltaics/results/models/*.log
 agrivoltaics/results/models/*.done
 agrivoltaics/results/*.out
 agrivoltaics/results/old_saturated/
+agrivoltaics/results/extra_*.parquet
+agrivoltaics/results/grid_cache/
+agrivoltaics/results/*.done
+agrivoltaics/results/*.out
