@@ -1,6 +1,6 @@
 Highlights
 - Daily light sharing lets trackers carry 3x the module area at the same 90% yield retention.
 - A phenology rule is the best simple controller and needs no weather forecast.
-- Shade response is checked against field trials; the model is conservative.
-- A learned controller adds only a small gain (0.03-0.05 LER) over the best rule.
-- Yield floor holds on average, not every season; 5% of cropland needs 10 TWp.
+- Shade response calibrated by gradient descent through a differentiable simulator.
+- Learned control adds only 0.01-0.05 LER; ensemble training and biomass feedback add nothing.
+- Uncertainty-aware design restores oracle yield-floor compliance for 0.02-0.03 LER.

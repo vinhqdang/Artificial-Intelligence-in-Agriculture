@@ -114,6 +114,19 @@ The floor is not met evenly. Production-weighted retention is 0.888 for soybean 
 \input{tables/fieldval}
 \input{tables/variants}
 
+\subsection{Learning under shade-response uncertainty}\label{sec:uncertain}
+\textbf{Calibration.} Gradient descent through the simulator fitted the shade response of all five crops to the meta-analysis and the field trials with small residual spread in the yield curves (relative yield at 23--25\% shading $0.83\pm0.02$--$0.03$ for rice and maize, $0.84\pm0.03$ for wheat, $0.86\pm0.03$ for potato and $0.72\pm0.04$ for soybean), whereas some parameters remain uncertain (Table~\ref{tab:posterior}). The data identify two features: the harvest index of maize is hardly affected by shade (multiplier $0.28\pm0.14$, $c\approx0$), as observed by \citet{ramosfuentes2023}, and soybean is more shade sensitive than the cereals (compensation 0.12, harvest-index multiplier 1.38), as in \citet{laub2022}. The compensation of wheat is the least certain ($0.68\pm0.34$).
+
+\input{tables/posterior}
+
+\textbf{Learned controllers.} Under every response the learned controller stays better than the best hand-written rule, but only slightly (Table~\ref{tab:robust}): the LER gain of SALS over the phenology rule is $+0.014$, $+0.015$, $+0.033$ and $+0.010$ under the proportional, calibrated, field-fitted and harsh responses. Training on the ensemble did not help: SALS-robust differs from SALS, which was trained on the proportional response only, by at most 0.005 in LER, and SALS-adaptive, which sees the measured biomass ratio, by at most 0.008. The feedback rule is worse than the phenology rule by 0.025--0.064 in LER. A plausible reason is that the biomass ratio does not reveal the harvest-index loss from shading around flowering, so the information that the controller could use to adapt is not in the measurement.
+
+\input{tables/robust}
+
+\textbf{Design under uncertainty.} The larger risk is in the design step (Table~\ref{tab:design}). When the density is chosen under the ensemble mean and the true response is a different plausible one, the share of sites whose mean retention reaches the floor falls to 58\% (phenology rule) and 55\% (SALS), against 76\% and 74\% for an oracle design. The uncertainty-aware design restores the oracle level of site compliance (76\% and 74\%) at a cost of 0.029 and 0.023 in LER relative to the ensemble-mean design. For the proportional and harsh responses, which lie outside the ensemble, the same design raises site compliance of the phenology rule from 29\% to 33\% and from 14\% to 24\% but does not restore it, so the guarantee holds only within the range of responses that the data support.
+
+\input{tables/design}
+
 \subsection{Agrivoltaics under warming}
 Under warming, the open-field production of the held-out sites (Fig.~\ref{fig:warming}) falls at +3\,\textdegree C by 23\% for maize and 18\% for rice, is nearly unchanged for soybean, and rises for wheat (+3\%) and potato (+10\%). Agrivoltaic production with light-sharing control follows the open field at about 90\% of its level, so it inherits the same climate impacts (maize $-31$\%, rice $-27$\% relative to the baseline open field at +3\,\textdegree C). Agrivoltaics does not protect staple production against warming in this model. The LER of light-sharing systems increases slightly with warming (SALS 1.270 to 1.297; phenology rule 1.236 to 1.265), because the floor allows slightly denser arrays in warmer conditions (GCR 0.173 to 0.177 and electricity 510 to 540\,MWh\,ha$^{-1}$\,yr$^{-1}$). The margin of SALS over the rules does not grow with warming (Table~\ref{tab:stats}).
 
