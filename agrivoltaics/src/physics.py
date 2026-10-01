@@ -206,6 +206,14 @@ RUE_COMP = {"wheat": 0.0, "rice": 0.0, "maize": 0.0, "soybean": 0.0, "potato": 0
 if VARIANT == "calibrated":
     RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp.json"))))
 HI_SHADE = {"wheat": 0.4, "rice": 0.5, "maize": 0.6, "soybean": 0.5, "potato": 0.2}
+if VARIANT == "harsh":      # strongest plausible shade penalty: proportional growth response, 1.5x harvest-index penalty
+    HI_SHADE.update({k: 1.5 * v for k, v in HI_SHADE.items()})
+if VARIANT == "posterior":  # ensemble mean of the gradient-calibrated response (calibrate_gradient.py)
+    _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "shade_posterior.json")))
+    _cm = [sum(m[i] for m in _post["c"]) / len(_post["c"]) for i in range(5)]
+    _hm = [sum(m[i] for m in _post["h"]) / len(_post["h"]) for i in range(5)]
+    for _i, _k in enumerate(_post["crops"]):
+        RUE_COMP[_k] = _cm[_i]; HI_SHADE[_k] = HI_SHADE[_k] * _hm[_i]
 if VARIANT == "field":      # fitted to the field trials themselves (optimistic bound), maize HI unaffected
     RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp_field.json"))))
     HI_SHADE["maize"] = 0.0

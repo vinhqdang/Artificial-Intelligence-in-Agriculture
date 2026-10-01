@@ -47,6 +47,13 @@ if __name__ == "__main__":
             return torch.load(fn)
         g = A.calibrate_training_gcr(D, refs, tm, rho=rho); torch.save(g, fn); return g
     g_site = gcr_for(0.9)
+    if kw.get("theta", "0") == "1":      # robust training: shade response drawn from the calibrated ensemble per season
+        post = json.load(open(f"{ROOT}/data/shade_posterior.json"))
+        cfg["theta"] = dict(c=torch.tensor(post["c"]), h=torch.tensor(post["h"]))
+    if kw.get("ref", "0") == "1":        # adaptive training: controller sees measured biomass relative to a reference plot
+        cfg["track_ref"] = True
+    if "jhi" in kw:
+        cfg["jitter"] = (-0.05, float(kw["jhi"]))
     extra = {}
     if kw.get("rho_cond", "0") == "1":
         levels = [0.8, 0.85, 0.9, 0.95]
@@ -54,8 +61,8 @@ if __name__ == "__main__":
     if kw.get("chance", "0") == "1":
         extra["chance"] = (0.8, 20.0)
     with open(f"{ROOT}/results/models/{name}.log", "w") as log:
-        print(json.dumps(dict(cfg, split=split)), file=log, flush=True)
+        print(json.dumps(dict({k: v for k, v in cfg.items() if k != 'theta'}, split=split, theta='theta' in cfg)), file=log, flush=True)
         ctrl = A.train(D, refs, tm, log=log, g_site=g_site, **cfg, **extra)
-    torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict(cfg, split=split, rho_cond=bool(extra.get('rho_levels')), chance=bool(extra.get('chance')))),
+    torch.save(dict(ctrl=ctrl.state_dict(), mask=ctrl.mask, cfg=dict({k: v for k, v in cfg.items() if k != "theta"}, split=split, rho_cond=bool(extra.get('rho_levels')), chance=bool(extra.get('chance')), theta=("theta" in cfg))),
                f"{ROOT}/results/models/{name}.pt")
     print("saved", name)

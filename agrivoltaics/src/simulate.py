@@ -65,7 +65,7 @@ def precompute(d):
 
 
 def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kappa=KAPPA, record=False,
-            forecast_noise=True, noise_seed=0, rho=None, noise_scale=1.0):
+            forecast_noise=True, noise_seed=0, rho=None, noise_scale=1.0, track_ref=False, shade_override=None):
     """Simulate a batch. g: (B,) ground-coverage ratio. controller(features)->u (B,),
     or u_seq (B, 365). Returns yield (t ha-1 dry matter), electricity (MWh ha-1),
     and optional daily records."""
@@ -80,6 +80,10 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
     energy = torch.zeros(B)
     hi_shade = torch.tensor([P.HI_SHADE[c] for c in P.CROP_PARAMS])[d["crop"].long()]
     rue_comp = torch.tensor([P.RUE_COMP[c] for c in P.CROP_PARAMS])[d["crop"].long()]
+    if "theta_c" in d:      # per-season shade-response parameters (uncertainty ensembles, calibration)
+        rue_comp = d["theta_c"]
+        hi_shade = hi_shade * d["theta_h"]
+    st_ref = P.CropState(B, wcap) if track_ref else None
     gen = torch.Generator().manual_seed(noise_seed)
     T = d["ghi"].shape[1]
     if forecast_noise and controller is not None:
@@ -93,7 +97,9 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
         ghi, dhi, bh = d["ghi_h"][:, t].float(), d["dhi_h"][:, t].float(), d["bh_h"][:, t].float()
         geo = dict(sx=d["sx"][:, t].float(), sz=d["sz"][:, t].float())
         geo["cosz"] = geo["sz"]
-        if panels:
+        if shade_override is not None:   # cached shading of a static array (crop-only rollouts)
+            u = torch.zeros(B); shade = shade_override[:, t]
+        elif panels:
             psi = d["psi"][:, t].float()
             gg = g[:, None]
             phi_bt = P.backtracking_angle(psi, gg)
@@ -105,6 +111,9 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
                     fday["ghi"] = day["ghi"] * (1 + nz["ghi"][:, t]).clamp(min=0)
                     fday["et0"] = day["et0"] * (1 + nz["et0"][:, t]).clamp(min=0)
                 fin = features(st, p, fday, t, g, irrigated, crop_onehot, d["lat"])
+                if track_ref:   # on-farm measurement: realised biomass relative to an open reference plot
+                    ratio = (st.biomass + 5.0) / (st_ref.biomass + 5.0)
+                    fin = torch.cat([fin, ratio[:, None]], 1)
                 if rho is not None:   # food-security floor as an extra controller input
                     rcol = rho if torch.is_tensor(rho) else torch.full((B,), float(rho))
                     fin = torch.cat([fin, rcol[:, None]], 1)
@@ -125,11 +134,15 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
         et0_c = P.et0_fao56(tmax_c, day["tmin"], day["tdew"], rad_c, rso, day["u2"], d["elev"])
         tmean = (day["tmax"] + day["tmin"]) / 2
         fh, fw = P.crop_step(st, p, tmean, tmax_c, rad_c, day["rain"], et0_c, d["co2"], irrigated, day["active"], wcap, shade=shade, rue_comp=rue_comp)
+        if track_ref:
+            P.crop_step(st_ref, p, tmean, day["tmax"], day["ghi"], day["rain"], day["et0"], d["co2"], irrigated,
+                        day["active"], wcap)
         if record:
             rec["u"].append(u); rec["shade"].append(shade); rec["fheat"].append(fh); rec["fwater"].append(fw)
     matured = torch.sigmoid((st.tt - p["Tsum"]) / 20.0)
     yld = st.biomass * p["HI"] * P.hi_factor(st, hi_shade) * matured / 100.0             # g m-2 -> t ha-1
     if record:
         rec = {k: torch.stack(v, 1) for k, v in rec.items()}
+        rec["hif"] = P.hi_factor(st, hi_shade)
         return yld, energy, rec
     return yld, energy

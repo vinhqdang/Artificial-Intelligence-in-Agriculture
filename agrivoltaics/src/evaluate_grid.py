@@ -17,6 +17,8 @@ from run_train import get_refs
 ROOT = A.ROOT
 torch.set_num_threads(4)
 GRID = [round(0.05 + 0.025 * i, 3) for i in range(19)]      # 0.05 ... 0.50
+if os.environ.get("AV_GRID") == "coarse":
+    GRID = [round(0.05 * i, 2) for i in range(1, 11)]
 
 
 from sals import u_season, u_phenology, u_stress
@@ -25,7 +27,7 @@ from sals import u_season, u_phenology, u_stress
 def load_ctrl(name):
     m = torch.load(f"{ROOT}/results/models/{name}.pt")
     c = A.Controller(n_in=len(m["mask"])); c.load_state_dict(m["ctrl"]); c.mask = m["mask"]; c.eval()
-    return A.wrap(c)
+    f = A.wrap(c); f.track_ref = bool(m["cfg"].get("track_ref", False)); return f
 
 
 if __name__ == "__main__":
@@ -39,6 +41,9 @@ if __name__ == "__main__":
     if kw.get("rules", "1") == "1":
         methods.update({"AV static": None, "Seasonal sharing": u_season, "Phenology rule": u_phenology,
                         "Stress rule": u_stress})
+    if kw.get("feedback"):
+        for rs in kw["feedback"].split(","):
+            f = A.make_feedback(float(rs)); f.track_ref = True; methods[f"Feedback rule"] = f
     for m in models:
         methods[m] = load_ctrl(m)
     D = A.load_all(); refs = get_refs(D)
@@ -68,7 +73,7 @@ if __name__ == "__main__":
                     if ctrl is None:
                         y, e = A.evaluate(dt, gg, kappa=kappa)
                     else:
-                        y, e = A.evaluate(dt, gg, controller=ctrl, kappa=kappa)
+                        y, e = A.evaluate(dt, gg, controller=ctrl, kappa=kappa, track_ref=getattr(ctrl, 'track_ref', False))
                     parts.append(pd.DataFrame(dict(base, method=name, scenario=scen, kappa=kappa, g=g,
                                                    y=y.numpy(), e=e.numpy())))
                 pd.concat(parts).to_parquet(fn + ".tmp", index=False); os.replace(fn + ".tmp", fn)

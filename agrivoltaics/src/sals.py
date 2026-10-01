@@ -87,7 +87,7 @@ def references(d, chunk=4000):
     return y_open, e_pv
 
 
-def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=None, noise_scale=1.0):
+def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=None, noise_scale=1.0, track_ref=False):
     """Area-weighted yield and electricity for a design g (B,) and controller."""
     B = d["lat"].shape[0]
     y_out, e_out = torch.zeros(B), torch.zeros(B)
@@ -98,7 +98,7 @@ def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=Non
             gg = torch.cat([g[idx], g[idx]])
             ctrl = controller if controller is not None else u_rule
             y, e = S.rollout(dd, gg, controller=ctrl, irrigated=irr, kappa=S.KAPPA if kappa is None else kappa,
-                             rho=rho, noise_scale=noise_scale)
+                             rho=rho, noise_scale=noise_scale, track_ref=track_ref)
             # rainfed and irrigated sub-fields each carry their own array:
             # both yield and electricity are area-weighted
             y_out[idx] = combine(y, w); e_out[idx] = combine(e, w)
@@ -120,15 +120,27 @@ def loss_fn(ret, eratio, rho, mu, mu1=5.0, chance=None):
     return loss
 
 
+def attach_theta(d, theta, gen=None):
+    """Draw one member of a shade-response ensemble per season (theta: dict of (M,5) tensors c, h)."""
+    if theta is None:
+        return d
+    B = d["lat"].shape[0]
+    m = torch.randint(theta["c"].shape[0], (B,), generator=gen)
+    crop = d["crop"].long()
+    d = dict(d); d["theta_c"] = theta["c"][m, crop]; d["theta_h"] = theta["h"][m, crop]
+    return d
+
+
 def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, seed=0,
           scenarios=SCEN, stress_features=True, log=None, g_site=None, jitter=(-0.05, 0.10),
-          warm_start=True, bc_batches=2, bc_steps=1500, rho_levels=None, g_site_by_rho=None, chance=None):
+          warm_start=True, bc_batches=2, bc_steps=1500, rho_levels=None, g_site_by_rho=None, chance=None,
+          theta=None, track_ref=False):
     """Train the density-conditioned controller. Each training season is simulated
     with a GCR close to the density that is sustainable at its site: g_site[s] is a
     (B,) tensor per scenario (from calibrate_training_gcr), perturbed by a uniform
     jitter so that the network learns to control a range of densities."""
     torch.manual_seed(seed); np.random.seed(seed)
-    n_in = 19 if rho_levels else 18           # rho-conditioned controllers get the floor as input
+    n_in = 18 + int(bool(rho_levels)) + int(track_ref)   # optional inputs: floor, measured biomass ratio
     ctrl = Controller(n_in=n_in)
     params = list(ctrl.parameters())
     pools = {s: torch.where(train_mask[s])[0] for s in scenarios}
@@ -137,7 +149,7 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
         mask_stress[[2, 3, 4, 5, 9, 10]] = 0.0
     if warm_start:
         behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, bc_batches, bc_steps, seed, log,
-                        rho_levels=rho_levels, g_site_by_rho=g_site_by_rho)
+                        rho_levels=rho_levels, g_site_by_rho=g_site_by_rho, theta=theta, track_ref=track_ref)
     opt = torch.optim.Adam(params, lr=lr)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
     t0 = time.time()
@@ -145,7 +157,7 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
     for step in range(steps):
         s = scenarios[step % len(scenarios)]
         idx = pools[s][torch.randint(len(pools[s]), (batch,))]
-        d = S._sel(D[s], idx)
+        d = attach_theta(S._sel(D[s], idx), theta)
         if rho_levels:
             lev = torch.randint(len(rho_levels), (batch,))
             rho_b = torch.tensor(rho_levels)[lev]
@@ -156,7 +168,7 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
         g = (base + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch)).clamp(G_MIN, G_MAX)
         dd, irr, w = expand_irrigation(d)
         y, e = S.rollout(dd, torch.cat([g, g]), controller=lambda f: ctrl(f * mask_stress), irrigated=irr,
-                         noise_seed=seed * 100000 + step, rho=rho_in)
+                         noise_seed=seed * 100000 + step, rho=rho_in, track_ref=track_ref)
         ret = combine(y, w) / refs[s][0][idx].clamp(min=0.05)
         eratio = combine(e, w) / refs[s][1][idx]
         loss = loss_fn(ret, eratio, rho_b, mu, chance=chance)
@@ -178,7 +190,7 @@ def train(D, refs, train_mask, rho=0.9, mu=30.0, steps=300, batch=512, lr=3e-3, 
 
 
 def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batch, n_batches, steps, seed, log,
-                    rho_levels=None, g_site_by_rho=None):
+                    rho_levels=None, g_site_by_rho=None, theta=None, track_ref=False):
     """Warm start: imitate the phenology rule (soft targets 0.95 / 0.05) on the
     states visited by that rule, before fine-tuning through the simulator."""
     feats, targets = [], []
@@ -193,7 +205,7 @@ def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batc
         for s in scenarios:
             for b in range(n_batches):
                 idx = pools[s][torch.randint(len(pools[s]), (batch,), generator=gen)]
-                d = S._sel(D[s], idx)
+                d = attach_theta(S._sel(D[s], idx), theta, gen)
                 if rho_levels:
                     lev = torch.randint(len(rho_levels), (batch,), generator=gen)
                     rho_b = torch.tensor(rho_levels)[lev]
@@ -203,7 +215,7 @@ def behaviour_clone(ctrl, D, pools, g_site, jitter, mask_stress, scenarios, batc
                     base, rho_in = g_site[s][idx], None
                 g = (base + jitter[0] + (jitter[1] - jitter[0]) * torch.rand(batch, generator=gen)).clamp(G_MIN, G_MAX)
                 dd, irr, w = expand_irrigation(d)
-                S.rollout(dd, torch.cat([g, g]), controller=recorder, irrigated=irr, noise_seed=seed * 7 + b, rho=rho_in)
+                S.rollout(dd, torch.cat([g, g]), controller=recorder, irrigated=irr, noise_seed=seed * 7 + b, rho=rho_in, track_ref=track_ref)
     X, Y = torch.cat(feats), torch.cat(targets) * 0.9 + 0.05
     opt = torch.optim.Adam(ctrl.parameters(), lr=3e-3)
     for it in range(steps):
@@ -228,6 +240,15 @@ def u_phenology(f):
     onset to physiological maturity)."""
     tt, active = f[:, 0], f[:, 8]
     return active * ((tt > 0.05) & (tt < 1.0)).float()
+
+
+def make_feedback(r_star, width=0.03):
+    """Feedback rule: share light during the growing season whenever the crop's measured biomass relative
+    to an open reference plot (feature 18) is below the target r_star, otherwise follow the sun."""
+    def u_feedback(f):
+        gate = f[:, 8] * ((f[:, 0] > 0.05) & (f[:, 0] < 1.0)).float()
+        return gate * torch.sigmoid((r_star - f[:, 18]) / width)
+    return u_feedback
 
 
 def u_stress(f):
