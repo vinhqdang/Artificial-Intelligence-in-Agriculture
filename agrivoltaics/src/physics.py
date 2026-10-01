@@ -214,6 +214,11 @@ if VARIANT == "posterior":  # ensemble mean of the gradient-calibrated response 
     _hm = [sum(m[i] for m in _post["h"]) / len(_post["h"]) for i in range(5)]
     for _i, _k in enumerate(_post["crops"]):
         RUE_COMP[_k] = _cm[_i]; HI_SHADE[_k] = HI_SHADE[_k] * _hm[_i]
+if VARIANT.startswith("member"):   # one member of the calibrated ensemble (index after 'member')
+    _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "shade_posterior.json")))
+    _k = int(VARIANT[6:])
+    for _i, _c in enumerate(_post["crops"]):
+        RUE_COMP[_c] = _post["c"][_k][_i]; HI_SHADE[_c] = HI_SHADE[_c] * _post["h"][_k][_i]
 if VARIANT == "field":      # fitted to the field trials themselves (optimistic bound), maize HI unaffected
     RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp_field.json"))))
     HI_SHADE["maize"] = 0.0

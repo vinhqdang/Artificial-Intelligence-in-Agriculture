@@ -46,6 +46,9 @@ if __name__ == "__main__":
             f = A.make_feedback(float(rs)); f.track_ref = True; methods[f"Feedback rule"] = f
     for m in models:
         methods[m] = load_ctrl(m)
+    if kw.get("only"):
+        keep = kw["only"].split(",")
+        methods = {k: v for k, v in methods.items() if k.replace(' ', '_') in keep}
     D = A.load_all(); refs = get_refs(D)
     test_site = A.site_split(split)
     cache = f"{ROOT}/results/grid_cache/{tag}"          # one file per (scenario, kappa, method): restartable
