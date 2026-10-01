@@ -1,6 +1,6 @@
 Highlights
-- A differentiable simulator couples trackers, PV, crop light and crop growth.
-- Light sharing allows 3x denser arrays at the same 90% mean yield retention.
-- A learned controller beats the best rule by 0.03-0.05 LER over seeds and splits.
-- Stress-aware inputs and warmed-climate training add no measurable benefit.
-- Yield floor holds on average, not in every season; 5% of cropland needs 10 TWp.
+- Daily light sharing lets trackers carry 3x the module area at the same 90% yield retention.
+- A phenology rule is the best simple controller and needs no weather forecast.
+- Shade response is checked against field trials; the model is conservative.
+- A learned controller adds only a small gain (0.03-0.05 LER) over the best rule.
+- Yield floor holds on average, not every season; 5% of cropland needs 10 TWp.
