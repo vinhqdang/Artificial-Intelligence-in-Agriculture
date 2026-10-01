@@ -209,7 +209,7 @@ HI_SHADE = {"wheat": 0.4, "rice": 0.5, "maize": 0.6, "soybean": 0.5, "potato": 0
 if VARIANT == "harsh":      # strongest plausible shade penalty: proportional growth response, 1.5x harvest-index penalty
     HI_SHADE.update({k: 1.5 * v for k, v in HI_SHADE.items()})
 if VARIANT == "posterior":  # ensemble mean of the gradient-calibrated response (calibrate_gradient.py)
-    _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "shade_posterior.json")))
+    _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", _os.environ.get("AV_POSTERIOR", "shade_posterior.json"))))
     _cm = [sum(m[i] for m in _post["c"]) / len(_post["c"]) for i in range(5)]
     _hm = [sum(m[i] for m in _post["h"]) / len(_post["h"]) for i in range(5)]
     for _i, _k in enumerate(_post["crops"]):

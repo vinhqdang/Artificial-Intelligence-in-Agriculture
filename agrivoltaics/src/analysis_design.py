@@ -9,6 +9,9 @@ from analysis import RES, RHO, HIST, summarize
 from analysis_robust import apply
 
 MEMBERS = [0, 3, 5, 8, 10]
+PREFIX = sys.argv[1] if len(sys.argv) > 1 else "mb"       # mb: first ensemble, mbml: ensemble calibrated to the data-driven curves
+MEAN = sys.argv[2] if len(sys.argv) > 2 else "rb_posterior"
+OUT = sys.argv[3] if len(sys.argv) > 3 else "design_uncertainty"
 NAME = {"sals_s0_seed0": "SALS", "rob_s0": "SALS"}
 Q = 0.75
 
@@ -37,8 +40,8 @@ def oracle(g):
 
 
 if __name__ == "__main__":
-    mem = {k: load(f"mb_{k}") for k in MEMBERS}
-    mean_g = load("rb_posterior")
+    mem = {k: load(f"{PREFIX}_{k}") for k in MEMBERS}
+    mean_g = load(MEAN)
     named = {t: load(f"rb_{t}") for t in ["conservative", "calibrated", "field", "harsh"]}
     rows = []
 
@@ -56,7 +59,7 @@ if __name__ == "__main__":
         add(t, g, "ensemble mean", pick([feas(mean_g)], 1.0))
         add(t, g, "uncertainty-aware", pick([feas(mem[k]) for k in MEMBERS], Q))
     out = pd.DataFrame(rows)[["truth", "design", "method", "sites", "GCR", "erel", "r", "comply", "site_comply", "p10", "LER"]]
-    out.to_csv(f"{RES}/design_uncertainty.csv", index=False)
+    out.to_csv(f"{RES}/{OUT}.csv", index=False)
     out["kind"] = np.where(out.truth.str.startswith("member"), "member (LOO)", out.truth)
     agg = out.groupby(["kind", "design", "method"])[["GCR", "erel", "r", "comply", "site_comply", "LER"]].mean().round(3)
     pd.set_option("display.width", 200); print(agg.to_string())

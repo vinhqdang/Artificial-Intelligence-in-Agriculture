@@ -1,6 +1,6 @@
 Highlights
 - Daily light sharing lets trackers carry 3x the module area at the same 90% yield retention.
 - A phenology rule is the best simple controller and needs no weather forecast.
-- Shade response calibrated by gradient descent through a differentiable simulator.
+- Shade response learned from 428 field observations: 28% lower held-out error than proportional loss.
 - Learned control adds only 0.01-0.05 LER; ensemble training and biomass feedback add nothing.
-- Uncertainty-aware design restores oracle yield-floor compliance for 0.02-0.03 LER.
+- Uncertainty-aware design raises yield-floor compliance from 62-63% to 71-73% of sites for 0.04 LER.
