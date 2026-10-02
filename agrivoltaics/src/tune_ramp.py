@@ -1,16 +1,16 @@
 """Derivative-free optimisation (CMA-ES) of a five-parameter ramp-plateau light-sharing schedule on training-block seasons,
 with the same objective as the other rules: electricity at the density where mean retention equals the floor."""
-import os, sys, json
+import os, sys, json, time
 import numpy as np, torch, cma
 sys.path.insert(0, os.path.dirname(__file__))
 import sals as A, simulate as S
 from run_train import get_refs, train_mask
-torch.set_num_threads(4)
+torch.set_num_threads(2)
 ROOT = A.ROOT
 D = A.load_all(); refs = get_refs(D)
 tm = train_mask(D, refs, A.site_split(0))["baseline"]
 idx = torch.where(tm)[0]; g_ = torch.Generator().manual_seed(1)
-idx = idx[torch.randperm(len(idx), generator=g_)[:500]]
+idx = idx[torch.randperm(len(idx), generator=g_)[:300]]
 d = S._sel(D["baseline"], idx); yo, ep = refs["baseline"][0][idx], refs["baseline"][1][idx]
 G = [0.1, 0.2, 0.3, 0.4, 0.5]
 
@@ -31,10 +31,13 @@ def objective(x):
     return -float(np.interp(0.9, ret[::-1], er[::-1]))
 
 
-es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=8, seed=1, maxiter=14, verbose=-9))
+es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=6, seed=1, maxiter=12, verbose=-9))
 n = 0
 while not es.stop():
-    xs = es.ask(); fs = [objective(x) for x in xs]; es.tell(xs, fs); n += len(xs)
+    xs = es.ask(); fs = []
+    for x in xs:
+        t0 = time.time(); fs.append(objective(x)); print('eval', round(time.time() - t0, 1), flush=True)
+    es.tell(xs, fs); n += len(xs)
     print(n, round(min(fs), 4), decode(es.result.xbest), flush=True)
 best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n), open(f"{ROOT}/results/ramp_tuning.json", "w"))
 print("best", best, -es.result.fbest, n)
