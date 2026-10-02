@@ -32,7 +32,8 @@ def objective(x):
 
 
 SEED = int(sys.argv[1]) if len(sys.argv) > 1 else 1
-es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=8, seed=SEED, maxiter=25, verbose=-9))
+x0 = (np.random.default_rng(SEED).standard_normal(5) * 1.5).tolist() if SEED > 1 else [-1.0, 1.0, 1.0, 1.0, 3.0]   # seed 1 starts at the tuned window; seeds 2 and 3 at random points
+es = cma.CMAEvolutionStrategy(x0, 1.0, dict(popsize=8, seed=SEED, maxiter=25, verbose=-9))
 n = 0
 while not es.stop():
     xs = es.ask(); fs = []

@@ -2,5 +2,5 @@ Highlights
 - Light sharing allows 2-3x denser trackers at a 90% yield-retention floor.
 - A phenology rule is the best simple controller; no weather forecast is needed.
 - Learned control adds 0.018 LER over a tuned rule; ensemble training adds nothing.
-- A raised floor matches ensemble-based design; neither is safe outside the ensemble.
+- A raised floor and ensemble-based design do not differ detectably; neither is safe outside it.
 - Under illustrative costs, plants beat agrivoltaics above 48 USD/MWh.
