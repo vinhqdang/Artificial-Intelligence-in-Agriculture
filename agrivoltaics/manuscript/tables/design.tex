@@ -1,16 +1,16 @@
 \begin{table}[t]
 \centering\small
-\caption{Array design under shade-response uncertainty (ensemble E2). Truth: each of five ensemble members in turn. Designs: oracle (density chosen under the truth), ensemble mean (density chosen under the mean response) and uncertainty-aware (density chosen so that the floor is met in at least 75\% of the \emph{other} four members). Means over the five held-out members; retention is the mean season retention, site compliance the share of sites whose mean retention is $\ge0.9$.}\label{tab:design}
+\caption{Array design under shade-response uncertainty (ensemble E2), pooled over the three spatial splits (93 held-out sites, every third site). Truth: each of five ensemble members in turn. Designs: oracle (density chosen under the truth), ensemble mean (density chosen under the mean response) and uncertainty-aware (density chosen so that the floor is met in at least 75\% of the \emph{other} four members). Means over members; site compliance is the share of sites whose mean retention is $\ge0.9$.}\label{tab:design}
 \begin{tabular}{llccccc}
 \toprule
 Design & Method & GCR & Retention & Seasons $\ge0.9$ (\%) & Sites $\ge0.9$ (\%) & LER\\
 \midrule
-oracle & Phenology rule & 0.261 & 0.913 & 76 & 79 & 1.412\\
-oracle & SALS & 0.256 & 0.912 & 73 & 73 & 1.438\\
-ensemble mean & Phenology rule & 0.272 & 0.907 & 60 & 63 & 1.427\\
-ensemble mean & SALS & 0.262 & 0.909 & 62 & 62 & 1.446\\
-uncertainty-aware & Phenology rule & 0.245 & 0.918 & 73 & 73 & 1.385\\
-uncertainty-aware & SALS & 0.238 & 0.917 & 69 & 71 & 1.406\\
+oracle & Phenology rule & 0.311 & 0.924 & 78 & 87 & 1.488\\
+oracle & SALS & 0.309 & 0.930 & 77 & 83 & 1.546\\
+ensemble mean & Phenology rule & 0.324 & 0.919 & 65 & 70 & 1.504\\
+ensemble mean & SALS & 0.322 & 0.925 & 64 & 67 & 1.564\\
+uncertainty-aware & Phenology rule & 0.299 & 0.928 & 74 & 78 & 1.467\\
+uncertainty-aware & SALS & 0.295 & 0.934 & 73 & 77 & 1.521\\
 \bottomrule
 \end{tabular}
 \end{table}
