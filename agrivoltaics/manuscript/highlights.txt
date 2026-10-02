@@ -1,6 +1,6 @@
 Highlights
 - Light sharing allows 2-3x denser trackers at a 90% yield-retention floor.
-- A phenology rule is the best simple controller; no weather forecast is needed.
-- Learned control adds 0.006 LER over an optimised window rule; ensembles add nothing.
-- A raised floor and ensemble-based design do not differ detectably; neither is safe outside it.
-- Under illustrative costs, plants beat agrivoltaics above 48 USD/MWh.
+- A learned shade response is no better than proportional loss for staple crops.
+- A neural controller beats an optimised window rule by only 0.006 LER.
+- Design margins matter: 70% vs 85-87% of pairs at the floor (mean vs oracle).
+- With illustrative costs, plants beat agrivoltaics above 48 USD/MWh.
