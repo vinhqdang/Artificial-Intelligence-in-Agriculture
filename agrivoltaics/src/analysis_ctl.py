@@ -28,3 +28,12 @@ for a, b in [("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule"), ("Tun
     for _ in range(2000):
         i = rng.integers(0, len(ids2), len(ids2)); dd.append((pa.ler.values[i] - pb.ler.values[i]).mean())
     print(a, "-", b, round(float((pa.ler - pb.ler).mean()), 4), np.round(np.quantile(dd, [0.025, 0.975]), 4), len(ids2))
+
+# per-split contrasts and saved intervals
+rows2 = []
+for sp in (0, 1, 2):
+    x = site[site.split == sp].pivot(index="site", columns="method", values="ler")
+    for a, b in [("SALS", "Optimised ramp schedule"), ("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule")]:
+        dd = (x[a] - x[b]).dropna().values; bs = [dd[rng.integers(0, len(dd), len(dd))].mean() for _ in range(2000)]
+        rows2.append(dict(split=sp, a=a, b=b, diff=dd.mean(), lo=np.quantile(bs, .025), hi=np.quantile(bs, .975), median=np.median(dd), pairs=len(dd)))
+pd.DataFrame(rows2).to_csv(f"{RES}/controllers_tuned_by_split.csv", index=False); print(pd.DataFrame(rows2).round(4).to_string())

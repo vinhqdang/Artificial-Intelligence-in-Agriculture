@@ -48,6 +48,7 @@ if __name__ == "__main__":
             for m, x in apply(sel, truth).groupby("method"):
                 s = summarize(x); s["truth"] = T; s["design"] = how; s["method"] = m; rows.append(s)
     out = pd.DataFrame(rows)[["truth", "design", "method", "sites", "GCR", "erel", "r", "comply", "site_comply", "p10", "LER"]]
+    out = out[out.design == "matched"]
     out.to_csv(f"{RES}/robust_eval.csv", index=False)
     pd.set_option("display.width", 200)
     print(out.round(3).to_string())
