@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering\small
-\caption{Land-equivalent ratio of rules and learned controllers under four true shade responses, with the array density designed under the true response (split~0, baseline climate, floor $\rho=0.9$, every sixth held-out site, 21 sites). The proportional (conservative) and harsh responses lie outside the range of the calibrated ensemble.}\label{tab:robust}
+\caption{Land-equivalent ratio of rules and learned controllers under four true shade responses, with the array density designed under the true response (split~0, baseline climate, floor $\rho=0.9$, every sixth held-out pair, 21 pairs, one training seed). Robust controllers are trained on random members of ensemble E1, E2 or E3 (adaptive: with the measured biomass ratio). The proportional (conservative) and harsh responses lie outside the ensembles.}\label{tab:robust}
 \begin{tabular}{lcccc}
 \toprule
 Method & Proportional & Calibrated & Field-fitted & Harsh\\
@@ -11,8 +11,11 @@ Stress rule & 1.129 & 1.160 & 1.406 & 1.086\\
 Feedback rule & 1.139 & 1.164 & 1.392 & 1.089\\
 Phenology rule & 1.164 & 1.190 & 1.456 & 1.122\\
 SALS (trained on proportional response) & 1.178 & 1.209 & 1.489 & 1.132\\
-SALS-robust (ensemble-trained) & 1.179 & 1.204 & 1.491 & 1.127\\
-SALS-adaptive (ensemble, biomass feedback) & 1.176 & 1.202 & 1.495 & 1.124\\
+SALS-robust, E1 & 1.179 & 1.204 & 1.491 & 1.127\\
+SALS-adaptive, E1 & 1.176 & 1.202 & 1.495 & 1.124\\
+SALS-robust, E2 & 1.165 & 1.192 & 1.483 & 1.126\\
+SALS-robust, E3 & 1.163 & 1.191 & 1.481 & 1.121\\
+SALS-adaptive, E3 & 1.164 & 1.191 & 1.475 & 1.118\\
 \bottomrule
 \end{tabular}
 \end{table}

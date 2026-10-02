@@ -6,7 +6,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from analysis import RES, RHO, HIST, TEST, summarize
 
 NAMES = {"sals_s0_seed0": "SALS (trained on proportional response)", "rob_s0": "SALS-robust (ensemble-trained)",
-         "adp_s0": "SALS-adaptive (ensemble, biomass feedback)"}
+         "adp_s0": "SALS-adaptive (ensemble, biomass feedback)",
+         "rob2_s0": "SALS-robust, E2", "rob3_s0": "SALS-robust, E3", "adp3_s0": "SALS-adaptive, E3"}
 TRUTHS = ["conservative", "calibrated", "field", "harsh"]
 
 
