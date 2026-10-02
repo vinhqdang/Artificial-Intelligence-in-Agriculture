@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\small
+\caption{Sensitivity of the controller comparison to the rotation limit of the trackers and to the harvest-index penalty (LER; main split, every sixth held-out pair, 21 pairs, main shade response, history-based design on a GCR grid with step 0.05). SALS was trained for the main setting. Fixed arrays (no tracking; flat and tilted by 30$^\circ$ from the horizontal about the north--south axis) reach LER 1.048 and 1.043 in the same sample, against 1.053 for static trackers.}\label{tab:physsens}
+\begin{tabular}{lcccc}
+\toprule
+Setting & Static tracker & Phenology rule & Tuned rule & SALS\\
+\midrule
+Main (limit 60$^\circ$, window 0.45--0.65) & 1.053 & 1.170 & 1.180 & 1.189\\
+Rotation limit 45$^\circ$ & 1.057 & 1.138 & 1.144 & 1.144\\
+Rotation limit 80$^\circ$ & 1.053 & 1.206 & 1.219 & 1.224\\
+Window 0.30--0.50 & 1.053 & 1.169 & 1.176 & 1.185\\
+Window 0.60--0.80 & 1.053 & 1.171 & 1.181 & 1.182\\
+No harvest-index penalty & 1.109 & 1.328 & 1.347 & 1.353\\
+\bottomrule
+\end{tabular}
+\end{table}
