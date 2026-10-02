@@ -45,6 +45,23 @@ def summarize(rows, name):
                                          ler=dd[:, 1].mean(), ler_lo=np.quantile(dd[:, 1], .025), ler_hi=np.quantile(dd[:, 1], .975), short=dd[:, 2].mean(), pairs=len(ids)))
     pd.DataFrame(B).to_csv(f"{RES}/{name}_boot.csv", index=False)
     pd.set_option("display.width", 200); print(name); print(S.round(3).to_string()); print(pd.DataFrame(B).round(3).to_string())
+    return d
+
+
+def frontier_diff(d, ens, n=2000):
+    """LER of the margin frontier (floors 0.90 = mean response, 0.92, 0.94, 0.96) interpolated at the compliance of an ensemble rule, minus the ensemble rule's LER (positive: margin better)."""
+    P = {k: d[d.design == k].set_index("site") for k in d.design.unique()}; ids = P["mean response"].index; out = []
+    mg = ["mean response", "margin 0.92", "margin 0.94", "margin 0.96"]
+    def stat(i):
+        comp = np.array([P[k].ok.values[i].mean() * 100 for k in mg]); ler = np.array([P[k].ler.values[i].mean() for k in mg])
+        o = np.argsort(comp); res = {}
+        for rule in ("aware q=0.75", "aware all others"):
+            c = P[rule].ok.values[i].mean() * 100; l = P[rule].ler.values[i].mean()
+            res[rule] = float(np.interp(c, comp[o], ler[o]) - l)
+        return res
+    base = stat(np.arange(len(ids))); bs = [stat(rng.integers(0, len(ids), len(ids))) for _ in range(n)]
+    rows = [dict(ensemble=ens, rule=r, margin_minus_rule_ler=base[r], lo=np.quantile([b[r] for b in bs], .025), hi=np.quantile([b[r] for b in bs], .975)) for r in base]
+    pd.DataFrame(rows).to_csv(f"{RES}/design_final_frontier_{ens}.csv", index=False); print(pd.DataFrame(rows).round(3).to_string())
 
 
 for ens, tg_s, tg_x in [("E2", "e2s", "e2x"), ("E3", "e3s", "e3x")]:
@@ -58,7 +75,8 @@ for ens, tg_s, tg_x in [("E2", "e2s", "e2x"), ("E3", "e3s", "e3x")]:
                        ("aware q=0.5", pick(others, 0.5)), ("aware q=0.75", pick(others, 0.75)), ("aware all others", pick(others, 1.0))]
             for name, sel in designs:
                 s = pairs(apply(sel, truth)); s["design"] = name; rows.append(s)
-    summarize(rows, f"design_final_loo_{ens}")
+    d = summarize(rows, f"design_final_loo_{ens}")
+    frontier_diff(d, ens)
     rows = []
     for sp in (0, 1, 2):
         mem = [feas(load(f"{tg_s}{sp}_{k}")) for k in MEM]; mean_g = load(f"{tg_s}{sp}_mean")

@@ -31,7 +31,8 @@ def objective(x):
     return -float(np.interp(0.9, ret[::-1], er[::-1]))
 
 
-es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=6, seed=1, maxiter=12, verbose=-9))
+SEED = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=8, seed=SEED, maxiter=25, verbose=-9))
 n = 0
 while not es.stop():
     xs = es.ask(); fs = []
@@ -39,5 +40,5 @@ while not es.stop():
         t0 = time.time(); fs.append(objective(x)); print('eval', round(time.time() - t0, 1), flush=True)
     es.tell(xs, fs); n += len(xs)
     print(n, round(min(fs), 4), decode(es.result.xbest), flush=True)
-best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n), open(f"{ROOT}/results/ramp_tuning.json", "w"))
+best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n, seed=SEED), open(f"{ROOT}/results/ramp_tuning_s{SEED}.json", "w"))
 print("best", best, -es.result.fbest, n)

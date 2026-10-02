@@ -3,5 +3,5 @@ Highlights
 - A phenology rule is the best simple controller and needs no weather forecast.
 - Shade response learned from 428 field observations; between-study spread about 0.22 in relative yield.
 - Learned control adds 0.018 LER over a tuned phenology rule; ensemble training and biomass feedback do not help.
-- A floor raised by 0.02 under the mean response matches an ensemble-quantile design; neither is safe outside the ensemble.
-- Under illustrative costs, light sharing breaks even at 73-92 USD/MWh and a conventional PV plant stays more profitable.
+- A floor raised by 0.02 performs like an ensemble-quantile design at equal compliance; neither is safe outside the ensemble.
+- Under illustrative costs, light sharing breaks even at 70-92 USD/MWh (static arrays 59); a conventional PV plant is more profitable above 48.
