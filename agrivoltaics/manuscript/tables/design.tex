@@ -1,16 +1,19 @@
 \begin{table}[t]
 \centering\small
-\caption{Array design under shade-response uncertainty (ensemble E2), pooled over the three spatial splits (93 held-out sites, every third site). Truth: each of five ensemble members in turn. Designs: oracle (density chosen under the truth), ensemble mean (density chosen under the mean response) and uncertainty-aware (density chosen so that the floor is met in at least 75\% of the \emph{other} four members). Means over members; site compliance is the share of sites whose mean retention is $\ge0.9$.}\label{tab:design}
-\begin{tabular}{llccccc}
+\caption{Array design under shade-response uncertainty, phenology rule, pooled over three spatial splits (76 distinct crop--site pairs; every third held-out pair). Truth: each of five members of the ensemble in turn; designs of the first group use the other four members (leave-one-out). Ensemble E2 is calibrated to the learned curves and field trials, E3 additionally carries the between-study spread (target errors 0.2). Pairs $\ge0.9$: share whose mean retention reaches the floor. The last three rows keep the density rule of the main analysis but raise the floor used in the design.}\label{tab:design}
+\begin{tabular}{lcccc}
 \toprule
-Design & Method & GCR & Retention & Seasons $\ge0.9$ (\%) & Sites $\ge0.9$ (\%) & LER\\
+ & \multicolumn{2}{c}{E2} & \multicolumn{2}{c}{E3}\\
+Design & Pairs $\ge0.9$ (\%) & LER & Pairs $\ge0.9$ (\%) & LER\\
 \midrule
-oracle & Phenology rule & 0.311 & 0.924 & 78 & 87 & 1.488\\
-oracle & SALS & 0.309 & 0.930 & 77 & 83 & 1.546\\
-ensemble mean & Phenology rule & 0.324 & 0.919 & 65 & 70 & 1.504\\
-ensemble mean & SALS & 0.322 & 0.925 & 64 & 67 & 1.564\\
-uncertainty-aware & Phenology rule & 0.299 & 0.928 & 74 & 78 & 1.467\\
-uncertainty-aware & SALS & 0.295 & 0.934 & 73 & 77 & 1.521\\
+oracle (true response) & 87 & 1.486 & 85 & 1.515\\
+mean response & 69 & 1.500 & 70 & 1.523\\
+floor met in 50\% of responses & 65 & 1.510 & 67 & 1.541\\
+floor met in 75\% of responses & 78 & 1.462 & 79 & 1.489\\
+floor met in 90\% of responses & 89 & 1.412 & 88 & 1.409\\
+floor 0.92 under mean response & 89 & 1.434 & 85 & 1.468\\
+floor 0.94 under mean response & 98 & 1.351 & 93 & 1.407\\
+floor 0.96 under mean response & 99 & 1.258 & 98 & 1.313\\
 \bottomrule
 \end{tabular}
 \end{table}
