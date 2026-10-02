@@ -2,5 +2,5 @@ Highlights
 - Daily light sharing lets trackers carry 3x the module area at the same 90% yield retention.
 - A phenology rule is the best simple controller and needs no weather forecast.
 - Shade response learned from 428 field observations; between-study spread about 0.22 in relative yield.
-- Learned control adds only 0.01-0.05 LER; ensemble training and biomass feedback add nothing.
+- Learned control adds 0.018 LER over a tuned phenology rule; ensemble training and biomass feedback add nothing.
 - Uncertainty-aware design raises yield-floor compliance from 67-70% to 77-78% of sites for 0.04 LER.

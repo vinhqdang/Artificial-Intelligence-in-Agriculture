@@ -80,6 +80,10 @@ SALS (ours) & 0.18 & 540 & 0.39 & 0.907 & 0.904 & 68 & 75 & 1.30\\
 
 \input{sections/extra}
 
+\textbf{A tuned rule.} The phenology rule above was written, not tuned, whereas SALS is trained. We therefore tuned the window of the rule on the training-block seasons with the same objective (electricity at the density where mean retention equals the floor); the best window starts at 0.15 instead of 0.05 of the thermal-time requirement (Table~\ref{tab:ctl}). Pooled over three splits and 76 distinct crop--site pairs, the tuned rule raises LER over the original rule by 0.026 (95\% cluster-bootstrap interval 0.016 to 0.037), and SALS exceeds the tuned rule by 0.018 (0.012 to 0.024), or 5.7\% more electricity at equal retention, and the original rule by 0.044 (0.030 to 0.060). Tuning the rule thus accounts for about 60\% of the margin of SALS over the written rule, and the remaining margin is small but not zero. SALS meets the floor in fewer seasons than the rules (83\% against 84--85\%).
+
+\input{tables/ctl}
+
 \subsection{What the learned policy does}\label{sec:policy}
 Averaged over the rainfed test seasons of the main split at a density of 0.3, the light-sharing level of SALS is a smooth function of relative thermal time. It is close to zero in the first 10\% of the thermal time required for maturity, rises through 0.55 at 10--20\%, stays at 0.94--0.99 between 30\% and 70\%, and falls through 0.58 at 80--90\% to about zero at maturity. The plateau covers the window in which our crop model penalises shading through the harvest index. The ramps at both ends let the modules produce electricity when additional light is worth least to the crop. Fig.~\ref{fig:trajectory} shows two example seasons. The phenology rule, which is also the initialisation of the network, shares light during the whole growing period. Fine-tuning through the simulator found that sharing can be reduced at the edges of the season: SALS gains its advantage by yielding light when it matters and collecting electricity when it matters less.
 
