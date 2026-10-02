@@ -33,7 +33,8 @@ OBS += [("rice", 0.25, "rel", 0.842, 0.06),
         ("maize", 0.35, "hi", 1.00, 0.05)]       # harvest index of maize unaffected by shade (Ramos-Fuentes 2023)
 SUFFIX = ""
 if os.environ.get("AV_TARGETS") == "ml":      # targets from the data-driven hierarchical model (shade_ml_fit.py)
-    SUFFIX = "_ml"
+    SUFFIX = "_ml" + os.environ.get("AV_SUFFIX", "")
+    ML_SIGMA = float(os.environ.get("AV_SIGMA", "0"))   # between-study spread (E3): the error of a new study around the learned curve
     ml = pd.read_csv(f"{ROOT}/results/shade_ml_curves.csv")
     tmap = {"wheat": "C3 cereals", "rice": "C3 cereals", "maize": "Maize", "soybean": "Grain legumes", "potato": "Tubers/root crops"}
     OBS = [o for o in OBS if o[3] is None or o[0] == "__none__"]
@@ -41,7 +42,7 @@ if os.environ.get("AV_TARGETS") == "ml":      # targets from the data-driven hie
     for c, t in tmap.items():
         for s in (0.2, 0.4):
             r = ml[(ml.ctype == t) & (abs(ml.s - s) < 1e-9)].iloc[0]
-            OBS.append((c, s, "rel", float(r["median"]), max(0.04, float((r.hi - r.lo) / 2.56))))
+            OBS.append((c, s, "rel", float(r["median"]), max(0.04, float((r.hi - r.lo) / 2.56), ML_SIGMA)))
     OBS += [("rice", 0.25, "rel", 0.842, 0.06),
             ("wheat", 0.30, "rel", 0.813, 0.08), ("wheat", 0.30, "rel", 1.027, 0.08),
             ("potato", 0.30, "rel", 0.818, 0.08), ("potato", 0.30, "rel", 1.110, 0.08),

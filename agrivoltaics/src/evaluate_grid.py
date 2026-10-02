@@ -44,6 +44,9 @@ if __name__ == "__main__":
     if kw.get("feedback"):
         for rs in kw["feedback"].split(","):
             f = A.make_feedback(float(rs)); f.track_ref = True; methods[f"Feedback rule"] = f
+    if kw.get("window"):
+        wa, wb = [float(x) for x in kw["window"].split(",")]
+        methods["Tuned phenology rule"] = A.make_window(wa, wb)
     for m in models:
         methods[m] = load_ctrl(m)
     if kw.get("only"):

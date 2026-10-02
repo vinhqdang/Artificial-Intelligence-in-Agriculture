@@ -242,6 +242,13 @@ def u_phenology(f):
     return active * ((tt > 0.05) & (tt < 1.0)).float()
 
 
+def make_window(a, b):
+    """Tunable phenology rule: share light while thermal time is between a and b of the season requirement."""
+    def u_window(f):
+        return f[:, 8] * ((f[:, 0] > a) & (f[:, 0] < b)).float()
+    return u_window
+
+
 def make_feedback(r_star, width=0.03):
     """Feedback rule: share light during the growing season whenever the crop's measured biomass relative
     to an open reference plot (feature 18) is below the target r_star, otherwise follow the sun."""
