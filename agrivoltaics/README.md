@@ -30,8 +30,10 @@ soybean, potato) in baseline, +1.5, +2 and +3 degC climates.
 | `src/shade_ml.py`, `src/shade_ml_fit.py` | hierarchical shade-response model learned from the public meta-analysis data in `data/laub/` (leave-one-study-out validation, bootstrap curves) |
 | `src/calibrate_shade.py`, `src/calibrate_gradient.py` | calibration of the simulator's shade response: one-parameter fit to published curves, and gradient-based randomised-MAP ensembles (E1 hand-read curves, E2 learned curves, E3 with between-study spread) |
 | `src/tune_feedback.py`, `src/tune_phenology.py` | tuning of the feedback rule and of the phenology-rule window on training seasons |
-| `src/analysis_variants.py`, `src/analysis_robust.py`, `src/analysis_robust_ci.py`, `src/analysis_design.py`, `src/analysis_splits.py`, `src/analysis_ctl.py` | sensitivity to the shade response, robust/adaptive controllers, design under uncertainty (margin baseline, three splits), tuned-rule comparison |
-| `run_robust_eval.sh`, `run_member_eval*.sh`, `run_split_eval.sh`, `run_review_fixes.sh` | restartable evaluation drivers for those analyses |
+| `src/analysis_variants.py`, `src/analysis_robust.py`, `src/analysis_robust_ci.py`, `src/analysis_final.py`, `src/analysis_ctl.py`, `src/analysis_sens.py` | sensitivity to the shade response, robust/adaptive controllers, design under uncertainty (leave-one-out, margin baseline, out of ensemble, three splits), tuned-rule and CMA-ES comparison, layout and window sensitivities |
+| `src/analysis_cost.py`, `src/analysis_cost_opt.py`, `src/analysis_cost_sens.py`, `src/analysis_cost_ci.py`, `src/cost.py` | illustrative economics (assumed parameters), net-optimal density, sensitivities, intervals |
+| `src/tune_phenology.py`, `src/tune_ramp.py` | grid-tuned window and CMA-ES schedule on training seasons |
+| `run_*.sh` (robust, member, split, review, layouts, window, ramp) | restartable evaluation drivers for those analyses |
 | `data/sites.csv` | the 400 crop-site pairs |
 | `data/shade_posterior*.json` | shade-response ensembles E1, E2, E3 |
 | `results/` | result tables (CSV) |
