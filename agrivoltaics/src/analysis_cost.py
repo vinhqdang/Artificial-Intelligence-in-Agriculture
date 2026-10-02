@@ -28,7 +28,7 @@ for sp in (0, 1, 2):
     g = g[g.y_open >= 0.2].copy(); g["r"] = g.y / g.y_open; g["erel"] = g.e / g.e_pv
     rows.append(comp_rows(apply(design(g, None), g)))
 R = pooled(pd.concat(rows))
-order = ["AV static", "Seasonal sharing", "Stress rule", "Phenology rule", "Tuned phenology rule", "SALS"]
+order = ["AV static", "Seasonal sharing", "Stress rule", "Phenology rule", "Tuned phenology rule", "Optimised ramp schedule", "SALS"]
 
 
 def summarize(R, p=C.BASE):
@@ -65,7 +65,7 @@ for name, key, vals in [("electricity price (USD/MWh)", "p_e", [30, 60, 90, 120]
         xx = x0; sens.append(dict(parameter=name, value=v, method="Conventional PV plant", net=C.net_pv_plant(xx.e_pv.values, xx.copen.values, p).mean()))
 pd.DataFrame(sens).to_csv(f"{RES}/cost_sensitivity.csv", index=False)
 fig, ax = plt.subplots(figsize=(3.6, 2.7))
-pr = np.arange(20, 131, 10); col = {"AV static": "#6b7280", "Phenology rule": "#0369a1", "Tuned phenology rule": "#059669", "SALS": "#c2410c"}
+pr = np.arange(20, 131, 10); col = {"AV static": "#6b7280", "Phenology rule": "#0369a1", "Optimised ramp schedule": "#059669", "SALS": "#c2410c"}
 for m, c in col.items():
     x = R[R.method == m]; y = [C.net_av(x.E.values, x.g.values, x.closs.values, dict(C.BASE, p_e=q)).mean() / 1000 for q in pr]; ax.plot(pr, y, color=c, label=m)
 y = [C.net_pv_plant(x0.e_pv.values, x0.copen.values, dict(C.BASE, p_e=q)).mean() / 1000 for q in pr]; ax.plot(pr, y, "--", color="k", label="PV plant replacing the crop")

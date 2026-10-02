@@ -4,6 +4,7 @@ electricity price (USD/MWh),30.0,Seasonal sharing,-20136.74282177681
 electricity price (USD/MWh),30.0,Stress rule,-13396.05297614172
 electricity price (USD/MWh),30.0,Phenology rule,-18969.6413535858
 electricity price (USD/MWh),30.0,Tuned phenology rule,-19420.26903960296
+electricity price (USD/MWh),30.0,Optimised ramp schedule,-18697.81984785553
 electricity price (USD/MWh),30.0,SALS,-18714.021750165226
 electricity price (USD/MWh),30.0,Conventional PV plant,-23159.100841993044
 electricity price (USD/MWh),60.0,AV static,290.95427478500795
@@ -11,6 +12,7 @@ electricity price (USD/MWh),60.0,Seasonal sharing,-10343.058538369696
 electricity price (USD/MWh),60.0,Stress rule,-3311.8585090991
 electricity price (USD/MWh),60.0,Phenology rule,-7497.195951340028
 electricity price (USD/MWh),60.0,Tuned phenology rule,-6978.357802187448
+electricity price (USD/MWh),60.0,Optimised ramp schedule,-5788.136099710682
 electricity price (USD/MWh),60.0,SALS,-5560.988679450378
 electricity price (USD/MWh),60.0,Conventional PV plant,16011.233065284918
 electricity price (USD/MWh),90.0,AV static,6301.905336535722
@@ -18,6 +20,7 @@ electricity price (USD/MWh),90.0,Seasonal sharing,-549.3742549625883
 electricity price (USD/MWh),90.0,Stress rule,6772.335957943522
 electricity price (USD/MWh),90.0,Phenology rule,3975.2494509057433
 electricity price (USD/MWh),90.0,Tuned phenology rule,5463.553435228065
+electricity price (USD/MWh),90.0,Optimised ramp schedule,7121.547648434172
 electricity price (USD/MWh),90.0,SALS,7592.044391264474
 electricity price (USD/MWh),90.0,Conventional PV plant,55181.56735804807
 electricity price (USD/MWh),120.0,AV static,12312.856398286434
@@ -25,6 +28,7 @@ electricity price (USD/MWh),120.0,Seasonal sharing,9244.310028444525
 electricity price (USD/MWh),120.0,Stress rule,16856.530424986144
 electricity price (USD/MWh),120.0,Phenology rule,15447.694853151517
 electricity price (USD/MWh),120.0,Tuned phenology rule,17905.464672643582
+electricity price (USD/MWh),120.0,Optimised ramp schedule,20031.231396579024
 electricity price (USD/MWh),120.0,SALS,20745.077461979323
 electricity price (USD/MWh),120.0,Conventional PV plant,94351.90406651846
 AV capex (USD/Wp),0.7,AV static,3729.916176207507
@@ -32,6 +36,7 @@ AV capex (USD/Wp),0.7,Seasonal sharing,-1455.8536245812165
 AV capex (USD/Wp),0.7,Stress rule,3643.345336474495
 AV capex (USD/Wp),0.7,Phenology rule,1544.5690479056436
 AV capex (USD/Wp),0.7,Tuned phenology rule,2488.4474320655
+AV capex (USD/Wp),0.7,Optimised ramp schedule,3601.3890918136726
 AV capex (USD/Wp),0.7,SALS,3905.816554802571
 AV capex (USD/Wp),0.7,Conventional PV plant,16011.233065284918
 AV capex (USD/Wp),1.0,AV static,290.95427478500795
@@ -39,6 +44,7 @@ AV capex (USD/Wp),1.0,Seasonal sharing,-10343.058538369696
 AV capex (USD/Wp),1.0,Stress rule,-3311.8585090991
 AV capex (USD/Wp),1.0,Phenology rule,-7497.195951340028
 AV capex (USD/Wp),1.0,Tuned phenology rule,-6978.357802187448
+AV capex (USD/Wp),1.0,Optimised ramp schedule,-5788.136099710682
 AV capex (USD/Wp),1.0,SALS,-5560.988679450378
 AV capex (USD/Wp),1.0,Conventional PV plant,16011.233065284918
 AV capex (USD/Wp),1.5,AV static,-5440.648894252493
@@ -46,6 +52,7 @@ AV capex (USD/Wp),1.5,Seasonal sharing,-25155.06672801717
 AV capex (USD/Wp),1.5,Stress rule,-14903.864918388426
 AV capex (USD/Wp),1.5,Phenology rule,-22566.804283416153
 AV capex (USD/Wp),1.5,Tuned phenology rule,-22756.36652594236
+AV capex (USD/Wp),1.5,Optimised ramp schedule,-21437.344752251272
 AV capex (USD/Wp),1.5,SALS,-21338.997403205296
 AV capex (USD/Wp),1.5,Conventional PV plant,16011.233065284918
 discount rate,0.04,AV static,2038.8080833939791
@@ -53,6 +60,7 @@ discount rate,0.04,Seasonal sharing,-5826.132965559996
 discount rate,0.04,Stress rule,223.12672179544987
 discount rate,0.04,Phenology rule,-2901.715151177114
 discount rate,0.04,Tuned phenology rule,-2166.8501268032
+discount rate,0.04,Optimised ramp schedule,-1015.9060380030381
 discount rate,0.04,SALS,-749.4810040661284
 discount rate,0.04,Conventional PV plant,24966.529940284916
 discount rate,0.06,AV static,290.95427478500795
@@ -60,6 +68,7 @@ discount rate,0.06,Seasonal sharing,-10343.058538369696
 discount rate,0.06,Stress rule,-3311.8585090991
 discount rate,0.06,Phenology rule,-7497.195951340028
 discount rate,0.06,Tuned phenology rule,-6978.357802187448
+discount rate,0.06,Optimised ramp schedule,-5788.136099710682
 discount rate,0.06,SALS,-5560.988679450378
 discount rate,0.06,Conventional PV plant,16011.233065284918
 discount rate,0.08,AV static,-1609.0392587273873
@@ -67,6 +76,7 @@ discount rate,0.08,Seasonal sharing,-15253.154186772514
 discount rate,0.08,Stress rule,-7154.542060023044
 discount rate,0.08,Phenology rule,-12492.684567541157
 discount rate,0.08,Tuned phenology rule,-12208.677079833931
+discount rate,0.08,Optimised ramp schedule,-10975.758893458007
 discount rate,0.08,SALS,-10791.307957096857
 discount rate,0.08,Conventional PV plant,6276.43228403492
 crop prices (multiplier),0.5,AV static,424.82503010571696
@@ -74,6 +84,7 @@ crop prices (multiplier),0.5,Seasonal sharing,-10189.853175425209
 crop prices (multiplier),0.5,Stress rule,-3163.741196796255
 crop prices (multiplier),0.5,Phenology rule,-7345.760905500367
 crop prices (multiplier),0.5,Tuned phenology rule,-6825.276387433127
+crop prices (multiplier),0.5,Optimised ramp schedule,-5633.592954251079
 crop prices (multiplier),0.5,SALS,-5405.4699927652555
 crop prices (multiplier),0.5,Conventional PV plant,17809.534424295423
 crop prices (multiplier),1.0,AV static,290.95427478500795
@@ -81,6 +92,7 @@ crop prices (multiplier),1.0,Seasonal sharing,-10343.058538369696
 crop prices (multiplier),1.0,Stress rule,-3311.8585090991
 crop prices (multiplier),1.0,Phenology rule,-7497.195951340028
 crop prices (multiplier),1.0,Tuned phenology rule,-6978.357802187448
+crop prices (multiplier),1.0,Optimised ramp schedule,-5788.136099710682
 crop prices (multiplier),1.0,SALS,-5560.988679450378
 crop prices (multiplier),1.0,Conventional PV plant,16011.233065284918
 crop prices (multiplier),2.0,AV static,23.21276414358997
@@ -88,5 +100,6 @@ crop prices (multiplier),2.0,Seasonal sharing,-10649.469264258674
 crop prices (multiplier),2.0,Stress rule,-3608.0931337047905
 crop prices (multiplier),2.0,Phenology rule,-7800.066043019353
 crop prices (multiplier),2.0,Tuned phenology rule,-7284.520631696095
+crop prices (multiplier),2.0,Optimised ramp schedule,-6097.222390629888
 crop prices (multiplier),2.0,SALS,-5872.0260528206245
 crop prices (multiplier),2.0,Conventional PV plant,12414.630347263917

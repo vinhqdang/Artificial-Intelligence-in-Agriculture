@@ -35,7 +35,7 @@ for price in range(20, 131, 10):
         res.append(dict(price=price, method=m, net=x.net_eff.mean(), share_array=x.array.mean() * 100, GCR=x[x.array == 1].g.mean() if (x.array == 1).any() else np.nan, pairs=len(x)))
 R = pd.DataFrame(res); R.to_csv(f"{RES}/cost_optimal.csv", index=False)
 print(R[R.price.isin([30, 60, 90, 120])].round(1).to_string())
-fig, ax = plt.subplots(figsize=(3.6, 2.7)); col = {"AV static": "#6b7280", "Phenology rule": "#0369a1", "Tuned phenology rule": "#059669", "SALS": "#c2410c"}
+fig, ax = plt.subplots(figsize=(3.6, 2.7)); col = {"AV static": "#6b7280", "Phenology rule": "#0369a1", "Optimised ramp schedule": "#059669", "SALS": "#c2410c"}
 for m, c in col.items():
     x = R[R.method == m]; ax.plot(x.price, x.net / 1000, color=c, label=m)
 ax.axhline(0, color="#9ca3af", lw=0.6); ax.set_xlabel("Electricity price (USD MWh$^{-1}$)"); ax.set_ylabel("Net value vs open field (kUSD ha$^{-1}$ yr$^{-1}$)")

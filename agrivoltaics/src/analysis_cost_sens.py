@@ -17,10 +17,10 @@ def plant(p):
     x = R[R.method == "SALS"]; return C.net_pv_plant(x.e_pv.values, x.copen.values, p).mean() / 1000
 base = dict(C.BASE, p_e=90.0)
 L = [r"\begin{table}[t]", r"\centering\small", r"\caption{One-at-a-time sensitivity of the net value (kUSD\,ha$^{-1}$\,yr$^{-1}$, relative to the open field) at 90\,USD\,MWh$^{-1}$, densities designed for the floor as in the main analysis. In the capex rows the capex of the conventional plant is set to 0.75 times that of the agrivoltaic plant.}\label{tab:costsens}",
-     r"\begin{tabular}{llcccc}", r"\toprule", r"Parameter & Value & Static arrays & Tuned rule & SALS & Conventional plant\\", r"\midrule"]
+     r"\begin{tabular}{llcccc}", r"\toprule", r"Parameter & Value & Static arrays & Optimised window & SALS & Conventional plant\\", r"\midrule"]
 def add(label, val, p, p_pv=None):
     pv = plant(p if p_pv is None else p_pv)
-    L.append(f"{label} & {val} & {net('AV static', p):.1f} & {net('Tuned phenology rule', p):.1f} & {net('SALS', p):.1f} & {pv:.1f}\\\\")
+    L.append(f"{label} & {val} & {net('AV static', p):.1f} & {net('Optimised ramp schedule', p):.1f} & {net('SALS', p):.1f} & {pv:.1f}\\\\")
 add("Base", "", base)
 for v in (0.7, 1.5): add("AV capex (USD/Wp)", f"{v}", dict(base, capex_av=v), dict(base, capex_pv=v * 0.75))
 for v in (0.04, 0.08): add("Discount rate", f"{int(v*100)}\\%", dict(base, rate=v))

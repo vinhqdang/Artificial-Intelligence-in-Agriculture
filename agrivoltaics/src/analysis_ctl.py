@@ -23,7 +23,7 @@ S[["seasons_ok", "sites_ok"]] *= 100
 S.to_csv(f"{RES}/controllers_tuned.csv", index=False); print(S.round(3).to_string())
 P = {m: d[d.method == m].set_index("site") for m in d.method.unique()}
 ids = P["SALS"].index
-for a, b in [("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule"), ("Tuned phenology rule", "Phenology rule"), ("SALS", "Optimised ramp schedule"), ("Optimised ramp schedule", "Tuned phenology rule")]:
+for a, b in [("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule"), ("Tuned phenology rule", "Phenology rule"), ("SALS", "Optimised ramp schedule"), ("Optimised ramp schedule", "Tuned phenology rule"), ("Optimised ramp schedule", "Phenology rule")]:
     ids2 = P[a].index.intersection(P[b].index); pa, pb = P[a].loc[ids2], P[b].loc[ids2]; dd = []
     for _ in range(2000):
         i = rng.integers(0, len(ids2), len(ids2)); dd.append((pa.ler.values[i] - pb.ler.values[i]).mean())
