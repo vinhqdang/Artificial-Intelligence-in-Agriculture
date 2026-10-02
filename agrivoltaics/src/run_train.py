@@ -48,7 +48,7 @@ if __name__ == "__main__":
         g = A.calibrate_training_gcr(D, refs, tm, rho=rho); torch.save(g, fn); return g
     g_site = gcr_for(0.9)
     if kw.get("theta", "0") == "1":      # robust training: shade response drawn from the calibrated ensemble per season
-        post = json.load(open(f"{ROOT}/data/shade_posterior.json"))
+        post = json.load(open(f"{ROOT}/data/" + kw.get("post", "shade_posterior.json")))
         cfg["theta"] = dict(c=torch.tensor(post["c"]), h=torch.tensor(post["h"]))
     if kw.get("ref", "0") == "1":        # adaptive training: controller sees measured biomass relative to a reference plot
         cfg["track_ref"] = True
