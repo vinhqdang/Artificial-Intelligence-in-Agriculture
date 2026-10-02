@@ -29,6 +29,8 @@ for price in range(20, 131, 10):
     keep = best[best.net > 0][["method", "site"]]
     pair["array"] = pair.merge(keep.assign(a=1), on=["method", "site"], how="left").a.fillna(0).values
     pair["net_eff"] = np.where(pair.array == 1, pair.net, 0.0)       # sites where no density pays stay open field
+    if price == 90:
+        pair[["method", "site", "net_eff"]].to_csv(f"{RES}/cost_optimal_pairs90.csv", index=False)
     for m, x in pair.groupby("method"):
         res.append(dict(price=price, method=m, net=x.net_eff.mean(), share_array=x.array.mean() * 100, GCR=x[x.array == 1].g.mean() if (x.array == 1).any() else np.nan, pairs=len(x)))
 R = pd.DataFrame(res); R.to_csv(f"{RES}/cost_optimal.csv", index=False)

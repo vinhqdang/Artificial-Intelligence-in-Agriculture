@@ -45,6 +45,7 @@ def summarize(R, p=C.BASE):
 
 
 S = summarize(R)
+R.assign(net90=C.net_av(R.E.values, R.g.values, R.closs.values, dict(C.BASE, p_e=90.0)))[["method", "site", "net90"]].to_csv(f"{RES}/cost_ler_pairs90.csv", index=False)
 x0 = R[R.method == "SALS"]
 pv = C.net_pv_plant(x0.e_pv.values, x0.copen.values).mean()
 S.loc[len(S)] = dict(method="Conventional PV plant (GCR 0.4, crop replaced)", pairs=len(x0), E=x0.e_pv.mean(),
