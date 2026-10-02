@@ -1,0 +1,17 @@
+truth,a,b,diff,lo,hi,pairs
+conservative,SALS (trained on proportional response),Phenology rule,0.019391166028522283,0.00710865695561677,0.03949106288807729,21
+conservative,SALS-robust (ensemble-trained),SALS (trained on proportional response),0.0015239113853091307,0.0002905153766984467,0.0030658346272649916,21
+conservative,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.002938913518474222,-0.013692746293686709,0.005251816025092468,21
+conservative,Feedback rule,Phenology rule,-0.02569115424440022,-0.038976733044144674,-0.013197038851323626,21
+calibrated,SALS (trained on proportional response),Phenology rule,0.02366779489176612,0.009013771918557924,0.048752132352618896,21
+calibrated,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004606765792483367,-0.014718712202849878,0.0023092765715860544,21
+calibrated,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.00796128788164684,-0.021073826388234188,0.0039703254969347,21
+calibrated,Feedback rule,Phenology rule,-0.02747133225202562,-0.04053698698679604,-0.01432095309808144,21
+field,SALS (trained on proportional response),Phenology rule,0.03766460887023379,0.017239838636347253,0.062046034772481204,21
+field,SALS-robust (ensemble-trained),SALS (trained on proportional response),0.0025732192255201497,-0.002853698091847609,0.007706334115493859,21
+field,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),0.007280547633057521,-0.006851085069633694,0.020089770700959898,21
+field,Feedback rule,Phenology rule,-0.05771250299045021,-0.10397795688538325,-0.014270338199677959,21
+harsh,SALS (trained on proportional response),Phenology rule,0.015342069026969715,0.0005022595698634595,0.03785111996212172,21
+harsh,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004959814179511259,-0.014832494808804374,0.0014416462253956856,21
+harsh,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.009930653160526643,-0.022789334759470967,0.0009523906133004507,21
+harsh,Feedback rule,Phenology rule,-0.03309319395394551,-0.04709867728075809,-0.01948644040950707,21
