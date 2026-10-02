@@ -15,11 +15,13 @@ Components
 All angles are in radians. Irradiance is in W m-2 (hourly means) or MJ m-2 d-1.
 """
 import math
+import os as _os_mod
+_os_env = _os_mod.environ
 import numpy as np
 import torch
 
 DEG = math.pi / 180.0
-MAX_ROT = 60 * DEG          # mechanical rotation limit of the tracker
+MAX_ROT = float(_os_env.get("AV_MAXROT", "60")) * DEG          # mechanical rotation limit of the tracker (degrees via AV_MAXROT)
 HUB_HEIGHT = 1.25           # axis height / module width (elevated agrivoltaic structure)
 ALBEDO = 0.20
 ETA_STC, GAMMA_T, NOCT, SYS_LOSS = 0.21, -0.0035, 45.0, 0.14
@@ -228,7 +230,9 @@ elif VARIANT.startswith("member"):   # one member of the calibrated ensemble (in
 if VARIANT == "field":      # fitted to the field trials themselves (optimistic bound), maize HI unaffected
     RUE_COMP.update(_json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", "rue_comp_field.json"))))
     HI_SHADE["maize"] = 0.0
-CRIT_WINDOW = (0.45, 0.65)   # fraction of the thermal-time requirement
+CRIT_WINDOW = tuple(float(x) for x in _os_env.get("AV_CRITWIN", "0.45,0.65").split(","))   # fraction of the thermal-time requirement (AV_CRITWIN for sensitivity)
+if "AV_HISCALE" in _os_env:      # multiplier on all harvest-index shade sensitivities (sensitivity analysis)
+    HI_SHADE = {k: float(_os_env["AV_HISCALE"]) * v for k, v in HI_SHADE.items()}
 PARAM_NAMES = ["Tsum", "HI", "I50A", "I50B", "Tbase", "Topt", "RUE", "I50maxH", "I50maxW",
                "Theat", "Text", "SCO2", "Swater", "root"]
 AWC = 0.13      # plant-available water per mm of soil (mm mm-1)

@@ -65,7 +65,7 @@ def precompute(d):
 
 
 def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kappa=KAPPA, record=False,
-            forecast_noise=True, noise_seed=0, rho=None, noise_scale=1.0, track_ref=False, shade_override=None):
+            forecast_noise=True, noise_seed=0, rho=None, noise_scale=1.0, track_ref=False, shade_override=None, phi_fixed=None):
     """Simulate a batch. g: (B,) ground-coverage ratio. controller(features)->u (B,),
     or u_seq (B, 365). Returns yield (t ha-1 dry matter), electricity (MWh ha-1),
     and optional daily records."""
@@ -123,6 +123,8 @@ def rollout(d, g, controller=None, u_seq=None, irrigated=None, panels=True, kapp
             else:
                 u = torch.zeros(B)
             phi = (1 - u[:, None]) * phi_bt + u[:, None] * P.light_sharing_angle(psi)
+            if phi_fixed is not None:        # fixed (non-tracking) array at a constant rotation angle (radians)
+                phi = torch.full_like(psi, float(phi_fixed))
             tair = d["tair_h"][:, t].float()
             elec, ground = P.pv_and_ground(phi, psi, gg, geo, ghi, dhi, bh, tair, svf)
             energy = energy + elec.sum(1) * 1e-2          # Wh m-2 -> MWh ha-1

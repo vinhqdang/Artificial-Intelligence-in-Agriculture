@@ -44,6 +44,8 @@ if __name__ == "__main__":
     if kw.get("feedback"):
         for rs in kw["feedback"].split(","):
             f = A.make_feedback(float(rs)); f.track_ref = True; methods[f"Feedback rule"] = f
+    if kw.get("fixed"):
+        methods[f"Fixed array {kw['fixed']} deg"] = A.FixedAngle(float(kw["fixed"]))
     if kw.get("window"):
         wa, wb = [float(x) for x in kw["window"].split(",")]
         methods["Tuned phenology rule"] = A.make_window(wa, wb)
@@ -81,7 +83,8 @@ if __name__ == "__main__":
                     if ctrl is None:
                         y, e = A.evaluate(dt, gg, kappa=kappa)
                     else:
-                        y, e = A.evaluate(dt, gg, controller=ctrl, kappa=kappa, track_ref=getattr(ctrl, 'track_ref', False))
+                        pf = getattr(ctrl, 'phi_fixed', None)
+                        y, e = A.evaluate(dt, gg, controller=None if pf is not None else ctrl, kappa=kappa, track_ref=getattr(ctrl, 'track_ref', False), phi_fixed=pf)
                     parts.append(pd.DataFrame(dict(base, method=name, scenario=scen, kappa=kappa, g=g,
                                                    y=y.numpy(), e=e.numpy())))
                 pd.concat(parts).to_parquet(fn + ".tmp", index=False); os.replace(fn + ".tmp", fn)

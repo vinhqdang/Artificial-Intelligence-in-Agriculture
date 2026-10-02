@@ -87,7 +87,7 @@ def references(d, chunk=4000):
     return y_open, e_pv
 
 
-def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=None, noise_scale=1.0, track_ref=False):
+def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=None, noise_scale=1.0, track_ref=False, phi_fixed=None):
     """Area-weighted yield and electricity for a design g (B,) and controller."""
     B = d["lat"].shape[0]
     y_out, e_out = torch.zeros(B), torch.zeros(B)
@@ -98,7 +98,7 @@ def evaluate(d, g, controller=None, u_rule=None, chunk=3000, kappa=None, rho=Non
             gg = torch.cat([g[idx], g[idx]])
             ctrl = controller if controller is not None else u_rule
             y, e = S.rollout(dd, gg, controller=ctrl, irrigated=irr, kappa=S.KAPPA if kappa is None else kappa,
-                             rho=rho, noise_scale=noise_scale, track_ref=track_ref)
+                             rho=rho, noise_scale=noise_scale, track_ref=track_ref, phi_fixed=phi_fixed)
             # rainfed and irrigated sub-fields each carry their own array:
             # both yield and electricity are area-weighted
             y_out[idx] = combine(y, w); e_out[idx] = combine(e, w)
@@ -247,6 +247,15 @@ def make_window(a, b):
     def u_window(f):
         return f[:, 8] * ((f[:, 0] > a) & (f[:, 0] < b)).float()
     return u_window
+
+
+class FixedAngle:
+    """Non-tracking array held at a constant rotation angle (degrees; 0 = flat)."""
+    def __init__(self, deg):
+        self.phi_fixed = float(deg) * 3.141592653589793 / 180.0
+
+    def __call__(self, f):
+        return torch.zeros(f.shape[0])
 
 
 def make_ramp(a, b, w1, w2, level):
