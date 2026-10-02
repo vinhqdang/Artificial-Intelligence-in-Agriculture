@@ -1,7 +1,7 @@
 Highlights
-- Daily light sharing lets trackers carry 3x the module area at the same 90% yield retention.
+- Daily light sharing lets trackers carry 2-3x the module area at the same 90% yield retention.
 - A phenology rule is the best simple controller and needs no weather forecast.
 - Shade response learned from 428 field observations; between-study spread about 0.22 in relative yield.
 - Learned control adds 0.018 LER over a tuned phenology rule; ensemble training and biomass feedback do not help.
-- A floor raised by 0.02 under the mean response secures yield-floor compliance better than an ensemble-quantile design.
+- A floor raised by 0.02 under the mean response matches an ensemble-quantile design; neither is safe outside the ensemble.
 - Under illustrative costs, light sharing breaks even at 73-92 USD/MWh and a conventional PV plant stays more profitable.

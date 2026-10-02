@@ -1,19 +1,19 @@
 \begin{table}[t]
 \centering\small
-\caption{Array design under shade-response uncertainty, phenology rule, pooled over three spatial splits (76 distinct crop--site pairs; every third held-out pair). Truth: each of five members of the ensemble in turn; designs of the first group use the other four members (leave-one-out). Ensemble E2 is calibrated to the learned curves and field trials, E3 additionally carries the between-study spread (target errors 0.2). Pairs $\ge0.9$: share whose mean retention reaches the floor. The last three rows keep the density rule of the main analysis but raise the floor used in the design.}\label{tab:design}
-\begin{tabular}{lcccc}
+\caption{Array design under shade-response uncertainty, phenology rule, three spatial splits pooled (76 distinct crop--site pairs, every third held-out pair). Truth: each of five members of the ensemble in turn; the mean response and the member-based rules use the other four members (leave-one-out, so the truth never enters the design). E2: ensemble calibrated to the learned curves and field trials; E3: same procedure with target errors of 0.2 on the learned curves. Pairs: share with mean retention $\ge0.9$; shortfall: mean of $\max(0,0.9-\text{retention})$ per pair.}\label{tab:design}
+\begin{tabular}{lcccccc}
 \toprule
- & \multicolumn{2}{c}{E2} & \multicolumn{2}{c}{E3}\\
-Design & Pairs $\ge0.9$ (\%) & LER & Pairs $\ge0.9$ (\%) & LER\\
+ & \multicolumn{3}{c}{E2} & \multicolumn{3}{c}{E3}\\
+Design & Pairs $\ge0.9$ (\%) & Shortfall & LER & Pairs $\ge0.9$ (\%) & Shortfall & LER\\
 \midrule
-oracle (true response) & 87 & 1.486 & 85 & 1.515\\
-mean response & 69 & 1.500 & 70 & 1.523\\
-floor met in 50\% of responses & 65 & 1.510 & 67 & 1.541\\
-floor met in 75\% of responses & 78 & 1.462 & 79 & 1.489\\
-floor met in 90\% of responses & 89 & 1.412 & 88 & 1.409\\
-floor 0.92 under mean response & 89 & 1.434 & 85 & 1.468\\
-floor 0.94 under mean response & 98 & 1.351 & 93 & 1.407\\
-floor 0.96 under mean response & 99 & 1.258 & 98 & 1.313\\
+oracle (true response) & 87 & 0.0025 & 1.486 & 85 & 0.0029 & 1.515\\
+mean response & 70 & 0.0062 & 1.493 & 71 & 0.0093 & 1.514\\
+floor met in 50\% of other members & 65 & 0.0084 & 1.510 & 67 & 0.0125 & 1.541\\
+floor met in 75\% of other members & 78 & 0.0045 & 1.462 & 79 & 0.0083 & 1.489\\
+floor met in all other members & 89 & 0.0019 & 1.412 & 88 & 0.0032 & 1.409\\
+floor 0.92 under mean response & 88 & 0.0022 & 1.426 & 85 & 0.0051 & 1.458\\
+floor 0.94 under mean response & 97 & 0.0007 & 1.345 & 92 & 0.0027 & 1.393\\
+floor 0.96 under mean response & 99 & 0.0003 & 1.251 & 96 & 0.0015 & 1.309\\
 \bottomrule
 \end{tabular}
 \end{table}
