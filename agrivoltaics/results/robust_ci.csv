@@ -7,27 +7,35 @@ conservative,"SALS-robust, E2",SALS (trained on proportional response),-0.013649
 conservative,"SALS-robust, E3",SALS (trained on proportional response),-0.01730134572301592,-0.034777677403319454,-0.0016818604724747918,21
 conservative,"SALS-adaptive, E3",SALS (trained on proportional response),-0.016954827166738955,-0.03420015852720964,-0.0018656827793235092,21
 conservative,"SALS-robust, E3",Phenology rule,0.002089820305506365,-0.013561925966115228,0.017815169482713597,21
-calibrated,SALS (trained on proportional response),Phenology rule,0.02366779489176612,0.00936834711404071,0.04512805541356405,21
-calibrated,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004606765792483367,-0.015033794279609387,0.0022896499186754464,21
-calibrated,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.00796128788164684,-0.021453744549126873,0.004176334124945448,21
-calibrated,Feedback rule,Phenology rule,-0.02747133225202562,-0.04072237080051783,-0.014489767416602113,21
-calibrated,"SALS-robust, E2",SALS (trained on proportional response),-0.017447459271975923,-0.040236053594521086,0.0012232270304646043,21
-calibrated,"SALS-robust, E3",SALS (trained on proportional response),-0.020670831771123964,-0.04411277920007702,-0.0009306428084771035,21
-calibrated,"SALS-adaptive, E3",SALS (trained on proportional response),-0.020232758067903082,-0.04469636016658375,0.0007293970811934259,21
-calibrated,"SALS-robust, E3",Phenology rule,0.002996963120642158,-0.01874599695560476,0.020631680907238055,21
-field,SALS (trained on proportional response),Phenology rule,0.03766460887023379,0.017118138028752224,0.06336125850322695,21
-field,SALS-robust (ensemble-trained),SALS (trained on proportional response),0.0025732192255201497,-0.0025236910439673504,0.007550531178712808,21
-field,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),0.007280547633057521,-0.0067984270570534055,0.020820220001041893,21
-field,Feedback rule,Phenology rule,-0.05771250299045021,-0.1057365652847858,-0.01286186779538796,21
-field,"SALS-robust, E2",SALS (trained on proportional response),-0.003895858426888803,-0.02167537450435618,0.012994658428998227,21
-field,"SALS-robust, E3",SALS (trained on proportional response),-0.005391112679526934,-0.025258003771305094,0.014846359459417192,21
-field,"SALS-adaptive, E3",SALS (trained on proportional response),-0.011435016280128833,-0.03469457762936752,0.010975205465441677,21
-field,"SALS-robust, E3",Phenology rule,0.03227349619070686,0.0014038903585501894,0.06710161425173278,21
-harsh,SALS (trained on proportional response),Phenology rule,0.015342069026969715,0.0004814357984633479,0.036058245099016555,21
-harsh,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004959814179511259,-0.014725933183161972,0.0013212912600665545,21
-harsh,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.009930653160526643,-0.023479792521823025,0.0011555426301700206,21
-harsh,Feedback rule,Phenology rule,-0.03309319395394551,-0.04761645777239686,-0.01978375517009269,21
-harsh,"SALS-robust, E2",SALS (trained on proportional response),-0.00758319461629506,-0.02044387465076784,0.0040658693831591075,21
-harsh,"SALS-robust, E3",SALS (trained on proportional response),-0.014386547676154512,-0.03150820478087377,-0.0013000638215314101,21
-harsh,"SALS-adaptive, E3",SALS (trained on proportional response),-0.016959256785256508,-0.033720084363151166,-0.0036852705212576265,21
-harsh,"SALS-robust, E3",Phenology rule,0.0009555213508152038,-0.01114806348369233,0.011777146252847839,21
+conservative,SALS (trained on proportional response),Tuned phenology rule,0.009403961045401416,0.004461259178462465,0.01584835541035446,21
+conservative,SALS (trained on proportional response),Optimised ramp schedule,0.0072307287227539666,0.00023427406592031332,0.015442958360626572,21
+calibrated,SALS (trained on proportional response),Phenology rule,0.02366779489176612,0.008969266208864386,0.04634004857568515,21
+calibrated,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004606765792483367,-0.014650144860858009,0.0021465849308740484,21
+calibrated,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.00796128788164684,-0.022313688771710527,0.003601267440688044,21
+calibrated,Feedback rule,Phenology rule,-0.02747133225202562,-0.04150370170850129,-0.014754007362893715,21
+calibrated,"SALS-robust, E2",SALS (trained on proportional response),-0.017447459271975923,-0.037855362572840286,0.0004577294187176743,21
+calibrated,"SALS-robust, E3",SALS (trained on proportional response),-0.020670831771123964,-0.04454812317022252,-6.232408895379185e-05,21
+calibrated,"SALS-adaptive, E3",SALS (trained on proportional response),-0.020232758067903082,-0.043070842371810074,-0.00021648824214938532,21
+calibrated,"SALS-robust, E3",Phenology rule,0.002996963120642158,-0.019601958188272636,0.021878002587528433,21
+calibrated,SALS (trained on proportional response),Tuned phenology rule,0.010534661582538055,0.0048734935905252125,0.017704586446994786,21
+calibrated,SALS (trained on proportional response),Optimised ramp schedule,0.010044258123352412,-0.0012458394148519908,0.02360712658791313,21
+field,SALS (trained on proportional response),Phenology rule,0.03766460887023379,0.017753334013479092,0.062297625623288534,21
+field,SALS-robust (ensemble-trained),SALS (trained on proportional response),0.0025732192255201497,-0.0026896507896128348,0.007959951141050846,21
+field,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),0.007280547633057521,-0.007005055929933344,0.02066970451601912,21
+field,Feedback rule,Phenology rule,-0.05771250299045021,-0.1087866086690199,-0.01230820296775731,21
+field,"SALS-robust, E2",SALS (trained on proportional response),-0.003895858426888803,-0.02106510235794957,0.012356364320786191,21
+field,"SALS-robust, E3",SALS (trained on proportional response),-0.005391112679526934,-0.02616765352232119,0.015233149613652925,21
+field,"SALS-adaptive, E3",SALS (trained on proportional response),-0.011435016280128833,-0.0351487738958427,0.010656901186420787,21
+field,"SALS-robust, E3",Phenology rule,0.03227349619070686,-0.00018999085185078898,0.07150227363975266,21
+field,SALS (trained on proportional response),Tuned phenology rule,0.01822960873444876,0.007688600176147073,0.030307732753100832,21
+field,SALS (trained on proportional response),Optimised ramp schedule,0.011287909462338406,-0.0014671515070256648,0.02449176569424925,21
+harsh,SALS (trained on proportional response),Phenology rule,0.015342069026969715,0.0009934920870831969,0.03721186120240458,21
+harsh,SALS-robust (ensemble-trained),SALS (trained on proportional response),-0.004959814179511259,-0.014758002859141112,0.001391732236813932,21
+harsh,"SALS-adaptive (ensemble, biomass feedback)",SALS (trained on proportional response),-0.009930653160526643,-0.02274854446273472,0.0007777802557462796,21
+harsh,Feedback rule,Phenology rule,-0.03309319395394551,-0.04795554790468446,-0.020038519274620796,21
+harsh,"SALS-robust, E2",SALS (trained on proportional response),-0.00758319461629506,-0.020614133278528884,0.003505335412919469,21
+harsh,"SALS-robust, E3",SALS (trained on proportional response),-0.014386547676154512,-0.03125823601370764,-0.0007278182747817792,21
+harsh,"SALS-adaptive, E3",SALS (trained on proportional response),-0.016959256785256508,-0.03371883843271508,-0.0033518705499314067,21
+harsh,"SALS-robust, E3",Phenology rule,0.0009555213508152038,-0.011478963499622699,0.012051178908773837,21
+harsh,SALS (trained on proportional response),Tuned phenology rule,0.004738279538495181,-0.004052436030691574,0.012777445442264987,21
+harsh,SALS (trained on proportional response),Optimised ramp schedule,0.010510805674961623,0.000847526641473893,0.022526332922279794,21

@@ -10,7 +10,7 @@ S = NAMES["sals_s0_seed0"]; R = NAMES["rob_s0"]; A_ = NAMES["adp_s0"]
 for T in TRUTHS:
     g = load(T); x = apply(design(g, None), g)
     d = x.groupby(["method", "site"]).ler.mean().unstack(0)
-    for a, b in [(S, "Phenology rule"), (R, S), (A_, S), ("Feedback rule", "Phenology rule"), ("SALS-robust, E2", S), ("SALS-robust, E3", S), ("SALS-adaptive, E3", S), ("SALS-robust, E3", "Phenology rule")]:
+    for a, b in [(S, "Phenology rule"), (R, S), (A_, S), ("Feedback rule", "Phenology rule"), ("SALS-robust, E2", S), ("SALS-robust, E3", S), ("SALS-adaptive, E3", S), ("SALS-robust, E3", "Phenology rule"), (S, "Tuned phenology rule"), (S, "Optimised ramp schedule")]:
         diff = (d[a] - d[b]).dropna().values; bs = [diff[rng.integers(0, len(diff), len(diff))].mean() for _ in range(2000)]
         rows.append(dict(truth=T, a=a, b=b, diff=diff.mean(), lo=np.quantile(bs, .025), hi=np.quantile(bs, .975), pairs=len(diff)))
 r = pd.DataFrame(rows); r.to_csv(f"{RES}/robust_ci.csv", index=False); print(r.round(3).to_string())
