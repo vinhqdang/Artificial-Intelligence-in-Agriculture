@@ -214,7 +214,13 @@ if VARIANT == "posterior":  # ensemble mean of the gradient-calibrated response 
     _hm = [sum(m[i] for m in _post["h"]) / len(_post["h"]) for i in range(5)]
     for _i, _k in enumerate(_post["crops"]):
         RUE_COMP[_k] = _cm[_i]; HI_SHADE[_k] = HI_SHADE[_k] * _hm[_i]
-if VARIANT.startswith("member"):   # one member of the calibrated ensemble (index after 'member'; AV_POSTERIOR selects the file)
+if VARIANT.startswith("meanex"):   # mean of the evaluated members {0,3,5,8,10} without member k (leave-one-out design belief)
+    _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", _os.environ.get("AV_POSTERIOR", "shade_posterior.json"))))
+    _k = int(VARIANT[6:]); _ms = [m for m in (0, 3, 5, 8, 10) if m != _k]
+    for _i, _c in enumerate(_post["crops"]):
+        RUE_COMP[_c] = sum(_post["c"][m][_i] for m in _ms) / len(_ms)
+        HI_SHADE[_c] = HI_SHADE[_c] * sum(_post["h"][m][_i] for m in _ms) / len(_ms)
+elif VARIANT.startswith("member"):   # one member of the calibrated ensemble (index after 'member'; AV_POSTERIOR selects the file)
     _post = _json.load(open(_os.path.join(_os.path.dirname(__file__), "..", "data", _os.environ.get("AV_POSTERIOR", "shade_posterior.json"))))
     _k = int(VARIANT[6:])
     for _i, _c in enumerate(_post["crops"]):

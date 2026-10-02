@@ -249,6 +249,14 @@ def make_window(a, b):
     return u_window
 
 
+def make_ramp(a, b, w1, w2, level):
+    """Parametric schedule: light sharing level rises around thermal time a (width w1), falls around b (width w2), plateau `level`."""
+    def u_ramp(f):
+        tt = f[:, 0]
+        return f[:, 8] * level * torch.sigmoid((tt - a) / w1) * torch.sigmoid((b - tt) / w2)
+    return u_ramp
+
+
 def make_feedback(r_star, width=0.03):
     """Feedback rule: share light during the growing season whenever the crop's measured biomass relative
     to an open reference plot (feature 18) is below the target r_star, otherwise follow the sun."""

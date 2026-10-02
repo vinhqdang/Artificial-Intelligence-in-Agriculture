@@ -1,0 +1,40 @@
+"""Derivative-free optimisation (CMA-ES) of a five-parameter ramp-plateau light-sharing schedule on training-block seasons,
+with the same objective as the other rules: electricity at the density where mean retention equals the floor."""
+import os, sys, json
+import numpy as np, torch, cma
+sys.path.insert(0, os.path.dirname(__file__))
+import sals as A, simulate as S
+from run_train import get_refs, train_mask
+torch.set_num_threads(4)
+ROOT = A.ROOT
+D = A.load_all(); refs = get_refs(D)
+tm = train_mask(D, refs, A.site_split(0))["baseline"]
+idx = torch.where(tm)[0]; g_ = torch.Generator().manual_seed(1)
+idx = idx[torch.randperm(len(idx), generator=g_)[:500]]
+d = S._sel(D["baseline"], idx); yo, ep = refs["baseline"][0][idx], refs["baseline"][1][idx]
+G = [0.1, 0.2, 0.3, 0.4, 0.5]
+
+
+def decode(x):
+    a = 0.6 / (1 + np.exp(-x[0])); b = 0.5 + 0.7 / (1 + np.exp(-x[1])); w1 = 0.01 * np.exp(x[2]); w2 = 0.01 * np.exp(x[3]); lvl = 1 / (1 + np.exp(-x[4]))
+    return float(a), float(b), float(min(w1, 0.5)), float(min(w2, 0.5)), float(lvl)
+
+
+def objective(x):
+    f = A.make_ramp(*decode(x)); ret, er = [], []
+    for g in G:
+        y, e = A.evaluate(d, torch.full((len(idx),), g), u_rule=f)
+        ret.append(float((y / yo).mean())); er.append(float((e / ep).mean()))
+    ret, er = np.array(ret), np.array(er)
+    if not (ret.min() < 0.9 < ret.max()):
+        return 1.0 + abs(ret.mean() - 0.9)        # penalise schedules that never reach or always exceed the floor
+    return -float(np.interp(0.9, ret[::-1], er[::-1]))
+
+
+es = cma.CMAEvolutionStrategy([-1.0, 1.0, 1.0, 1.0, 3.0], 1.0, dict(popsize=8, seed=1, maxiter=14, verbose=-9))
+n = 0
+while not es.stop():
+    xs = es.ask(); fs = [objective(x) for x in xs]; es.tell(xs, fs); n += len(xs)
+    print(n, round(min(fs), 4), decode(es.result.xbest), flush=True)
+best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n), open(f"{ROOT}/results/ramp_tuning.json", "w"))
+print("best", best, -es.result.fbest, n)

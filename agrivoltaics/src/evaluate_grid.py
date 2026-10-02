@@ -47,6 +47,8 @@ if __name__ == "__main__":
     if kw.get("window"):
         wa, wb = [float(x) for x in kw["window"].split(",")]
         methods["Tuned phenology rule"] = A.make_window(wa, wb)
+    if kw.get("ramp"):
+        methods["Optimised ramp schedule"] = A.make_ramp(*[float(x) for x in kw["ramp"].split(",")])
     for m in models:
         methods[m] = load_ctrl(m)
     if kw.get("only"):
