@@ -149,6 +149,21 @@ The learned curves show a clear ordering of crop types (Table~\ref{tab:mlcurves}
 \end{figure}
 
 
+\subsection{Economics of light sharing}\label{sec:cost}
+Under the illustrative parameters of Table~\ref{tab:costparams} the economics are dominated by the capacity installed, not by the crop (Table~\ref{tab:cost}). The annuity of the modules is 11--32 kUSD per hectare and year, whereas the crop revenue lost is about 0.3 kUSD, so a method is worth what it earns per installed watt. At 60\,USD\,MWh$^{-1}$ all light-sharing methods lose money relative to the open field ($-3$ to $-10$ kUSD\,ha$^{-1}$\,yr$^{-1}$) and static arrays are close to break-even; break-even prices are 73 (SALS), 77 (tuned phenology rule), 80 (written rule), 70 (stress rule) and 92 (seasonal sharing) USD\,MWh$^{-1}$, against 48 for a conventional plant that replaces the crop. At 90\,USD\,MWh$^{-1}$ SALS earns 7.6 kUSD\,ha$^{-1}$\,yr$^{-1}$, against 5.5 for the tuned rule and 4.0 for the written rule, so learning is worth about 2.1 kUSD\,ha$^{-1}$\,yr$^{-1}$ (39\%) over the tuned rule at that price; the stress rule, which installs fewer modules, has a lower break-even price than SALS (70 against 73) although it earns less electricity per hectare. A conventional plant is far more profitable per hectare at every price (16 kUSD at 60, 94 kUSD at 120, against $-6$ and 21 for SALS), so agrivoltaics competes with it only if food production, land-use rules or a premium are valued; the net value of agrivoltaics relative to the plant stays negative across the whole price range.
+
+\input{tables/costparams}
+\input{tables/cost}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/cost_price.pdf}
+\caption{Net value per hectare relative to the open field against electricity price for static arrays, rules and SALS, and for a conventional plant replacing the crop (dashed). Illustrative parameters of Table~\ref{tab:costparams}.}
+\label{fig:cost}
+\end{figure}
+
+\textbf{Cost of the safety margin.} At 90\,USD\,MWh$^{-1}$, moving from a density designed under the mean response to a floor of 0.92 under that response costs 1.07 kUSD\,ha$^{-1}$\,yr$^{-1}$ (18\%) under E2 for 20 more points of compliance (69\% to 89\%) and 1.08 kUSD (18\%) under E3 for 14 points (70\% to 85\%), about 50--75 USD\,ha$^{-1}$\,yr$^{-1}$ per point. The ensemble rule at 90\% reliability costs 1.03 and 1.47 kUSD for 20 and 18 points, so its price per point is similar to or higher than that of the margin. At 60\,USD\,MWh$^{-1}$ a margin has a negative cost, because every module beyond break-even loses money; the economics of the design margin therefore depend on the price level, whereas its effect on compliance does not.
+
 \subsection{Agrivoltaics under warming}
 Under warming, the open-field production of the held-out sites (Fig.~\ref{fig:warming}) falls at +3\,\textdegree C by 23\% for maize and 18\% for rice, is nearly unchanged for soybean, and rises for wheat (+3\%) and potato (+10\%). Agrivoltaic production with light-sharing control follows the open field at about 90\% of its level, so it inherits the same climate impacts (maize $-31$\%, rice $-27$\% relative to the baseline open field at +3\,\textdegree C). Agrivoltaics does not protect staple production against warming in this model. The LER of light-sharing systems increases slightly with warming (SALS 1.270 to 1.297; phenology rule 1.236 to 1.265), because the floor allows slightly denser arrays in warmer conditions (GCR 0.173 to 0.177 and electricity 510 to 540\,MWh\,ha$^{-1}$\,yr$^{-1}$). The margin of SALS over the rules does not grow with warming (Table~\ref{tab:stats}).
 

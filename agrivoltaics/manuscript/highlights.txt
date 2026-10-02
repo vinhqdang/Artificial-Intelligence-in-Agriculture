@@ -4,3 +4,4 @@ Highlights
 - Shade response learned from 428 field observations; between-study spread about 0.22 in relative yield.
 - Learned control adds 0.018 LER over a tuned phenology rule; ensemble training and biomass feedback add nothing.
 - A floor raised by 0.02 under the mean response secures yield-floor compliance better than an ensemble-quantile design.
+- Under illustrative costs, light sharing breaks even at 73-92 USD/MWh and a conventional PV plant stays more profitable.
