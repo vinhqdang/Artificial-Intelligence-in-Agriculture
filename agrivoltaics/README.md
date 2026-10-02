@@ -27,7 +27,13 @@ soybean, potato) in baseline, +1.5, +2 and +3 degC climates.
 | `src/analysis.py`, `src/trajectories.py`, `src/run_extra.py` | history-based design selection, tables, statistics, figures, extra experiments |
 | `src/validate_pv.py` | benchmark of the PV model against PVGIS |
 | `src/run_all_training.sh`, `src/run_all_eval.sh`, `src/run_all_extra.sh` | experiment queues |
+| `src/shade_ml.py`, `src/shade_ml_fit.py` | hierarchical shade-response model learned from the public meta-analysis data in `data/laub/` (leave-one-study-out validation, bootstrap curves) |
+| `src/calibrate_shade.py`, `src/calibrate_gradient.py` | calibration of the simulator's shade response: one-parameter fit to published curves, and gradient-based randomised-MAP ensembles (E1 hand-read curves, E2 learned curves, E3 with between-study spread) |
+| `src/tune_feedback.py`, `src/tune_phenology.py` | tuning of the feedback rule and of the phenology-rule window on training seasons |
+| `src/analysis_variants.py`, `src/analysis_robust.py`, `src/analysis_robust_ci.py`, `src/analysis_design.py`, `src/analysis_splits.py`, `src/analysis_ctl.py` | sensitivity to the shade response, robust/adaptive controllers, design under uncertainty (margin baseline, three splits), tuned-rule comparison |
+| `run_robust_eval.sh`, `run_member_eval*.sh`, `run_split_eval.sh`, `run_review_fixes.sh` | restartable evaluation drivers for those analyses |
 | `data/sites.csv` | the 400 crop-site pairs |
+| `data/shade_posterior*.json` | shade-response ensembles E1, E2, E3 |
 | `results/` | result tables (CSV) |
 | `manuscript/` | LaTeX source (elsarticle) and figures |
 
