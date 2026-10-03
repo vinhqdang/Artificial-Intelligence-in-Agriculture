@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering\small
 \caption{Land-equivalent ratio of rules and learned controllers under four true shade responses, with the array density designed under the true response (split~0, baseline climate, floor $\rho=0.9$, every sixth held-out pair, 21 pairs, coarse GCR grid, one training seed; season means, so differences differ slightly from the pair-level intervals in the text). SALS is trained on the proportional response; robust controllers are trained on random members of ensemble E1, E2 or E3 (adaptive: with the measured biomass ratio). The proportional and harsh responses lie outside the ensembles.}\label{tab:robust}
-\begin{tabular}{lcccc}
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\begin{tabular}{lcccc}
 \toprule
 Method & Proportional & Calibrated & Field-fitted & Harsh\\
 \midrule
@@ -19,5 +19,5 @@ SALS-robust, E2 & 1.165 & 1.192 & 1.483 & 1.126\\
 SALS-robust, E3 & 1.163 & 1.191 & 1.481 & 1.121\\
 SALS-adaptive, E3 & 1.164 & 1.191 & 1.475 & 1.118\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

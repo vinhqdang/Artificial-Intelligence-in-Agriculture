@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering\small
 \caption{Leave-one-study-out prediction error (RMSE of relative yield, observations with $s>0$) by crop type: proportional loss, hierarchical curve with partial pooling, and gradient-boosted trees. The last columns give the difference hierarchical minus proportional with a 95\% cluster-bootstrap interval over studies (negative: hierarchical better).}\label{tab:mlcvtype}
-\begin{tabular}{lcccccc}
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\begin{tabular}{lcccccc}
 \toprule
 Group & Obs./studies & Proportional & Hierarchical & Boosted trees & Difference & 95\% interval\\
 \midrule
@@ -13,5 +13,5 @@ Four crop types used by the simulator & 138/30 & 0.220 & 0.222 & 0.234 & +0.002 
 Other types (berries, forages, fruits, vegetables) & 201/29 & 0.528 & 0.361 & 0.369 & -0.167 & [-0.210, -0.115]\\
 All types & 339/58 & 0.430 & 0.312 & 0.321 & -0.118 & [-0.158, -0.071]\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

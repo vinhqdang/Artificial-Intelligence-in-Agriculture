@@ -3,4 +3,4 @@ Highlights
 - A learned shade response is no better than proportional loss for staple crops.
 - A neural controller adds 0.007 LER over a tuned window (0.003 at equal retention).
 - Design margins matter: 70% vs 85-87% of pairs at the floor (mean vs oracle).
-- Illustrative costs: plants (cheaper per watt) beat agrivoltaics above 48 USD/MWh.
+- Plants beat agrivoltaics above 48 USD/MWh (64 at equal cost per watt).
