@@ -22,12 +22,14 @@ S = d.groupby("method").agg(pairs=("site", "size"), GCR=("gcr", "mean"), erel=("
 S[["seasons_ok", "sites_ok"]] *= 100
 S.to_csv(f"{RES}/controllers_tuned.csv", index=False); print(S.round(3).to_string())
 P = {m: d[d.method == m].set_index("site") for m in d.method.unique()}
-ids = P["SALS"].index
+ids = P["SALS"].index; ci = []
 for a, b in [("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule"), ("Tuned phenology rule", "Phenology rule"), ("SALS", "Optimised ramp schedule"), ("Optimised ramp schedule", "Tuned phenology rule"), ("Optimised ramp schedule", "Phenology rule")]:
     ids2 = P[a].index.intersection(P[b].index); pa, pb = P[a].loc[ids2], P[b].loc[ids2]; dd = []
     for _ in range(2000):
         i = rng.integers(0, len(ids2), len(ids2)); dd.append((pa.ler.values[i] - pb.ler.values[i]).mean())
     print(a, "-", b, round(float((pa.ler - pb.ler).mean()), 4), np.round(np.quantile(dd, [0.025, 0.975]), 4), len(ids2))
+    ci.append(dict(a=a, b=b, diff=float((pa.ler - pb.ler).mean()), lo=np.quantile(dd, 0.025), hi=np.quantile(dd, 0.975), pairs=len(ids2)))
+pd.DataFrame(ci).to_csv(f"{RES}/ctl_ci.csv", index=False)
 
 # per-split contrasts and saved intervals
 rows2 = []

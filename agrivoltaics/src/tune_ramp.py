@@ -7,8 +7,9 @@ import sals as A, simulate as S
 from run_train import get_refs, train_mask
 torch.set_num_threads(2)
 ROOT = A.ROOT
+SPLIT = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 D = A.load_all(); refs = get_refs(D)
-tm = train_mask(D, refs, A.site_split(0))["baseline"]
+tm = train_mask(D, refs, A.site_split(SPLIT))["baseline"]
 idx = torch.where(tm)[0]; g_ = torch.Generator().manual_seed(1)
 idx = idx[torch.randperm(len(idx), generator=g_)[:300]]
 d = S._sel(D["baseline"], idx); yo, ep = refs["baseline"][0][idx], refs["baseline"][1][idx]
@@ -41,5 +42,5 @@ while not es.stop():
         t0 = time.time(); fs.append(objective(x)); print('eval', round(time.time() - t0, 1), flush=True)
     es.tell(xs, fs); n += len(xs)
     print(n, round(min(fs), 4), decode(es.result.xbest), flush=True)
-best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n, seed=SEED), open(f"{ROOT}/results/ramp_tuning_s{SEED}.json", "w"))
+best = decode(es.result.xbest); json.dump(dict(params=best, e_at_floor=-es.result.fbest, evaluations=n, seed=SEED, split=SPLIT), open(f"{ROOT}/results/ramp_tuning_s{SEED}.json" if SPLIT == 0 else f"{ROOT}/results/ramp_tuning_split{SPLIT}_s{SEED}.json", "w"))
 print("best", best, -es.result.fbest, n)
