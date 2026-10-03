@@ -11,7 +11,7 @@ tag = sys.argv[1] if len(sys.argv) > 1 else "ctl"
 rows = []
 for sp in (0, 1, 2):
     g = pd.read_parquet(f"{RES}/grid_{tag}{sp}.parquet")
-    g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g["method"] = np.where(g.method.str.startswith("sals_"), "SALS#" + g.method.str[-1], g.method)
     g = g[(g.y_open >= 0.2) & (g.year >= TEST)].copy(); g["r"] = g.y / g.y_open; g["ler"] = g.r + g.e / g.e_pv
     m = g.groupby(["method", "site", "g"]).agg(r=("r", "mean"), ler=("ler", "mean")).reset_index(); m["split"] = sp; rows.append(m)
 M = pd.concat(rows)
@@ -20,7 +20,9 @@ for (meth, site, sp), x in M.groupby(["method", "site", "split"]):
     x = x.sort_values("g"); r, l = x.r.values, x.ler.values
     if r.min() < RHO < r.max():
         o = np.argsort(r); out.append(dict(method=meth, site=site, split=sp, ler90=float(np.interp(RHO, r[o], l[o]))))
-F = pd.DataFrame(out).groupby(["method", "site"]).ler90.mean().reset_index()
+F = pd.DataFrame(out)
+sm = F[F.method.str.startswith("SALS#")].groupby(["site", "split"]).ler90.mean().reset_index().assign(method="SALS")   # mean over training seeds
+F = pd.concat([F[~F.method.str.startswith("SALS#")], sm]).groupby(["method", "site"]).ler90.mean().reset_index()
 S = F.groupby("method").ler90.agg(["mean", "size"]).reset_index(); print(S.round(4).to_string())
 res = []
 for a, b in [("SALS", "Optimised ramp schedule"), ("SALS", "Tuned phenology rule"), ("SALS", "Phenology rule"), ("Optimised ramp schedule", "Phenology rule")]:
@@ -32,7 +34,8 @@ R = pd.DataFrame(res); R.to_csv(f"{RES}/matched_frontier{'' if tag=='ctl' else '
 # differences at fixed densities
 fx = []
 for gv in (0.10, 0.15, 0.20, 0.25, 0.30):
-    z = M[np.isclose(M.g, gv)].groupby(["method", "site"])[["r", "ler"]].mean().reset_index()
+    Mx = M.copy(); Mx["method"] = np.where(Mx.method.str.startswith("SALS#"), "SALS", Mx.method)
+    z = Mx[np.isclose(Mx.g, gv)].groupby(["method", "site"])[["r", "ler"]].mean().reset_index()
     for b in ("Optimised ramp schedule",):
         pa, pb = z[z.method == "SALS"].set_index("site"), z[z.method == b].set_index("site"); ids = pa.index.intersection(pb.index)
         dd = (pa.loc[ids].ler - pb.loc[ids].ler).values; bs = [dd[rng.integers(0, len(dd), len(dd))].mean() for _ in range(2000)]

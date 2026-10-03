@@ -24,7 +24,7 @@ def pooled(df):
 rows = []
 for sp in (0, 1, 2):
     g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet")
-    g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g = g[~g.method.str.match(r"sals_s\d_seed[12]")].copy(); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
     g = g[g.y_open >= 0.2].copy(); g["r"] = g.y / g.y_open; g["erel"] = g.e / g.e_pv
     rows.append(comp_rows(apply(design(g, None), g)))
 R = pooled(pd.concat(rows))
@@ -74,7 +74,7 @@ ax.legend(fontsize=5.5, frameon=False); fig.tight_layout(); fig.savefig(f"{FIG}/
 
 # ---- cost of the design margin (phenology rule, symmetric leave-one-member-out, E2 and E3)
 def load(tag):
-    g = pd.read_parquet(f"{RES}/grid_{tag}.parquet"); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g = pd.read_parquet(f"{RES}/grid_{tag}.parquet"); g = g[~g.method.str.match(r"sals_s\d_seed[12]")].copy(); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
     g = g[g.method.isin(["Phenology rule"]) & (g.y_open >= 0.2)].copy(); g["r"] = g.y / g.y_open; g["erel"] = g.e / g.e_pv; return g
 def feas(g, rho=RHO):
     h = g[g.year <= HIST].groupby(["method", "site", "g"]).r.mean().reset_index(); h["ok"] = (h.r >= rho).astype(float); return h[["method", "site", "g", "ok"]]

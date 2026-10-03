@@ -11,7 +11,7 @@ FIG = os.path.join(os.path.dirname(__file__), "..", "manuscript", "figures")
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.spines.top": False, "axes.spines.right": False})
 rows = []
 for sp in (0, 1, 2):
-    g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet"); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet"); g = g[~g.method.str.match(r"sals_s\d_seed[12]")].copy(); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
     g = g[g.y_open >= 0.2].copy(); g["r"] = g.y / g.y_open
     comp = C.components(g); g["E"] = comp["E"]; g["closs"] = comp["closs"]; g["e_pv"] = comp["e_pv"]; g["split"] = sp
     rows.append(g[["method", "site", "year", "g", "r", "E", "closs", "split"]])

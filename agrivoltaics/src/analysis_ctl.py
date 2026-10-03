@@ -9,12 +9,17 @@ rng = np.random.default_rng(0)
 rows = []
 for sp in (0, 1, 2):
     g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet")
-    g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g["method"] = np.where(g.method.str.startswith("sals_"), "SALS#" + g.method.str[-1], g.method)
     g = g[(g.y_open >= 0.2)].copy(); g["r"] = g.y / g.y_open; g["erel"] = g.e / g.e_pv
     x = apply(design(g, None), g); x["split"] = sp; rows.append(x)
 X = pd.concat(rows)
 site = X.groupby(["method", "split", "site"]).agg(r=("r", "mean"), ler=("ler", "mean"), gcr=("g", "mean"), erel=("erel", "mean"),
                                                    season_ok=("r", lambda v: (v >= RHO).mean())).reset_index()
+sd = site[site.method.str.startswith("SALS#")]       # seeds: one SALS value per (split, site) = mean over training seeds
+seeds = sorted(sd.method.unique()); print("SALS seeds:", seeds)
+site0 = sd[sd.method == "SALS#0"].assign(method="SALS seed 0")
+sm = sd.groupby(["split", "site"])[["r", "ler", "gcr", "erel", "season_ok"]].mean().reset_index().assign(method="SALS")
+site = pd.concat([site[~site.method.str.startswith("SALS#")], sm, site0], ignore_index=True)
 d = site.groupby(["method", "site"])[["r", "ler", "gcr", "erel", "season_ok"]].mean().reset_index()
 d["site_ok"] = (d.r >= RHO).astype(float)
 S = d.groupby("method").agg(pairs=("site", "size"), GCR=("gcr", "mean"), erel=("erel", "mean"), retention=("r", "mean"),

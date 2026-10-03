@@ -9,7 +9,7 @@ from analysis_cost import comp_rows, pooled
 import cost as C
 rows = []
 for sp in (0, 1, 2):
-    g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet"); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
+    g = pd.read_parquet(f"{RES}/grid_ctl{sp}.parquet"); g = g[~g.method.str.match(r"sals_s\d_seed[12]")].copy(); g["method"] = np.where(g.method.str.startswith("sals_"), "SALS", g.method)
     g = g[g.y_open >= 0.2].copy(); g["r"] = g.y / g.y_open; g["erel"] = g.e / g.e_pv
     rows.append(comp_rows(apply(design(g, None), g)))
 R = pooled(pd.concat(rows)); P = C.BASE
