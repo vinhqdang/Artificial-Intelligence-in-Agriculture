@@ -1,6 +1,6 @@
 Highlights
-- Light sharing allows 2-3x denser trackers at a 90% yield-retention floor.
+- Light sharing allows 2-3x denser trackers at a 90% floor (proportional response).
 - A learned shade response is no better than proportional loss for staple crops.
-- A neural controller beats an optimised window rule by only 0.007 LER.
+- A neural controller adds 0.007 LER over a tuned window (0.003 at equal retention).
 - Design margins matter: 70% vs 85-87% of pairs at the floor (mean vs oracle).
-- With illustrative costs, plants beat agrivoltaics above 48 USD/MWh.
+- Illustrative costs: plants (cheaper per watt) beat agrivoltaics above 48 USD/MWh.
