@@ -1,0 +1,46 @@
+scenario,quantity,value,lo,hi
+bound (c squared),LER AV static,1.0752833422542092,,
+bound (c squared),break-even AV static,58.712649228175934,,
+bound (c squared),net at 90 AV static,6.251298231802947,,
+bound (c squared),LER Phenology rule,1.2019903981285807,,
+bound (c squared),break-even Phenology rule,81.07554666493463,,
+bound (c squared),net at 90 Phenology rule,3.3509361830228537,,
+bound (c squared),LER Optimised ramp schedule,1.2370568498786572,,
+bound (c squared),break-even Optimised ramp schedule,74.57070965497707,,
+bound (c squared),net at 90 Optimised ramp schedule,6.472106930368089,,
+bound (c squared),LER SALS,1.2439563860888723,,
+bound (c squared),break-even SALS,74.21400620571445,,
+bound (c squared),net at 90 SALS,6.778412256895902,,
+bound (c squared),dLER SALS - Optimised ramp schedule,0.006899536210214896,0.0022693225568340076,0.012649061160754692
+bound (c squared),dLER SALS - Phenology rule,0.04196598796029158,0.028670721244316195,0.05726526647054545
+bound (c squared),dLER SALS - AV static,0.16867304383466258,0.14316427289867806,0.1962115098202425
+main analysis,LER AV static,1.075720392641509,,
+main analysis,break-even AV static,58.54787901594902,,
+main analysis,net at 90 AV static,6.3019053341131075,,
+main analysis,LER Phenology rule,1.207303641471399,,
+main analysis,break-even Phenology rule,79.6048768451846,,
+main analysis,net at 90 Phenology rule,3.975249428108011,,
+main analysis,LER Optimised ramp schedule,1.243785758725549,,
+main analysis,break-even Optimised ramp schedule,73.04453452243426,,
+main analysis,net at 90 Optimised ramp schedule,7.260892376484837,,
+main analysis,LER SALS,1.250898238575108,,
+main analysis,break-even SALS,72.6837406116342,,
+main analysis,net at 90 SALS,7.592044413208395,,
+main analysis,dLER SALS - Optimised ramp schedule,0.007112479849558939,0.0018429657726013148,0.01316275998988741
+main analysis,dLER SALS - Phenology rule,0.043594597103709484,0.029588964007918127,0.05897973391118964
+main analysis,dLER SALS - AV static,0.17517784593359872,0.1476435189863222,0.2044735220988254
+pvlib-corrected,LER AV static,1.075501100162895,,
+pvlib-corrected,break-even AV static,58.63042986583788,,
+pvlib-corrected,net at 90 AV static,6.276515321456368,,
+pvlib-corrected,LER Phenology rule,1.2046293147022695,,
+pvlib-corrected,break-even Phenology rule,80.33832212007336,,
+pvlib-corrected,net at 90 Phenology rule,3.661037829596396,,
+pvlib-corrected,LER Optimised ramp schedule,1.2403952515365226,,
+pvlib-corrected,break-even Optimised ramp schedule,73.80560163461547,,
+pvlib-corrected,net at 90 Optimised ramp schedule,6.863466242099527,,
+pvlib-corrected,LER SALS,1.2474008078396557,,
+pvlib-corrected,break-even SALS,73.44670073412436,,
+pvlib-corrected,net at 90 SALS,7.182145549578951,,
+pvlib-corrected,dLER SALS - Optimised ramp schedule,0.007005556303132891,0.00204391807771068,0.012446526351407219
+pvlib-corrected,dLER SALS - Phenology rule,0.04277149313738614,0.028991542219054235,0.05799508821664871
+pvlib-corrected,dLER SALS - AV static,0.1718997076767608,0.14503896950229392,0.20000853039337357
