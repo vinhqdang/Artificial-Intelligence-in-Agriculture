@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering\small
-\caption{Rules and the learned controller pooled over the three spatial splits (76 distinct crop--site pairs, every third held-out pair; baseline climate; main shade response; history-based design on a GCR grid with step 0.05, coarser than the 0.025 grid of the main analysis). The grid-tuned window shares light while thermal time lies between 0.15 and 1.0 of the season requirement (best of a $4\times3$ grid on training-block seasons of split~0; the written rule uses 0.05 to 1.0). The CMA-ES schedule has five parameters (start, end, two ramp widths, level) and converged to an almost binary window from 0.20 to 0.93 of the requirement at level 1.00 (two of three runs; see Methods).}\label{tab:ctl}
+\caption{Rules and the learned controller pooled over the three spatial splits (76 distinct crop--site pairs, every third held-out pair; baseline climate; main shade response; history-based design on a GCR grid with step 0.05, coarser than the 0.025 grid of the main analysis). The grid-tuned window shares light while thermal time lies between 0.15 and 1.0 of the season requirement (best of a $4\times3$ grid on the training-block seasons of each split, the same on all three; the written rule uses 0.05 to 1.0). The CMA-ES schedule has five parameters (start, end, two ramp widths, level) was tuned on each split's training block and stopped, at the generation cap, at an almost binary window from 0.20 to 0.93 of the requirement at level 1.00 (see Methods).}\label{tab:ctl}
 \begin{tabular}{lcccccc}
 \toprule
 Method & GCR & $E/E_\mathrm{PV}$ & Retention & Seasons $\ge0.9$ (\%) & Pairs $\ge0.9$ (\%) & LER\\
@@ -10,7 +10,7 @@ Seasonal sharing & 0.151 & 0.249 & 0.915 & 84 & 91 & 1.164\\
 Stress rule & 0.118 & 0.255 & 0.918 & 83 & 88 & 1.173\\
 Phenology rule (written) & 0.154 & 0.292 & 0.916 & 85 & 91 & 1.207\\
 Grid-tuned window & 0.161 & 0.317 & 0.916 & 84 & 89 & 1.233\\
-CMA-ES optimised window & 0.160 & 0.329 & 0.916 & 83 & 87 & 1.245\\
+CMA-ES optimised window & 0.158 & 0.327 & 0.916 & 83 & 87 & 1.244\\
 SALS & 0.161 & 0.335 & 0.916 & 83 & 87 & 1.251\\
 \bottomrule
 \end{tabular}
