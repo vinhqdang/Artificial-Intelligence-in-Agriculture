@@ -40,35 +40,55 @@ for sp in (0, 1, 2):
             s = outcome(select(mean_g, d), truth); s["split"], s["member"], s["d"], s["kind"] = sp, T, d, "out-of-ensemble"; rows.append(s)
 U = pd.concat(rows, ignore_index=True); U["crop"] = U.crop.map(CROP); U["member"] = U.member.astype(str); U.to_parquet(f"{RES}/conformal_units.parquet")
 I = U[U.kind == "in-ensemble"]; O = U[U.kind == "out-of-ensemble"]
+split_sites = {sp: set(U[U.split == sp].site) for sp in (0, 1, 2)}
+
+
+def pair_table(X):
+    """pair-level outcome: share of units at the floor, mean LER, mean shortfall (mean over members/responses and over splits)"""
+    return X.groupby(["site", "d"]).agg(ok=("ok", "mean"), ler=("ler", "mean"), short=("short", "mean"), crop=("crop", "first")).reset_index()
 
 
 def calibrate(cal, alpha):
-    """smallest margin d whose conformal-adjusted risk is <= alpha (None: infeasible)"""
-    n = cal.groupby("d").size(); r = 1 - cal.groupby("d").ok.mean()
+    P = pair_table(cal); n = P.site.nunique(); r = 1 - P.groupby("d").ok.mean()
     for d in D:
-        if n[d] / (n[d] + 1) * r[d] + 1 / (n[d] + 1) <= alpha + 1e-12: return d
-    return D[-1]
+        if n / (n + 1) * r[d] + 1 / (n + 1) <= alpha + 1e-12: return d, n
+    return D[-1], n
 
 
 out = []; marg = []
 for alpha in (0.10, 0.15, 0.20):
-    for test_sp in (0, 1, 2):
-        cal = I[I.split != test_sp]; ev = I[I.split == test_sp]; evo = O[O.split == test_sp]
-        dg = calibrate(cal, alpha); marg.append(dict(alpha=alpha, test_split=test_sp, scope="global", crop="all", d=dg))
-        dc = {c: calibrate(cal[cal.crop == c], alpha) for c in CROP.values()}
-        for c, v in dc.items(): marg.append(dict(alpha=alpha, test_split=test_sp, scope="per crop", crop=c, d=v))
-        for name, pick in (("global conformal", lambda c: dg), ("per-crop conformal", lambda c: dc[c])):
-            for kind, E in (("in-ensemble", ev), ("out-of-ensemble", evo)):
-                z = E[[np.isclose(d_, pick(c_)) for d_, c_ in zip(E.d, E.crop)]]
-                out.append(dict(alpha=alpha, test_split=test_sp, rule=name, kind=kind, pairs=z.site.nunique(), compliance=z.ok.mean() * 100, ler=z.ler.mean(), short=z.short.mean(),
-                                **{f"ok_{c}": z[z.crop == c].ok.mean() * 100 for c in CROP.values()}))
+    for te in (0, 1, 2):
+        cal = I[(I.split != te) & (~I.site.isin(split_sites[te]))]; dg, n = calibrate(cal, alpha); marg.append(dict(alpha=alpha, test_split=te, d=dg, calibration_pairs=n))
+        for kind, E in (("in-ensemble", I[I.split == te]), ("out-of-ensemble", O[O.split == te])):
+            z = pair_table(E[np.isclose(E.d, dg)])
+            out.append(dict(alpha=alpha, test_split=te, rule="conformal margin", kind=kind, pairs=len(z), compliance=z.ok.mean() * 100, ler=z.ler.mean(), short=z.short.mean(),
+                            **{f"ok_{c}": z[z.crop == c].ok.mean() * 100 for c in CROP.values()}))
 for name, dfix in (("mean response (d = 0.90)", 0.90), ("fixed margin 0.92", 0.92), ("fixed margin 0.94", 0.94), ("fixed margin 0.96", 0.96)):
-    for test_sp in (0, 1, 2):
-        for kind, E in (("in-ensemble", I[I.split == test_sp]), ("out-of-ensemble", O[O.split == test_sp])):
-            z = E[np.isclose(E.d, dfix)]
-            out.append(dict(alpha=np.nan, test_split=test_sp, rule=name, kind=kind, pairs=z.site.nunique(), compliance=z.ok.mean() * 100, ler=z.ler.mean(), short=z.short.mean(),
+    for te in (0, 1, 2):
+        for kind, E in (("in-ensemble", I[I.split == te]), ("out-of-ensemble", O[O.split == te])):
+            z = pair_table(E[np.isclose(E.d, dfix)])
+            out.append(dict(alpha=np.nan, test_split=te, rule=name, kind=kind, pairs=len(z), compliance=z.ok.mean() * 100, ler=z.ler.mean(), short=z.short.mean(),
                             **{f"ok_{c}": z[z.crop == c].ok.mean() * 100 for c in CROP.values()}))
 R = pd.DataFrame(out); R.to_csv(f"{RES}/conformal_by_split.csv", index=False); pd.DataFrame(marg).to_csv(f"{RES}/conformal_margins.csv", index=False)
-S = R.groupby(["alpha", "rule", "kind"], dropna=False).agg(compliance=("compliance", "mean"), ler=("ler", "mean"), short=("short", "mean"), **{f"ok_{c}": (f"ok_{c}", "mean") for c in CROP.values()}).reset_index()
-S.to_csv(f"{RES}/conformal_summary.csv", index=False)
-pd.set_option("display.width", 220); print(S.round(3).to_string()); print(pd.DataFrame(marg).pivot_table(index=["alpha", "scope", "crop"], columns="test_split", values="d").round(3).to_string())
+# pooled over distinct pairs: the margins chosen in each test split are applied to that split's pairs; a pair held out in several splits is averaged
+pool = []
+for alpha in (0.10, 0.15, 0.20):
+    for kind, X in (("in-ensemble", I), ("out-of-ensemble", O)):
+        rows = []
+        for te in (0, 1, 2):
+            d = [m["d"] for m in marg if m["alpha"] == alpha and m["test_split"] == te][0]; E = X[(X.split == te) & np.isclose(X.d, d)]; rows.append(pair_table(E))
+        Z = pd.concat(rows).groupby("site").agg(ok=("ok", "mean"), ler=("ler", "mean"), short=("short", "mean"), crop=("crop", "first")).reset_index(); Z["alpha"], Z["kind"], Z["rule"] = alpha, kind, "conformal margin"; pool.append(Z)
+for name, dfix in (("mean response (d = 0.90)", 0.90), ("fixed margin 0.92", 0.92), ("fixed margin 0.94", 0.94), ("fixed margin 0.96", 0.96)):
+    for kind, X in (("in-ensemble", I), ("out-of-ensemble", O)):
+        Z = pair_table(X[np.isclose(X.d, dfix)]).groupby("site").agg(ok=("ok", "mean"), ler=("ler", "mean"), short=("short", "mean"), crop=("crop", "first")).reset_index(); Z["alpha"], Z["kind"], Z["rule"] = np.nan, kind, name; pool.append(Z)
+Pp = pd.concat(pool); Pp.to_csv(f"{RES}/conformal_pairs.csv", index=False)
+S = Pp.groupby(["alpha", "rule", "kind"], dropna=False).agg(pairs=("site", "nunique"), compliance=("ok", "mean"), ler=("ler", "mean"), short=("short", "mean"), **{f"ok_{c}": ("ok", lambda v, c=c: np.nan) for c in CROP.values()}).reset_index()
+for c in CROP.values():
+    sub = Pp[Pp.crop == c].groupby(["alpha", "rule", "kind"], dropna=False).ok.mean().mul(100)
+    for k, v in sub.items():
+        m = np.ones(len(S), bool)
+        for col, val in zip(("alpha", "rule", "kind"), k): m &= (S[col].isna() if (isinstance(val, float) and np.isnan(val)) else (S[col] == val)).values
+        S.loc[m, f"ok_{c}"] = v
+S["compliance"] *= 100; S.to_csv(f"{RES}/conformal_summary.csv", index=False)
+pd.set_option("display.width", 220); print(S.round(3).to_string()); print(pd.DataFrame(marg).round(3).to_string())
+print(R[(R.rule == "conformal margin") & (R.kind == "in-ensemble")][["alpha", "test_split", "pairs", "compliance"]].round(1).to_string())

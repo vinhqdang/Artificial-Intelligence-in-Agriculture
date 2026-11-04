@@ -80,7 +80,10 @@ def decide(net, mu, sd, X):
 rows = []; LAMS = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.25, 1.5, 2.0, 3.0]
 for lam in LAMS:
     for te in (0, 1, 2):
-        tr = pool([u for u in units if u["kind"] == "in" and u["split"] != te])
+        test_ids = set(np.concatenate([u["site"] for u in units if u["split"] == te and u["kind"] == "in"]).tolist())
+        def drop(u):   # pairs that are held out in the test split are removed from the training set (a pair can be a test pair in several splits)
+            keep = np.array([int(i) not in test_ids for i in u["site"]]); return dict(X=u["X"][keep], ok=u["ok"][keep], ler=u["ler"][keep])
+        tr = pool([drop(u) for u in units if u["kind"] == "in" and u["split"] != te])
         nets = [train(tr, lam, s) for s in range(3)]
         for u in [u for u in units if u["split"] == te]:
             for s, (net, mu, sd) in enumerate(nets):
