@@ -1,6 +1,6 @@
 Highlights
-- Light sharing allows 2-3x denser trackers at a 90% floor (proportional response).
-- A learned shade response is no better than proportional loss for staple crops.
-- A neural controller adds 0.007 LER over a tuned window (0.003 at equal retention).
-- Design margins matter: 70% vs 85-87% of pairs at the floor (mean vs oracle).
-- Plants beat agrivoltaics above 48 USD/MWh (64 at equal cost per watt).
+- Light sharing lets trackers carry 2-3x more modules at a 90% yield floor.
+- A neural controller adds 0.007 LER over a tuned window, nil at equal retention.
+- Mean-response designs leave 71% of pairs at the floor; an oracle reaches 87%.
+- Conformal margins hold inside the ensemble; no rule is safe outside it.
+- Plants beat agrivoltaics above 48 USD/MWh (64 at equal capex per watt).

@@ -24,3 +24,18 @@ Build: `manuscript/build.sh` compiles the supplement and the main text together 
 - Manuscript reference: AIA-D-26-01992.
 - Editorial decision, reported 2026-11-04: the manuscript did not pass the initial quality check of the editors and was not sent to external reviewers (desk rejection). No reasons were given in the notice.
 - Next step: choose another journal and reformat; the current text, figures and supplement are in this folder.
+
+## Second submission: Agricultural Systems (in preparation)
+Changes made for the journal's guide for authors (recommended maximum 8000 words; structured abstract of at most 250 words; 1 to 7 keywords; 3 to 5 highlights of at most 85 characters; graphical abstract required; Option C research-data policy):
+- Main text reduced to about 5700 words in 24 to 25 pages (from 56 pages); full methods and results moved to the supplementary material (about 48 pages).
+- New section on learning the design margin: conformal calibration and a learned design network (scripts \`src/analysis_conformal.py\`, \`src/learned_design.py\`, \`src/fig_design_learning.py\`).
+- Structured abstract (240 words), 7 keywords, 5 highlights (71 to 79 characters), graphical abstract (13 cm x 6.5 cm, 300 dpi).
+- Files for upload are in \`agrivoltaics/pdf/\`; sources in \`manuscript/\` (\`build.sh\` compiles the supplement and the main text together).
+
+Open items before submitting:
+- Research data: deposit the code and results in a repository (for example Zenodo) and cite the DOI; the journal requires deposit or a statement of why not.
+- Declaration of generative AI use: the journal requires a statement before the reference list when such tools were used in preparing the manuscript; decide on the wording (Elsevier policy).
+- Read the editorial directions linked from the journal's aims and scope; check the fit once more (whole-farm or landscape-level systems focus).
+- The numbers in the new design section come from a re-run of the pipeline after the computing environment was rebuilt (weather re-downloaded, caches rebuilt); they differ by one or two points from the older design tables in the supplement. Re-run the whole pipeline, or keep the statement in the text, before submission.
+- Cover letter; suggested reviewers if wanted.
+- Compile with the fonts and class used here; check the PDF once more for tables and figure legibility at journal size.

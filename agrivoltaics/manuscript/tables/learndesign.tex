@@ -1,7 +1,7 @@
 \begin{table}[t]
 \centering\small
 \caption{Design rules for the density under shade-response uncertainty (ensemble E2, phenology rule, leave-one-split-out, 76 pairs): share of pairs (\%) with mean retention $\ge0.9$ and mean LER when the true response is the held-out member (inside) or one of four fixed responses (outside the ensemble); the third column gives the range over crops of the inside share. Margins and the network are fitted on two splits and evaluated on the third; the fixed margins are not fitted.}\label{tab:learndesign}
-\begin{tabular}{lccccc}
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\begin{tabular}{lccccc}
 \toprule
  & \multicolumn{3}{c}{Inside the ensemble} & \multicolumn{2}{c}{Outside}\\
 Rule & Pairs at floor & LER & By crop & Pairs at floor & LER\\
@@ -24,5 +24,5 @@ Learned design network, $\lambda=0.8$ & 90 & 1.417 & -- & 35 & 1.365\\
 Learned design network, $\lambda=1.0$ & 94 & 1.385 & -- & 37 & 1.333\\
 Learned design network, $\lambda=2.0$ & 97 & 1.342 & -- & 42 & 1.294\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}

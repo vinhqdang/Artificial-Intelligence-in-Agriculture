@@ -1,7 +1,6 @@
-# Learning when to share sunlight: differentiable simulation and learned tracker control for agrivoltaics
+# Light-sharing control for tracker-based agrivoltaics under a yield floor
 
-Code, data pipeline and manuscript for a study prepared for *Artificial Intelligence in
-Agriculture*.
+Code, data pipeline and manuscript for a study prepared for submission to a journal on agricultural systems.
 
 A differentiable agrivoltaic simulator (solar geometry, single-axis trackers with backtracking,
 PV output, crop light and microclimate, soil water, SIMPLE crop model with a flowering-stage
