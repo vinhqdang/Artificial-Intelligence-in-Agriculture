@@ -19,3 +19,8 @@ Build: `manuscript/build.sh` compiles the supplement and the main text together 
 - State the page count (56 plus 8 of supplement) in the cover letter.
 - Outstanding minor points from the last internal review round: note in the Table cost caption that the economic analysis uses training seed 0; state the direction of the omitted costs on the net value of agrivoltaics.
 - The two non-open-access papers (Marrou et al. 2013, Valle et al. 2017) are noted in `literature/README.md` and are not redistributed.
+
+## Outcome
+- Manuscript reference: AIA-D-26-01992.
+- Editorial decision, reported 2026-11-04: the manuscript did not pass the initial quality check of the editors and was not sent to external reviewers (desk rejection). No reasons were given in the notice.
+- Next step: choose another journal and reformat; the current text, figures and supplement are in this folder.
