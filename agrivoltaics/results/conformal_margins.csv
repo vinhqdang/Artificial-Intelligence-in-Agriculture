@@ -1,0 +1,55 @@
+alpha,test_split,scope,crop,d
+0.1,0,global,all,0.925
+0.1,0,per crop,wheat,0.925
+0.1,0,per crop,rice,0.915
+0.1,0,per crop,maize,0.93
+0.1,0,per crop,soybean,0.925
+0.1,0,per crop,potato,0.94
+0.1,1,global,all,0.925
+0.1,1,per crop,wheat,0.925
+0.1,1,per crop,rice,0.915
+0.1,1,per crop,maize,0.93
+0.1,1,per crop,soybean,0.91
+0.1,1,per crop,potato,0.945
+0.1,2,global,all,0.925
+0.1,2,per crop,wheat,0.925
+0.1,2,per crop,rice,0.915
+0.1,2,per crop,maize,0.935
+0.1,2,per crop,soybean,0.91
+0.1,2,per crop,potato,0.94
+0.15,0,global,all,0.915
+0.15,0,per crop,wheat,0.92
+0.15,0,per crop,rice,0.91
+0.15,0,per crop,maize,0.92
+0.15,0,per crop,soybean,0.915
+0.15,0,per crop,potato,0.925
+0.15,1,global,all,0.92
+0.15,1,per crop,wheat,0.925
+0.15,1,per crop,rice,0.915
+0.15,1,per crop,maize,0.93
+0.15,1,per crop,soybean,0.905
+0.15,1,per crop,potato,0.935
+0.15,2,global,all,0.92
+0.15,2,per crop,wheat,0.925
+0.15,2,per crop,rice,0.915
+0.15,2,per crop,maize,0.93
+0.15,2,per crop,soybean,0.91
+0.15,2,per crop,potato,0.935
+0.2,0,global,all,0.91
+0.2,0,per crop,wheat,0.915
+0.2,0,per crop,rice,0.9
+0.2,0,per crop,maize,0.905
+0.2,0,per crop,soybean,0.91
+0.2,0,per crop,potato,0.91
+0.2,1,global,all,0.915
+0.2,1,per crop,wheat,0.92
+0.2,1,per crop,rice,0.91
+0.2,1,per crop,maize,0.92
+0.2,1,per crop,soybean,0.9
+0.2,1,per crop,potato,0.925
+0.2,2,global,all,0.915
+0.2,2,per crop,wheat,0.92
+0.2,2,per crop,rice,0.915
+0.2,2,per crop,maize,0.93
+0.2,2,per crop,soybean,0.905
+0.2,2,per crop,potato,0.92

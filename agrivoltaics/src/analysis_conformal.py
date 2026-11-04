@@ -38,7 +38,7 @@ for sp in (0, 1, 2):
         truth = load(f"nt{sp}_{T}")
         for d in D:
             s = outcome(select(mean_g, d), truth); s["split"], s["member"], s["d"], s["kind"] = sp, T, d, "out-of-ensemble"; rows.append(s)
-U = pd.concat(rows, ignore_index=True); U["crop"] = U.crop.map(CROP); U.to_parquet(f"{RES}/conformal_units.parquet")
+U = pd.concat(rows, ignore_index=True); U["crop"] = U.crop.map(CROP); U["member"] = U.member.astype(str); U.to_parquet(f"{RES}/conformal_units.parquet")
 I = U[U.kind == "in-ensemble"]; O = U[U.kind == "out-of-ensemble"]
 
 
