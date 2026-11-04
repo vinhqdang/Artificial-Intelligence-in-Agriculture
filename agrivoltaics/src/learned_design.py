@@ -2,7 +2,8 @@
 grid density), the crop and the latitude to a choice among the grid densities (or no array), trained to maximise the land-equivalent ratio minus a penalty for
 missing the retention floor under the held-out member (loss = sum_g p_g (-LER_g + lambda * 1[retention_g < 0.9])), with leave-one-split-out evaluation.
 Compared with the margin rules and the conformal margins on the same units. Output: results/learned_design_*.csv"""
-import os, sys
+import os, sys, warnings
+warnings.filterwarnings("ignore")
 import numpy as np, pandas as pd, torch
 sys.path.insert(0, os.path.dirname(__file__))
 from analysis import RES, RHO, HIST, ROOT
@@ -76,7 +77,7 @@ def decide(net, mu, sd, X):
     with torch.no_grad(): return net(((torch.tensor(X) - mu) / sd)).argmax(1).numpy()
 
 
-rows = []; LAMS = [0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 1.0, 2.0]
+rows = []; LAMS = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.25, 1.5, 2.0, 3.0]
 for lam in LAMS:
     for te in (0, 1, 2):
         tr = pool([u for u in units if u["kind"] == "in" and u["split"] != te])
