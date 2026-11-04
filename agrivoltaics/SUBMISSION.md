@@ -40,3 +40,11 @@ Open items before submitting:
 - Round-9 review fixes: pair-level analysis of the design section without overlap between calibration and test pairs, per-crop conformal calibration dropped, learned design compared with the margin frontier with bootstrap intervals, text qualified (single-axis trackers, strict 90% floor, maize).
 - Cover letter; suggested reviewers if wanted.
 - Compile with the fonts and class used here; check the PDF once more for tables and figure legibility at journal size.
+
+## Second submission: Agricultural Systems — submitted
+- Submitted: November 2026 (date of the submission-system confirmation to be added).
+- Repository state at submission: commit `f2b9c90` on `main`.
+- Files submitted (all in `agrivoltaics/submission_AgriculturalSystems/`): cover letter, abstract, manuscript (LaTeX source zip and PDF, 25 pages), highlights, graphical abstract, supplementary material (49 pages). Declaration of competing interests was completed in the submission system.
+- Manuscript reference number: to be added when the confirmation e-mail arrives.
+- Still open: the generative-AI declaration (decide and, if applicable, add), the deposit of code and results in a repository with a DOI (the cover letter and data statement say it will be cited before publication), and the date and reference number above.
+- Keep the build reproducible: `manuscript/build.sh` compiles the supplement and the main text together; the submission package was compiled standalone from the zip.
