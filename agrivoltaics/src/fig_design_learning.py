@@ -12,12 +12,15 @@ for ax, kind, fk, lk, ttl in ((axs[0], "in-ensemble", "in-ensemble", "in", "True
     c = C[(C.kind == kind) & (C.rule == "global conformal")]; ax.plot(c.compliance, c.ler, "s", color="#1d4ed8", ms=4.5, label="conformal margin (targets 90, 85, 80%)")
     c2 = C[(C.kind == kind) & (C.rule == "per-crop conformal")]; ax.plot(c2.compliance, c2.ler, "^", color="#059669", ms=4.5, label="per-crop conformal margin")
     ax.set_xlabel("Pairs at the floor (%)"); ax.set_ylabel("Land-equivalent ratio"); ax.set_title(ttl, fontsize=7.5)
+O_ = pd.read_csv(f"{RES}/conformal_oracle.csv").set_index("kind")
+for ax, k in zip(axs, ("in-ensemble", "out-of-ensemble")): ax.plot(O_.loc[k].compliance, O_.loc[k].ler, "*", color="black", ms=8, label="oracle (true response)")
 axs[0].legend(fontsize=6, frameon=False, loc="upper right")
 fig.tight_layout(); fig.savefig(f"{FIG}/design_learning.pdf", bbox_inches="tight"); fig.savefig(f"{FIG}/design_learning.png", dpi=200)
 def row(label, i, o, rngs=""):
     return f"{label} & {i.compliance:.0f} & {i.ler:.3f} & {rngs} & {o.compliance:.0f} & {o.ler:.3f}\\\\"
 S = C.set_index(["rule", "alpha", "kind"], drop=False) if False else C
-lines = []
+O = pd.read_csv(f"{RES}/conformal_oracle.csv").set_index("kind")
+lines = [f"Oracle (design under the true response) & {O.loc['in-ensemble'].compliance:.0f} & {O.loc['in-ensemble'].ler:.3f} & -- & {O.loc['out-of-ensemble'].compliance:.0f} & {O.loc['out-of-ensemble'].ler:.3f}\\\\", "\\addlinespace"]
 def pick(rule, alpha, kind):
     x = C[(C.rule == rule) & (C.kind == kind)]
     x = x[x.alpha.isna()] if np.isnan(alpha) else x[np.isclose(x.alpha, alpha)]

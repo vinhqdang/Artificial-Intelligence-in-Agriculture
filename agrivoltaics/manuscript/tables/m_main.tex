@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering\small
+\caption{Held-out performance (92 test pairs, seasons 2015--2019) under the baseline and the +3\,\textdegree C climate. The density (GCR) of each site is the largest value on a grid with step 0.025 at which the method's mean retention in the site's 2001--2014 seasons is $\ge0.9$. $E$: electricity (MWh\,ha$^{-1}$\,yr$^{-1}$); $e$: electricity relative to a conventional plant; $r$: mean yield retention; $r_{\mathrm{prod}}$: production-weighted retention; C$_s$, C$_{\mathrm{site}}$: share of seasons and of sites with retention $\ge0.9$ (\%); LER $=r+e$. Other warming levels are in Supplementary Table~\ref{S-tab:main}.}
+\label{tab:m-main}
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{\begin{tabular}{lcccccccc}
+\toprule
+Method & GCR & $E$ & $e$ & $r$ & $r_{\mathrm{prod}}$ & C$_s$ & C$_{\mathrm{site}}$ & LER\\
+\midrule
+\multicolumn{9}{l}{\textit{Baseline}}\\
+AV static & 0.06 & 217 & 0.16 & 0.917 & 0.914 & 93 & 96 & 1.07\\
+Seasonal sharing & 0.17 & 397 & 0.28 & 0.904 & 0.902 & 69 & 72 & 1.19\\
+Phenology rule & 0.17 & 465 & 0.33 & 0.904 & 0.902 & 69 & 75 & 1.24\\
+Stress rule & 0.13 & 387 & 0.28 & 0.907 & 0.907 & 76 & 82 & 1.18\\
+SALS & 0.17 & 510 & 0.36 & 0.905 & 0.902 & 70 & 74 & 1.27\\
+\addlinespace
+\multicolumn{9}{l}{\textit{+3\,\textdegree C}}\\
+AV static & 0.06 & 231 & 0.17 & 0.915 & 0.914 & 88 & 89 & 1.08\\
+Seasonal sharing & 0.17 & 397 & 0.29 & 0.906 & 0.904 & 69 & 75 & 1.19\\
+Phenology rule & 0.18 & 499 & 0.36 & 0.905 & 0.902 & 67 & 72 & 1.26\\
+Stress rule & 0.11 & 366 & 0.26 & 0.908 & 0.908 & 74 & 77 & 1.17\\
+SALS & 0.18 & 540 & 0.39 & 0.907 & 0.904 & 68 & 75 & 1.30\\
+\bottomrule
+\end{tabular}}
+\end{table}
