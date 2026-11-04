@@ -10,5 +10,6 @@ for sp in (0, 1, 2):
         t = AC.load(f"e2s{sp}_{k}"); s = AC.outcome(AC.select(t, 0.9), t); s["kind"] = "in-ensemble"; rows.append(s)
     for T in ["conservative", "calibrated", "field", "harsh"]:
         t = AC.load(f"nt{sp}_{T}"); s = AC.outcome(AC.select(t, 0.9), t); s["kind"] = "out-of-ensemble"; rows.append(s)
-R = pd.concat(rows); o = R.groupby("kind").agg(compliance=("ok", "mean"), ler=("ler", "mean")).reset_index(); o["compliance"] *= 100
+R = pd.concat(rows); R = R.groupby(["kind", "site"]).agg(ok=("ok", "mean"), ler=("ler", "mean")).reset_index()   # pair level
+o = R.groupby("kind").agg(compliance=("ok", "mean"), ler=("ler", "mean")).reset_index(); o["compliance"] *= 100
 o.to_csv(f"{AC.RES}/conformal_oracle.csv", index=False); print(o)

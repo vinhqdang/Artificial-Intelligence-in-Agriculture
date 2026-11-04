@@ -12,7 +12,7 @@ d.columns = ["crop", "ctype", "rsr", "yld", "exp", "zone", "lat", "lon", "ghi", 
 d["s"] = d.rsr / 100; d["y"] = d.yld / 100; d = d[d.s > 0]
 cur = pd.read_csv(f"{ROOT}/results/shade_ml_curves.csv")
 sp = pd.concat([pd.read_csv(f) for f in glob.glob(f"{ROOT}/results/spread_E2_m*.csv")])
-panels = [("C3 cereals", ["wheat", "rice"], "Wheat and rice"), ("Maize", ["maize"], "Maize"), ("Grain legumes", ["soybean"], "Soybean"), ("Tubers/root crops", ["potato"], "Potato")]
+panels = [("C3 cereals", ["wheat", "rice"], "Wheat, rice"), ("Maize", ["maize"], "Maize"), ("Grain legumes", ["soybean"], "Soybean"), ("Tubers/root crops", ["potato"], "Potato")]
 fig, axs = plt.subplots(1, 4, figsize=(7.4, 2.9), sharey=True)
 for ax, (ct, crops, title) in zip(axs, panels):
     x = d[d.ctype == ct]; c = cur[cur.ctype == ct].sort_values("s")
@@ -25,7 +25,7 @@ for ax, (ct, crops, title) in zip(axs, panels):
     for cr, col in zip(crops, ["#15803d", "#a16207"]):
         for m, z in sp[sp.crop == cr].groupby("member"):
             z = z.sort_values("shading"); ax.plot(100 * z.shading, z.rel_yield, color=col, lw=0.5, alpha=0.6)
-    ax.set_title(f"{title}  (n = {len(x)})", fontsize=7.5); ax.set_xlim(0, 62); ax.set_ylim(0, 1.35); ax.set_xlabel("Shade (%)")
+    ax.set_title(f"{title}  (n = {len(x)})", fontsize=7.5); ax.set_xlim(0, 62); ax.set_ylim(0, 1.45); ax.set_xlabel("Shade (%)")
 axs[0].set_ylabel("Relative yield")
 h, l = axs[1].get_legend_handles_labels()
 fig.legend(h + [plt.Line2D([], [], color="#15803d", lw=0.8)], l + ["simulator, five ensemble members"], loc="lower center", ncol=3, fontsize=6.5, frameon=False)

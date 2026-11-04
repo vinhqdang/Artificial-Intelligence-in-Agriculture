@@ -1,0 +1,1065 @@
+site,ok,ler,short,crop,alpha,kind,rule
+0,0.4,1.6838808584213258,0.019754917621612543,maize,0.1,in-ensemble,conformal margin
+3,1.0,1.7749035716056825,0.0,maize,0.1,in-ensemble,conformal margin
+6,1.0,1.381588089466095,0.0,maize,0.1,in-ensemble,conformal margin
+24,1.0,1.256314536333084,0.0,maize,0.1,in-ensemble,conformal margin
+30,0.7,1.311821221113205,0.00139858961105348,maize,0.1,in-ensemble,conformal margin
+33,1.0,1.297168493270874,0.0,maize,0.1,in-ensemble,conformal margin
+39,1.0,1.2514916741847992,0.0,maize,0.1,in-ensemble,conformal margin
+42,1.0,1.2015062499046327,0.0,maize,0.1,in-ensemble,conformal margin
+45,0.6,1.289411369562149,0.008151760101318373,maize,0.1,in-ensemble,conformal margin
+57,1.0,1.7205878996849058,0.0,maize,0.1,in-ensemble,conformal margin
+60,1.0,1.1710638624429701,0.0,maize,0.1,in-ensemble,conformal margin
+63,1.0,1.23738241314888,0.0,maize,0.1,in-ensemble,conformal margin
+66,1.0,1.950558762550354,0.0,maize,0.1,in-ensemble,conformal margin
+69,0.8,1.5821814560890197,0.0007174849510192871,maize,0.1,in-ensemble,conformal margin
+72,1.0,1.9302230978012083,0.0,maize,0.1,in-ensemble,conformal margin
+75,1.0,1.2625968432426453,0.0,maize,0.1,in-ensemble,conformal margin
+78,0.2,1.4312509214878084,0.022351744174957267,maize,0.1,in-ensemble,conformal margin
+81,1.0,1.4083374774456023,0.0,wheat,0.1,in-ensemble,conformal margin
+93,1.0,1.786566631793976,0.0,wheat,0.1,in-ensemble,conformal margin
+96,1.0,1.665506820678711,0.0,wheat,0.1,in-ensemble,conformal margin
+99,1.0,1.3388651406764984,0.0,wheat,0.1,in-ensemble,conformal margin
+105,1.0,1.5233944964408874,0.0,wheat,0.1,in-ensemble,conformal margin
+111,1.0,1.4677110171318055,0.0,wheat,0.1,in-ensemble,conformal margin
+114,0.9,1.4660039490461352,0.0005103468894958497,wheat,0.1,in-ensemble,conformal margin
+120,1.0,1.3641616427898406,0.0,wheat,0.1,in-ensemble,conformal margin
+123,1.0,1.5731602263450621,0.0,wheat,0.1,in-ensemble,conformal margin
+126,0.8,1.4765536856651305,0.0017449831962585538,wheat,0.1,in-ensemble,conformal margin
+129,1.0,1.4863000440597536,0.0,wheat,0.1,in-ensemble,conformal margin
+132,1.0,1.3069658815860747,0.0,wheat,0.1,in-ensemble,conformal margin
+138,1.0,1.5003242444992064,0.0,wheat,0.1,in-ensemble,conformal margin
+144,1.0,1.750987067222595,0.0,wheat,0.1,in-ensemble,conformal margin
+147,1.0,1.6211045575141907,0.0,wheat,0.1,in-ensemble,conformal margin
+150,1.0,1.5013468599319457,0.0,wheat,0.1,in-ensemble,conformal margin
+159,1.0,1.5140375518798828,0.0,wheat,0.1,in-ensemble,conformal margin
+162,1.0,1.5628982186317444,0.0,rice,0.1,in-ensemble,conformal margin
+165,1.0,1.1788514065742492,0.0,rice,0.1,in-ensemble,conformal margin
+171,1.0,1.2098166579008103,0.0,rice,0.1,in-ensemble,conformal margin
+174,1.0,1.1711821430921554,0.0,rice,0.1,in-ensemble,conformal margin
+177,1.0,1.7046392226219176,0.0,rice,0.1,in-ensemble,conformal margin
+183,1.0,1.2198158431053163,0.0,rice,0.1,in-ensemble,conformal margin
+186,1.0,1.2077788364887236,0.0,rice,0.1,in-ensemble,conformal margin
+189,1.0,1.2527512049674987,0.0,rice,0.1,in-ensemble,conformal margin
+192,1.0,1.3583810436725616,0.0,rice,0.1,in-ensemble,conformal margin
+195,1.0,1.2457122313976288,0.0,rice,0.1,in-ensemble,conformal margin
+201,1.0,1.223354263305664,0.0,rice,0.1,in-ensemble,conformal margin
+204,1.0,1.2468269228935243,0.0,rice,0.1,in-ensemble,conformal margin
+207,1.0,1.176049426794052,0.0,rice,0.1,in-ensemble,conformal margin
+210,1.0,1.2489747452735902,0.0,rice,0.1,in-ensemble,conformal margin
+213,1.0,1.256994811296463,0.0,rice,0.1,in-ensemble,conformal margin
+216,1.0,1.2047335636615752,0.0,rice,0.1,in-ensemble,conformal margin
+219,0.6,1.8229436933994294,0.004889542460441598,rice,0.1,in-ensemble,conformal margin
+222,1.0,1.260994873046875,0.0,rice,0.1,in-ensemble,conformal margin
+231,1.0,1.2296544909477234,0.0,rice,0.1,in-ensemble,conformal margin
+234,1.0,1.4063822042942047,0.0,rice,0.1,in-ensemble,conformal margin
+243,1.0,1.062350791990757,0.0,soybean,0.1,in-ensemble,conformal margin
+246,1.0,1.067600114941597,0.0,soybean,0.1,in-ensemble,conformal margin
+255,1.0,1.1058203703165055,0.0,soybean,0.1,in-ensemble,conformal margin
+258,1.0,1.0584455308318137,0.0,soybean,0.1,in-ensemble,conformal margin
+267,1.0,1.135505315065384,0.0,soybean,0.1,in-ensemble,conformal margin
+270,1.0,1.1507738131284715,0.0,soybean,0.1,in-ensemble,conformal margin
+294,1.0,1.0506245869398119,0.0,soybean,0.1,in-ensemble,conformal margin
+303,1.0,1.205679337978363,0.0,soybean,0.1,in-ensemble,conformal margin
+315,1.0,1.0708339777588844,0.0,soybean,0.1,in-ensemble,conformal margin
+318,1.0,1.0584567078948022,0.0,soybean,0.1,in-ensemble,conformal margin
+327,0.8,1.6333458876609803,0.005457558631896986,potato,0.1,in-ensemble,conformal margin
+330,1.0,1.3334585511684418,0.0,potato,0.1,in-ensemble,conformal margin
+333,1.0,1.5571235132217407,0.0,potato,0.1,in-ensemble,conformal margin
+342,0.8,1.6556111127138138,0.002504583001136784,potato,0.1,in-ensemble,conformal margin
+348,0.8,1.2817943716049194,0.0022404718399047898,potato,0.1,in-ensemble,conformal margin
+354,0.8,1.2624084913730622,0.0002156853675842285,potato,0.1,in-ensemble,conformal margin
+369,1.0,1.3538498079776764,0.0,potato,0.1,in-ensemble,conformal margin
+372,0.8,1.6802823265393574,0.0023128398259480766,potato,0.1,in-ensemble,conformal margin
+378,0.6,1.6947226071357726,0.010610234737396241,potato,0.1,in-ensemble,conformal margin
+381,0.8,1.619540309906006,0.004374830722808842,potato,0.1,in-ensemble,conformal margin
+390,1.0,1.7365604937076569,0.0,potato,0.1,in-ensemble,conformal margin
+399,0.8,1.626428918838501,0.01137572765350343,potato,0.1,in-ensemble,conformal margin
+0,0.0,1.574984511733055,0.12515044510364534,maize,0.1,out-of-ensemble,conformal margin
+3,0.25,1.651172536611557,0.04530218839645386,maize,0.1,out-of-ensemble,conformal margin
+6,0.25,1.3325713515281676,0.023215857148170455,maize,0.1,out-of-ensemble,conformal margin
+24,0.75,1.2190078109502793,0.000285249948501598,maize,0.1,out-of-ensemble,conformal margin
+30,0.25,1.285232912003994,0.02885078936815262,maize,0.1,out-of-ensemble,conformal margin
+33,0.25,1.2940962731838226,0.037322565913200406,maize,0.1,out-of-ensemble,conformal margin
+39,0.25,1.2231272608041763,0.01506742537021638,maize,0.1,out-of-ensemble,conformal margin
+42,0.25,1.2132124423980712,0.020663884282112133,maize,0.1,out-of-ensemble,conformal margin
+45,0.0,1.2852109223604202,0.058870503306388905,maize,0.1,out-of-ensemble,conformal margin
+57,0.25,1.6108757585287095,0.07258920073509215,maize,0.1,out-of-ensemble,conformal margin
+60,0.75,1.138898628950119,0.0034721463918686024,maize,0.1,out-of-ensemble,conformal margin
+63,0.25,1.1882646441459657,0.013190621137619013,maize,0.1,out-of-ensemble,conformal margin
+66,0.25,1.816258692741394,0.061470654606819136,maize,0.1,out-of-ensemble,conformal margin
+69,0.25,1.485574761033058,0.04314452707767488,maize,0.1,out-of-ensemble,conformal margin
+72,0.75,1.7909547865390778,0.011368894577026362,maize,0.1,out-of-ensemble,conformal margin
+75,0.25,1.214580884575844,0.018172481656074574,maize,0.1,out-of-ensemble,conformal margin
+78,0.0,1.3725178718566895,0.09914677143096923,maize,0.1,out-of-ensemble,conformal margin
+81,0.25,1.3580070227384566,0.06718106865882875,wheat,0.1,out-of-ensemble,conformal margin
+93,0.25,1.7217315196990968,0.09779763519763945,wheat,0.1,out-of-ensemble,conformal margin
+96,0.25,1.590209314227104,0.07858250439167022,wheat,0.1,out-of-ensemble,conformal margin
+99,0.25,1.3014410316944123,0.05033037066459656,wheat,0.1,out-of-ensemble,conformal margin
+105,0.25,1.4501877754926682,0.05663294196128846,wheat,0.1,out-of-ensemble,conformal margin
+111,0.25,1.393265575170517,0.0722250670194626,wheat,0.1,out-of-ensemble,conformal margin
+114,0.25,1.389878076314926,0.07424247860908512,wheat,0.1,out-of-ensemble,conformal margin
+120,0.25,1.2949058085680007,0.04804008901119233,wheat,0.1,out-of-ensemble,conformal margin
+123,0.25,1.5156041443347932,0.06362953484058381,wheat,0.1,out-of-ensemble,conformal margin
+126,0.25,1.3900460720062255,0.055574071407318126,wheat,0.1,out-of-ensemble,conformal margin
+129,0.25,1.4299557775259018,0.06729125082492832,wheat,0.1,out-of-ensemble,conformal margin
+132,0.25,1.2578008830547334,0.04127907156944277,wheat,0.1,out-of-ensemble,conformal margin
+138,0.25,1.433231595158577,0.07671661078929903,wheat,0.1,out-of-ensemble,conformal margin
+144,0.25,1.692862331867218,0.06649637818336489,wheat,0.1,out-of-ensemble,conformal margin
+147,0.25,1.5627437710762024,0.06894174516201021,wheat,0.1,out-of-ensemble,conformal margin
+150,0.25,1.4202212899923325,0.07325008660554888,wheat,0.1,out-of-ensemble,conformal margin
+159,0.25,1.4540532529354095,0.07292329967021943,wheat,0.1,out-of-ensemble,conformal margin
+162,0.25,1.4685174614191054,0.03919849693775179,rice,0.1,out-of-ensemble,conformal margin
+165,0.25,1.179564207792282,0.00979804992675784,rice,0.1,out-of-ensemble,conformal margin
+171,0.25,1.1808932006359099,0.008687117695808433,rice,0.1,out-of-ensemble,conformal margin
+174,1.0,1.1377160519361496,0.0,rice,0.1,out-of-ensemble,conformal margin
+177,0.5,1.5563185811042786,0.021749728918075584,rice,0.1,out-of-ensemble,conformal margin
+183,0.25,1.1915229916572572,0.008848866820335421,rice,0.1,out-of-ensemble,conformal margin
+186,0.25,1.1593853294849397,0.013072618842124933,rice,0.1,out-of-ensemble,conformal margin
+189,0.0,1.2022222697734832,0.0274643361568451,rice,0.1,out-of-ensemble,conformal margin
+192,0.25,1.2996529757976532,0.029678291082382208,rice,0.1,out-of-ensemble,conformal margin
+195,0.25,1.2030895084142685,0.025772494077682506,rice,0.1,out-of-ensemble,conformal margin
+201,0.5,1.1842468291521073,0.004909807443618769,rice,0.1,out-of-ensemble,conformal margin
+204,0.0,1.2199058890342713,0.03056159615516668,rice,0.1,out-of-ensemble,conformal margin
+207,0.75,1.1394960463047028,0.001606208086013805,rice,0.1,out-of-ensemble,conformal margin
+210,0.25,1.199775767326355,0.021093866229057318,rice,0.1,out-of-ensemble,conformal margin
+213,0.5,1.2111989706754684,0.007890671491622953,rice,0.1,out-of-ensemble,conformal margin
+216,0.25,1.2100163370370864,0.017638081312179588,rice,0.1,out-of-ensemble,conformal margin
+219,0.0,1.7255139462649822,0.09359808042645457,rice,0.1,out-of-ensemble,conformal margin
+222,0.0,1.2101548433303833,0.030458807945251465,rice,0.1,out-of-ensemble,conformal margin
+231,0.25,1.1854343473911286,0.012530720233917242,rice,0.1,out-of-ensemble,conformal margin
+234,0.0,1.3905763357877732,0.053464117646217335,rice,0.1,out-of-ensemble,conformal margin
+243,1.0,1.0696203604340553,0.0,soybean,0.1,out-of-ensemble,conformal margin
+246,1.0,1.075771152973175,0.0,soybean,0.1,out-of-ensemble,conformal margin
+255,1.0,1.118125307559967,0.0,soybean,0.1,out-of-ensemble,conformal margin
+258,1.0,1.0674222245812417,0.0,soybean,0.1,out-of-ensemble,conformal margin
+267,1.0,1.16757855117321,0.0,soybean,0.1,out-of-ensemble,conformal margin
+270,1.0,1.1649101704359055,0.0,soybean,0.1,out-of-ensemble,conformal margin
+294,1.0,1.0595545947551728,0.0,soybean,0.1,out-of-ensemble,conformal margin
+303,1.0,1.2418320715427398,0.0,soybean,0.1,out-of-ensemble,conformal margin
+315,1.0,1.0775999411940576,0.0,soybean,0.1,out-of-ensemble,conformal margin
+318,1.0,1.0673749819397926,0.0,soybean,0.1,out-of-ensemble,conformal margin
+327,0.25,1.5928218334913253,0.05225441455841065,potato,0.1,out-of-ensemble,conformal margin
+330,0.25,1.3170046240091324,0.015594252943992637,potato,0.1,out-of-ensemble,conformal margin
+333,0.25,1.5111792892217637,0.00932961404323579,potato,0.1,out-of-ensemble,conformal margin
+342,0.25,1.6047691963613033,0.04983710423111917,potato,0.1,out-of-ensemble,conformal margin
+348,0.25,1.2662168040871622,0.02328543961048128,potato,0.1,out-of-ensemble,conformal margin
+354,0.25,1.2748880684375763,0.02632772624492649,potato,0.1,out-of-ensemble,conformal margin
+369,0.25,1.3041392892599106,0.00654624104499818,potato,0.1,out-of-ensemble,conformal margin
+372,0.25,1.610433002312978,0.04209199845790862,potato,0.1,out-of-ensemble,conformal margin
+378,0.25,1.6436437040567398,0.0665844112634659,potato,0.1,out-of-ensemble,conformal margin
+381,0.25,1.5358487367630005,0.04255072325468065,potato,0.1,out-of-ensemble,conformal margin
+390,0.25,1.6679257526993752,0.036286617815494554,potato,0.1,out-of-ensemble,conformal margin
+399,0.25,1.5665286839008332,0.07329273819923404,potato,0.1,out-of-ensemble,conformal margin
+0,0.4,1.6838808584213258,0.019754917621612543,maize,0.15,in-ensemble,conformal margin
+3,1.0,1.7749035716056825,0.0,maize,0.15,in-ensemble,conformal margin
+6,1.0,1.4093973851203918,0.0,maize,0.15,in-ensemble,conformal margin
+24,1.0,1.256314536333084,0.0,maize,0.15,in-ensemble,conformal margin
+30,0.6,1.3783244979381561,0.0014812421798706232,maize,0.15,in-ensemble,conformal margin
+33,1.0,1.3496397376060485,0.0,maize,0.15,in-ensemble,conformal margin
+39,1.0,1.2700623452663422,0.0,maize,0.15,in-ensemble,conformal margin
+42,1.0,1.2534573435783387,0.0,maize,0.15,in-ensemble,conformal margin
+45,0.6,1.3406600785255431,0.008151760101318373,maize,0.15,in-ensemble,conformal margin
+57,1.0,1.7205878996849058,0.0,maize,0.15,in-ensemble,conformal margin
+60,1.0,1.1710638624429701,0.0,maize,0.15,in-ensemble,conformal margin
+63,1.0,1.23738241314888,0.0,maize,0.15,in-ensemble,conformal margin
+66,1.0,1.950558762550354,0.0,maize,0.15,in-ensemble,conformal margin
+69,0.6,1.6381416106224058,0.004419608116149898,maize,0.15,in-ensemble,conformal margin
+72,1.0,1.9302230978012083,0.0,maize,0.15,in-ensemble,conformal margin
+75,1.0,1.2625968432426453,0.0,maize,0.15,in-ensemble,conformal margin
+78,0.2,1.4819490575790406,0.03316567182540895,maize,0.15,in-ensemble,conformal margin
+81,1.0,1.4223009490966798,0.0,wheat,0.15,in-ensemble,conformal margin
+93,1.0,1.8155055785179137,0.0,wheat,0.15,in-ensemble,conformal margin
+96,1.0,1.7317104840278623,0.0,wheat,0.15,in-ensemble,conformal margin
+99,0.8,1.3811295354366302,0.001002237796783456,wheat,0.15,in-ensemble,conformal margin
+105,0.8,1.5860735535621644,0.0005005478858947753,wheat,0.15,in-ensemble,conformal margin
+111,0.8,1.492901680469513,0.0009982824325561524,wheat,0.15,in-ensemble,conformal margin
+114,0.8,1.5087218546867371,0.0010206937789916993,wheat,0.15,in-ensemble,conformal margin
+120,1.0,1.404198648929596,0.0,wheat,0.15,in-ensemble,conformal margin
+123,0.6,1.6481075167655945,0.002483747005462655,wheat,0.15,in-ensemble,conformal margin
+126,0.6,1.5282706260681151,0.0018140578269958628,wheat,0.15,in-ensemble,conformal margin
+129,0.8,1.5272311711311342,0.00018040657043456588,wheat,0.15,in-ensemble,conformal margin
+132,1.0,1.3549335539340972,0.0,wheat,0.15,in-ensemble,conformal margin
+138,0.8,1.5362124419212342,0.0007740664482116744,wheat,0.15,in-ensemble,conformal margin
+144,0.9,1.8073746299743652,0.0004977750778198287,wheat,0.15,in-ensemble,conformal margin
+147,1.0,1.6358988690376282,0.0,wheat,0.15,in-ensemble,conformal margin
+150,0.8,1.5427702510356904,0.0018821334838867276,wheat,0.15,in-ensemble,conformal margin
+159,0.8,1.537952778339386,0.0013689208030700727,wheat,0.15,in-ensemble,conformal margin
+162,1.0,1.6138618254661559,0.0,rice,0.15,in-ensemble,conformal margin
+165,1.0,1.224273577928543,0.0,rice,0.15,in-ensemble,conformal margin
+171,1.0,1.2252253043651582,0.0,rice,0.15,in-ensemble,conformal margin
+174,1.0,1.2544489097595215,0.0,rice,0.15,in-ensemble,conformal margin
+177,1.0,1.7800624513626098,0.0,rice,0.15,in-ensemble,conformal margin
+183,1.0,1.235940854549408,0.0,rice,0.15,in-ensemble,conformal margin
+186,1.0,1.2077788364887236,0.0,rice,0.15,in-ensemble,conformal margin
+189,1.0,1.2527512049674987,0.0,rice,0.15,in-ensemble,conformal margin
+192,1.0,1.3845558702945708,0.0,rice,0.15,in-ensemble,conformal margin
+195,1.0,1.254343614578247,0.0,rice,0.15,in-ensemble,conformal margin
+201,1.0,1.223354263305664,0.0,rice,0.15,in-ensemble,conformal margin
+204,1.0,1.2744102418422698,0.0,rice,0.15,in-ensemble,conformal margin
+207,1.0,1.2609041023254395,0.0,rice,0.15,in-ensemble,conformal margin
+210,1.0,1.2489747452735902,0.0,rice,0.15,in-ensemble,conformal margin
+213,1.0,1.256994811296463,0.0,rice,0.15,in-ensemble,conformal margin
+216,1.0,1.256575025320053,0.0,rice,0.15,in-ensemble,conformal margin
+219,0.6,1.8229436933994294,0.004889542460441598,rice,0.15,in-ensemble,conformal margin
+222,0.8,1.277422194480896,0.0033994460105896017,rice,0.15,in-ensemble,conformal margin
+231,1.0,1.2296544909477234,0.0,rice,0.15,in-ensemble,conformal margin
+234,1.0,1.4605117988586425,0.0,rice,0.15,in-ensemble,conformal margin
+243,1.0,1.062350791990757,0.0,soybean,0.15,in-ensemble,conformal margin
+246,1.0,1.067600114941597,0.0,soybean,0.15,in-ensemble,conformal margin
+255,0.6,1.1261111229658127,0.012685153484344491,soybean,0.15,in-ensemble,conformal margin
+258,1.0,1.0584455308318137,0.0,soybean,0.15,in-ensemble,conformal margin
+267,1.0,1.1527664476633073,0.0,soybean,0.15,in-ensemble,conformal margin
+270,1.0,1.1507738131284715,0.0,soybean,0.15,in-ensemble,conformal margin
+294,1.0,1.0506245869398119,0.0,soybean,0.15,in-ensemble,conformal margin
+303,1.0,1.2219664132595063,0.0,soybean,0.15,in-ensemble,conformal margin
+315,1.0,1.0708339777588844,0.0,soybean,0.15,in-ensemble,conformal margin
+318,1.0,1.0584567078948022,0.0,soybean,0.15,in-ensemble,conformal margin
+327,0.8,1.660982005596161,0.005457558631896986,potato,0.15,in-ensemble,conformal margin
+330,0.8,1.3664694786071778,0.0018851637840270996,potato,0.15,in-ensemble,conformal margin
+333,0.9,1.5980093479156494,0.0008353769779205322,potato,0.15,in-ensemble,conformal margin
+342,0.8,1.695629207789898,0.002504583001136784,potato,0.15,in-ensemble,conformal margin
+348,0.8,1.315987274646759,0.0022404718399047898,potato,0.15,in-ensemble,conformal margin
+354,0.8,1.3232436525821687,0.005110707283020033,potato,0.15,in-ensemble,conformal margin
+369,1.0,1.4022539889812469,0.0,potato,0.15,in-ensemble,conformal margin
+372,0.8,1.7081442594528198,0.004964098135630301,potato,0.15,in-ensemble,conformal margin
+378,0.6,1.7575417971611025,0.01662362098693848,potato,0.15,in-ensemble,conformal margin
+381,0.8,1.6601528078317642,0.004374830722808842,potato,0.15,in-ensemble,conformal margin
+390,1.0,1.7365604937076569,0.0,potato,0.15,in-ensemble,conformal margin
+399,0.6,1.6913559985160826,0.01756981372833253,potato,0.15,in-ensemble,conformal margin
+0,0.0,1.574984511733055,0.12515044510364534,maize,0.15,out-of-ensemble,conformal margin
+3,0.25,1.651172536611557,0.04530218839645386,maize,0.15,out-of-ensemble,conformal margin
+6,0.25,1.3963076829910277,0.04091704189777376,maize,0.15,out-of-ensemble,conformal margin
+24,0.75,1.2190078109502793,0.000285249948501598,maize,0.15,out-of-ensemble,conformal margin
+30,0.25,1.326203092932701,0.04274942874908447,maize,0.15,out-of-ensemble,conformal margin
+33,0.25,1.2940962731838226,0.037322565913200406,maize,0.15,out-of-ensemble,conformal margin
+39,0.25,1.2231272608041763,0.01506742537021638,maize,0.15,out-of-ensemble,conformal margin
+42,0.25,1.2132124423980712,0.020663884282112133,maize,0.15,out-of-ensemble,conformal margin
+45,0.0,1.2852109223604202,0.058870503306388905,maize,0.15,out-of-ensemble,conformal margin
+57,0.25,1.6108757585287095,0.07258920073509215,maize,0.15,out-of-ensemble,conformal margin
+60,0.75,1.138898628950119,0.0034721463918686024,maize,0.15,out-of-ensemble,conformal margin
+63,0.25,1.1882646441459657,0.013190621137619013,maize,0.15,out-of-ensemble,conformal margin
+66,0.25,1.816258692741394,0.061470654606819136,maize,0.15,out-of-ensemble,conformal margin
+69,0.25,1.5489202439785004,0.05822686553001405,maize,0.15,out-of-ensemble,conformal margin
+72,0.75,1.7909547865390778,0.011368894577026362,maize,0.15,out-of-ensemble,conformal margin
+75,0.25,1.214580884575844,0.018172481656074574,maize,0.15,out-of-ensemble,conformal margin
+78,0.0,1.4458925306797028,0.13426424860954286,maize,0.15,out-of-ensemble,conformal margin
+81,0.25,1.3580070227384566,0.06718106865882875,wheat,0.15,out-of-ensemble,conformal margin
+93,0.25,1.7217315196990968,0.09779763519763945,wheat,0.15,out-of-ensemble,conformal margin
+96,0.25,1.6485470414161683,0.0937756597995758,wheat,0.15,out-of-ensemble,conformal margin
+99,0.25,1.3014410316944123,0.05033037066459656,wheat,0.15,out-of-ensemble,conformal margin
+105,0.25,1.5211888164281846,0.07600075602531434,wheat,0.15,out-of-ensemble,conformal margin
+111,0.25,1.4462601244449615,0.09100747704505921,wheat,0.15,out-of-ensemble,conformal margin
+114,0.25,1.430775597691536,0.08829364776611331,wheat,0.15,out-of-ensemble,conformal margin
+120,0.25,1.3537905186414718,0.0700706511735916,wheat,0.15,out-of-ensemble,conformal margin
+123,0.25,1.583161509037018,0.08077618479728702,wheat,0.15,out-of-ensemble,conformal margin
+126,0.25,1.4671347558498382,0.07873443961143498,wheat,0.15,out-of-ensemble,conformal margin
+129,0.25,1.4299557775259018,0.06729125082492832,wheat,0.15,out-of-ensemble,conformal margin
+132,0.25,1.3088479489088058,0.06203938424587249,wheat,0.15,out-of-ensemble,conformal margin
+138,0.25,1.4840503871440887,0.09301587045192719,wheat,0.15,out-of-ensemble,conformal margin
+144,0.25,1.765694609284401,0.08078731298446656,wheat,0.15,out-of-ensemble,conformal margin
+147,0.25,1.5627437710762024,0.06894174516201021,wheat,0.15,out-of-ensemble,conformal margin
+150,0.25,1.4723446682095527,0.09063709229230883,wheat,0.15,out-of-ensemble,conformal margin
+159,0.25,1.4540532529354095,0.07292329967021943,wheat,0.15,out-of-ensemble,conformal margin
+162,0.0,1.5426334559917452,0.057539087533950845,rice,0.15,out-of-ensemble,conformal margin
+165,0.25,1.179564207792282,0.00979804992675784,rice,0.15,out-of-ensemble,conformal margin
+171,0.25,1.1808932006359099,0.008687117695808433,rice,0.15,out-of-ensemble,conformal margin
+174,0.25,1.2068618535995483,0.020137444138526917,rice,0.15,out-of-ensemble,conformal margin
+177,0.25,1.6211979418992997,0.03336970508098605,rice,0.15,out-of-ensemble,conformal margin
+183,0.25,1.1915229916572572,0.008848866820335421,rice,0.15,out-of-ensemble,conformal margin
+186,0.25,1.1593853294849397,0.013072618842124933,rice,0.15,out-of-ensemble,conformal margin
+189,0.0,1.2022222697734832,0.0274643361568451,rice,0.15,out-of-ensemble,conformal margin
+192,0.25,1.2996529757976532,0.029678291082382208,rice,0.15,out-of-ensemble,conformal margin
+195,0.25,1.2030895084142685,0.025772494077682506,rice,0.15,out-of-ensemble,conformal margin
+201,0.5,1.1842468291521073,0.004909807443618769,rice,0.15,out-of-ensemble,conformal margin
+204,0.0,1.2199058890342713,0.03056159615516668,rice,0.15,out-of-ensemble,conformal margin
+207,0.0,1.209112784266472,0.029004350304603604,rice,0.15,out-of-ensemble,conformal margin
+210,0.25,1.199775767326355,0.021093866229057318,rice,0.15,out-of-ensemble,conformal margin
+213,0.5,1.2111989706754684,0.007890671491622953,rice,0.15,out-of-ensemble,conformal margin
+216,0.25,1.2100163370370864,0.017638081312179588,rice,0.15,out-of-ensemble,conformal margin
+219,0.0,1.7255139462649822,0.09359808042645457,rice,0.15,out-of-ensemble,conformal margin
+222,0.0,1.2457372158765794,0.050246274471282965,rice,0.15,out-of-ensemble,conformal margin
+231,0.25,1.1854343473911286,0.012530720233917242,rice,0.15,out-of-ensemble,conformal margin
+234,0.0,1.3905763357877732,0.053464117646217335,rice,0.15,out-of-ensemble,conformal margin
+243,1.0,1.0696203604340553,0.0,soybean,0.15,out-of-ensemble,conformal margin
+246,1.0,1.075771152973175,0.0,soybean,0.15,out-of-ensemble,conformal margin
+255,0.75,1.178128033876419,0.00365229249000551,soybean,0.15,out-of-ensemble,conformal margin
+258,1.0,1.0674222245812417,0.0,soybean,0.15,out-of-ensemble,conformal margin
+267,1.0,1.16757855117321,0.0,soybean,0.15,out-of-ensemble,conformal margin
+270,1.0,1.1649101704359055,0.0,soybean,0.15,out-of-ensemble,conformal margin
+294,1.0,1.0595545947551728,0.0,soybean,0.15,out-of-ensemble,conformal margin
+303,1.0,1.2418320715427398,0.0,soybean,0.15,out-of-ensemble,conformal margin
+315,1.0,1.0775999411940576,0.0,soybean,0.15,out-of-ensemble,conformal margin
+318,1.0,1.0673749819397926,0.0,soybean,0.15,out-of-ensemble,conformal margin
+327,0.25,1.5928218334913253,0.05225441455841065,potato,0.15,out-of-ensemble,conformal margin
+330,0.25,1.3170046240091324,0.015594252943992637,potato,0.15,out-of-ensemble,conformal margin
+333,0.25,1.5901400446891785,0.02202516794204712,potato,0.15,out-of-ensemble,conformal margin
+342,0.25,1.634731113910675,0.05630645453929903,potato,0.15,out-of-ensemble,conformal margin
+348,0.25,1.3040624737739563,0.036380943655967724,potato,0.15,out-of-ensemble,conformal margin
+354,0.25,1.2748880684375763,0.02632772624492649,potato,0.15,out-of-ensemble,conformal margin
+369,0.25,1.377395448088646,0.026227679848671,potato,0.15,out-of-ensemble,conformal margin
+372,0.25,1.6747987320025763,0.05584455827871959,potato,0.15,out-of-ensemble,conformal margin
+378,0.25,1.7167058318853379,0.08214731812477116,potato,0.15,out-of-ensemble,conformal margin
+381,0.25,1.596444707363844,0.0560984753072262,potato,0.15,out-of-ensemble,conformal margin
+390,0.25,1.6679257526993752,0.036286617815494554,potato,0.15,out-of-ensemble,conformal margin
+399,0.25,1.6419871926307676,0.09249104857444765,potato,0.15,out-of-ensemble,conformal margin
+0,0.4,1.6838808584213258,0.019754917621612543,maize,0.2,in-ensemble,conformal margin
+3,1.0,1.7749035716056825,0.0,maize,0.2,in-ensemble,conformal margin
+6,1.0,1.4093973851203918,0.0,maize,0.2,in-ensemble,conformal margin
+24,1.0,1.2881244361400603,0.0,maize,0.2,in-ensemble,conformal margin
+30,0.6,1.3783244979381561,0.0014812421798706232,maize,0.2,in-ensemble,conformal margin
+33,0.6,1.381360695362091,0.007319571971893324,maize,0.2,in-ensemble,conformal margin
+39,1.0,1.2864959526062012,0.0,maize,0.2,in-ensemble,conformal margin
+42,1.0,1.2534573435783387,0.0,maize,0.2,in-ensemble,conformal margin
+45,0.6,1.3406600785255431,0.008151760101318373,maize,0.2,in-ensemble,conformal margin
+57,1.0,1.7205878996849058,0.0,maize,0.2,in-ensemble,conformal margin
+60,1.0,1.1710638624429701,0.0,maize,0.2,in-ensemble,conformal margin
+63,1.0,1.297329763174057,0.0,maize,0.2,in-ensemble,conformal margin
+66,1.0,1.950558762550354,0.0,maize,0.2,in-ensemble,conformal margin
+69,0.6,1.6381416106224058,0.004419608116149898,maize,0.2,in-ensemble,conformal margin
+72,1.0,1.9302230978012083,0.0,maize,0.2,in-ensemble,conformal margin
+75,0.8,1.2949438691139221,0.0005006074905395507,maize,0.2,in-ensemble,conformal margin
+78,0.2,1.4819490575790406,0.03316567182540895,maize,0.2,in-ensemble,conformal margin
+81,0.6,1.4758323216438294,0.003273353576660165,wheat,0.2,in-ensemble,conformal margin
+93,1.0,1.8299042177200318,0.0,wheat,0.2,in-ensemble,conformal margin
+96,1.0,1.7449316954612732,0.0,wheat,0.2,in-ensemble,conformal margin
+99,0.8,1.407780967950821,0.001002237796783456,wheat,0.2,in-ensemble,conformal margin
+105,0.8,1.5860735535621644,0.0005005478858947753,wheat,0.2,in-ensemble,conformal margin
+111,0.8,1.5406242966651917,0.004103918075561519,wheat,0.2,in-ensemble,conformal margin
+114,0.8,1.5134929084777833,0.0010206937789916993,wheat,0.2,in-ensemble,conformal margin
+120,0.8,1.4459148144721985,0.003022060394287118,wheat,0.2,in-ensemble,conformal margin
+123,0.6,1.6481075167655945,0.002483747005462655,wheat,0.2,in-ensemble,conformal margin
+126,0.6,1.5282706260681151,0.0018140578269958628,wheat,0.2,in-ensemble,conformal margin
+129,0.8,1.5527647137641907,0.00018040657043456588,wheat,0.2,in-ensemble,conformal margin
+132,1.0,1.3549335539340972,0.0,wheat,0.2,in-ensemble,conformal margin
+138,0.8,1.5814965057373047,0.0033930730819702105,wheat,0.2,in-ensemble,conformal margin
+144,0.8,1.8314756441116333,0.0009955501556396574,wheat,0.2,in-ensemble,conformal margin
+147,1.0,1.6929111242294312,0.0,wheat,0.2,in-ensemble,conformal margin
+150,0.6,1.5724539923667908,0.003764266967773455,wheat,0.2,in-ensemble,conformal margin
+159,0.8,1.5971707749366761,0.0039705634117126465,wheat,0.2,in-ensemble,conformal margin
+162,1.0,1.6486285519599915,0.0,rice,0.2,in-ensemble,conformal margin
+165,1.0,1.224273577928543,0.0,rice,0.2,in-ensemble,conformal margin
+171,1.0,1.2252253043651582,0.0,rice,0.2,in-ensemble,conformal margin
+174,1.0,1.2544489097595215,0.0,rice,0.2,in-ensemble,conformal margin
+177,1.0,1.7800624513626098,0.0,rice,0.2,in-ensemble,conformal margin
+183,1.0,1.235940854549408,0.0,rice,0.2,in-ensemble,conformal margin
+186,1.0,1.2605321824550628,0.0,rice,0.2,in-ensemble,conformal margin
+189,1.0,1.2527512049674987,0.0,rice,0.2,in-ensemble,conformal margin
+192,1.0,1.4252189898490906,0.0,rice,0.2,in-ensemble,conformal margin
+195,1.0,1.254343614578247,0.0,rice,0.2,in-ensemble,conformal margin
+201,1.0,1.2663536667823792,0.0,rice,0.2,in-ensemble,conformal margin
+204,1.0,1.2744102418422698,0.0,rice,0.2,in-ensemble,conformal margin
+207,1.0,1.2609041023254395,0.0,rice,0.2,in-ensemble,conformal margin
+210,1.0,1.2489747452735902,0.0,rice,0.2,in-ensemble,conformal margin
+213,1.0,1.2894356787204742,0.0,rice,0.2,in-ensemble,conformal margin
+216,1.0,1.256575025320053,0.0,rice,0.2,in-ensemble,conformal margin
+219,0.6,1.8229436933994294,0.004889542460441598,rice,0.2,in-ensemble,conformal margin
+222,0.6,1.293849515914917,0.006798892021179203,rice,0.2,in-ensemble,conformal margin
+231,1.0,1.2296544909477234,0.0,rice,0.2,in-ensemble,conformal margin
+234,1.0,1.4605117988586425,0.0,rice,0.2,in-ensemble,conformal margin
+243,1.0,1.062350791990757,0.0,soybean,0.2,in-ensemble,conformal margin
+246,1.0,1.067600114941597,0.0,soybean,0.2,in-ensemble,conformal margin
+255,0.2,1.1602941119670869,0.020448527336120615,soybean,0.2,in-ensemble,conformal margin
+258,1.0,1.0584455308318137,0.0,soybean,0.2,in-ensemble,conformal margin
+267,1.0,1.1527664476633073,0.0,soybean,0.2,in-ensemble,conformal margin
+270,1.0,1.1507738131284715,0.0,soybean,0.2,in-ensemble,conformal margin
+294,1.0,1.0506245869398119,0.0,soybean,0.2,in-ensemble,conformal margin
+303,1.0,1.2219664132595063,0.0,soybean,0.2,in-ensemble,conformal margin
+315,1.0,1.0708339777588844,0.0,soybean,0.2,in-ensemble,conformal margin
+318,1.0,1.0584567078948022,0.0,soybean,0.2,in-ensemble,conformal margin
+327,0.8,1.7155115556716918,0.008262064456939711,potato,0.2,in-ensemble,conformal margin
+330,0.8,1.4159882700443267,0.0018851637840270996,potato,0.2,in-ensemble,conformal margin
+333,0.8,1.6555690479278564,0.0016707539558410644,potato,0.2,in-ensemble,conformal margin
+342,0.8,1.7225288033485413,0.002504583001136784,potato,0.2,in-ensemble,conformal margin
+348,0.8,1.341983035802841,0.0022404718399047898,potato,0.2,in-ensemble,conformal margin
+354,0.8,1.3232436525821687,0.005110707283020033,potato,0.2,in-ensemble,conformal margin
+369,0.8,1.4339370179176332,0.0026829528808593795,potato,0.2,in-ensemble,conformal margin
+372,0.8,1.749472713470459,0.004964098135630301,potato,0.2,in-ensemble,conformal margin
+378,0.6,1.7575417971611025,0.01662362098693848,potato,0.2,in-ensemble,conformal margin
+381,0.8,1.6870200008153915,0.004374830722808842,potato,0.2,in-ensemble,conformal margin
+390,1.0,1.7365604937076569,0.0,potato,0.2,in-ensemble,conformal margin
+399,0.6,1.6913559985160826,0.01756981372833253,potato,0.2,in-ensemble,conformal margin
+0,0.0,1.574984511733055,0.12515044510364534,maize,0.2,out-of-ensemble,conformal margin
+3,0.25,1.651172536611557,0.04530218839645386,maize,0.2,out-of-ensemble,conformal margin
+6,0.25,1.3963076829910277,0.04091704189777376,maize,0.2,out-of-ensemble,conformal margin
+24,0.25,1.2909402072429657,0.011958453059196461,maize,0.2,out-of-ensemble,conformal margin
+30,0.25,1.326203092932701,0.04274942874908447,maize,0.2,out-of-ensemble,conformal margin
+33,0.0,1.365553191304207,0.06436280906200412,maize,0.2,out-of-ensemble,conformal margin
+39,0.25,1.2231272608041763,0.01506742537021638,maize,0.2,out-of-ensemble,conformal margin
+42,0.25,1.2132124423980712,0.020663884282112133,maize,0.2,out-of-ensemble,conformal margin
+45,0.0,1.2852109223604202,0.058870503306388905,maize,0.2,out-of-ensemble,conformal margin
+57,0.25,1.6108757585287095,0.07258920073509215,maize,0.2,out-of-ensemble,conformal margin
+60,0.75,1.138898628950119,0.0034721463918686024,maize,0.2,out-of-ensemble,conformal margin
+63,0.25,1.2501725286245347,0.04124533534049993,maize,0.2,out-of-ensemble,conformal margin
+66,0.25,1.816258692741394,0.061470654606819136,maize,0.2,out-of-ensemble,conformal margin
+69,0.25,1.5489202439785004,0.05822686553001405,maize,0.2,out-of-ensemble,conformal margin
+72,0.75,1.7909547865390778,0.011368894577026362,maize,0.2,out-of-ensemble,conformal margin
+75,0.25,1.285836711525917,0.04674634933471683,maize,0.2,out-of-ensemble,conformal margin
+78,0.0,1.4458925306797028,0.13426424860954286,maize,0.2,out-of-ensemble,conformal margin
+81,0.25,1.4160597145557403,0.08783829808235172,wheat,0.2,out-of-ensemble,conformal margin
+93,0.25,1.7217315196990968,0.09779763519763945,wheat,0.2,out-of-ensemble,conformal margin
+96,0.25,1.6485470414161683,0.0937756597995758,wheat,0.2,out-of-ensemble,conformal margin
+99,0.25,1.3604149878025056,0.07263068258762359,wheat,0.2,out-of-ensemble,conformal margin
+105,0.25,1.5211888164281846,0.07600075602531434,wheat,0.2,out-of-ensemble,conformal margin
+111,0.25,1.4462601244449615,0.09100747704505921,wheat,0.2,out-of-ensemble,conformal margin
+114,0.25,1.430775597691536,0.08829364776611331,wheat,0.2,out-of-ensemble,conformal margin
+120,0.25,1.3537905186414718,0.0700706511735916,wheat,0.2,out-of-ensemble,conformal margin
+123,0.25,1.583161509037018,0.08077618479728702,wheat,0.2,out-of-ensemble,conformal margin
+126,0.25,1.4671347558498382,0.07873443961143498,wheat,0.2,out-of-ensemble,conformal margin
+129,0.25,1.4874323636293412,0.0849730283021927,wheat,0.2,out-of-ensemble,conformal margin
+132,0.25,1.3088479489088058,0.06203938424587249,wheat,0.2,out-of-ensemble,conformal margin
+138,0.25,1.4840503871440887,0.09301587045192719,wheat,0.2,out-of-ensemble,conformal margin
+144,0.25,1.801555898785591,0.08780733644962313,wheat,0.2,out-of-ensemble,conformal margin
+147,0.25,1.6268646359443664,0.08448775708675385,wheat,0.2,out-of-ensemble,conformal margin
+150,0.25,1.4982338428497315,0.09917598664760591,wheat,0.2,out-of-ensemble,conformal margin
+159,0.25,1.5066485315561295,0.08879115581512453,wheat,0.2,out-of-ensemble,conformal margin
+162,0.0,1.5426334559917452,0.057539087533950845,rice,0.2,out-of-ensemble,conformal margin
+165,0.25,1.179564207792282,0.00979804992675784,rice,0.2,out-of-ensemble,conformal margin
+171,0.25,1.1808932006359099,0.008687117695808433,rice,0.2,out-of-ensemble,conformal margin
+174,0.25,1.2068618535995483,0.020137444138526917,rice,0.2,out-of-ensemble,conformal margin
+177,0.25,1.6855492889881134,0.04506176710128787,rice,0.2,out-of-ensemble,conformal margin
+183,0.25,1.1915229916572572,0.008848866820335421,rice,0.2,out-of-ensemble,conformal margin
+186,0.0,1.2127775758504868,0.04287722408771519,rice,0.2,out-of-ensemble,conformal margin
+189,0.0,1.2022222697734832,0.0274643361568451,rice,0.2,out-of-ensemble,conformal margin
+192,0.0,1.3574803531169892,0.052742069959640536,rice,0.2,out-of-ensemble,conformal margin
+195,0.25,1.2030895084142685,0.025772494077682506,rice,0.2,out-of-ensemble,conformal margin
+201,0.0,1.2462021827697753,0.02826759815216065,rice,0.2,out-of-ensemble,conformal margin
+204,0.0,1.2199058890342713,0.03056159615516668,rice,0.2,out-of-ensemble,conformal margin
+207,0.0,1.209112784266472,0.029004350304603604,rice,0.2,out-of-ensemble,conformal margin
+210,0.25,1.199775767326355,0.021093866229057318,rice,0.2,out-of-ensemble,conformal margin
+213,0.5,1.2111989706754684,0.007890671491622953,rice,0.2,out-of-ensemble,conformal margin
+216,0.25,1.2100163370370864,0.017638081312179588,rice,0.2,out-of-ensemble,conformal margin
+219,0.0,1.7255139462649822,0.09359808042645457,rice,0.2,out-of-ensemble,conformal margin
+222,0.0,1.2813195884227753,0.07003374099731446,rice,0.2,out-of-ensemble,conformal margin
+231,0.25,1.1854343473911286,0.012530720233917242,rice,0.2,out-of-ensemble,conformal margin
+234,0.0,1.3905763357877732,0.053464117646217335,rice,0.2,out-of-ensemble,conformal margin
+243,1.0,1.0696203604340553,0.0,soybean,0.2,out-of-ensemble,conformal margin
+246,1.0,1.075771152973175,0.0,soybean,0.2,out-of-ensemble,conformal margin
+255,0.75,1.178128033876419,0.00365229249000551,soybean,0.2,out-of-ensemble,conformal margin
+258,1.0,1.0674222245812417,0.0,soybean,0.2,out-of-ensemble,conformal margin
+267,1.0,1.16757855117321,0.0,soybean,0.2,out-of-ensemble,conformal margin
+270,1.0,1.1649101704359055,0.0,soybean,0.2,out-of-ensemble,conformal margin
+294,1.0,1.0595545947551728,0.0,soybean,0.2,out-of-ensemble,conformal margin
+303,1.0,1.2418320715427398,0.0,soybean,0.2,out-of-ensemble,conformal margin
+315,1.0,1.0775999411940576,0.0,soybean,0.2,out-of-ensemble,conformal margin
+318,1.0,1.0673749819397926,0.0,soybean,0.2,out-of-ensemble,conformal margin
+327,0.25,1.6554404973983763,0.0665654540061951,potato,0.2,out-of-ensemble,conformal margin
+330,0.25,1.3923981606960296,0.03743035793304447,potato,0.2,out-of-ensemble,conformal margin
+333,0.25,1.6670448184013367,0.034380960464477556,potato,0.2,out-of-ensemble,conformal margin
+342,0.25,1.6646930314600468,0.06277580484747888,potato,0.2,out-of-ensemble,conformal margin
+348,0.25,1.3040624737739563,0.036380943655967724,potato,0.2,out-of-ensemble,conformal margin
+354,0.25,1.2748880684375763,0.02632772624492649,potato,0.2,out-of-ensemble,conformal margin
+369,0.25,1.377395448088646,0.026227679848671,potato,0.2,out-of-ensemble,conformal margin
+372,0.25,1.7372307380040488,0.06925543944040935,potato,0.2,out-of-ensemble,conformal margin
+378,0.25,1.7167058318853379,0.08214731812477116,potato,0.2,out-of-ensemble,conformal margin
+381,0.25,1.655153226107359,0.06959992572665216,potato,0.2,out-of-ensemble,conformal margin
+390,0.25,1.6679257526993752,0.036286617815494554,potato,0.2,out-of-ensemble,conformal margin
+399,0.25,1.6419871926307676,0.09249104857444765,potato,0.2,out-of-ensemble,conformal margin
+0,0.4,1.6838808584213258,0.019754917621612543,maize,,in-ensemble,mean response (d = 0.90)
+3,1.0,1.7749035716056825,0.0,maize,,in-ensemble,mean response (d = 0.90)
+6,0.6,1.5084227275848388,0.004351265430450435,maize,,in-ensemble,mean response (d = 0.90)
+24,1.0,1.3392597270011901,0.0,maize,,in-ensemble,mean response (d = 0.90)
+30,0.4,1.4705142593383789,0.01159429073333742,maize,,in-ensemble,mean response (d = 0.90)
+33,0.6,1.463872151374817,0.017009806632995606,maize,,in-ensemble,mean response (d = 0.90)
+39,1.0,1.357046844959259,0.0,maize,,in-ensemble,mean response (d = 0.90)
+42,0.6,1.3374228000640869,0.005530097484588636,maize,,in-ensemble,mean response (d = 0.90)
+45,0.6,1.372620439529419,0.019316031932830824,maize,,in-ensemble,mean response (d = 0.90)
+57,1.0,1.7205878996849058,0.0,maize,,in-ensemble,mean response (d = 0.90)
+60,0.8,1.2554783868789672,0.0009654211997985884,maize,,in-ensemble,mean response (d = 0.90)
+63,0.6,1.3421020114421844,0.005321295261383074,maize,,in-ensemble,mean response (d = 0.90)
+66,1.0,1.950558762550354,0.0,maize,,in-ensemble,mean response (d = 0.90)
+69,0.6,1.7218533086776735,0.008982119560241707,maize,,in-ensemble,mean response (d = 0.90)
+72,1.0,1.9302230978012083,0.0,maize,,in-ensemble,mean response (d = 0.90)
+75,0.8,1.3634404826164246,0.005378346443176274,maize,,in-ensemble,mean response (d = 0.90)
+78,0.0,1.566081771850586,0.05643755912780764,maize,,in-ensemble,mean response (d = 0.90)
+81,0.4,1.5413182067871094,0.012913691997528098,wheat,,in-ensemble,mean response (d = 0.90)
+93,1.0,1.8299042177200318,0.0,wheat,,in-ensemble,mean response (d = 0.90)
+96,1.0,1.7586629247665406,0.0,wheat,,in-ensemble,mean response (d = 0.90)
+99,0.4,1.4751722621917724,0.010085976123809837,wheat,,in-ensemble,mean response (d = 0.90)
+105,0.4,1.6626684999465944,0.0069251966476440606,wheat,,in-ensemble,mean response (d = 0.90)
+111,0.4,1.6001667428016664,0.0110956859588623,wheat,,in-ensemble,mean response (d = 0.90)
+114,0.8,1.5234341645240783,0.0010206937789916993,wheat,,in-ensemble,mean response (d = 0.90)
+120,0.4,1.5131030511856078,0.008597309589386004,wheat,,in-ensemble,mean response (d = 0.90)
+123,0.4,1.7353049516677856,0.013427374362945544,wheat,,in-ensemble,mean response (d = 0.90)
+126,0.4,1.6136659073829651,0.012618257999420157,wheat,,in-ensemble,mean response (d = 0.90)
+129,0.4,1.617353262901306,0.004850559234619145,wheat,,in-ensemble,mean response (d = 0.90)
+132,0.4,1.414283287525177,0.004262621402740497,wheat,,in-ensemble,mean response (d = 0.90)
+138,0.4,1.638869888782501,0.006069052219390869,wheat,,in-ensemble,mean response (d = 0.90)
+144,0.8,1.8937944889068603,0.0009955501556396574,wheat,,in-ensemble,mean response (d = 0.90)
+147,0.8,1.7770494914054873,0.0018069434165954635,wheat,,in-ensemble,mean response (d = 0.90)
+150,0.4,1.6301131749153135,0.012221248149871845,wheat,,in-ensemble,mean response (d = 0.90)
+159,0.4,1.6557295417785647,0.007549548149108909,wheat,,in-ensemble,mean response (d = 0.90)
+162,1.0,1.7320290684700013,0.0,rice,,in-ensemble,mean response (d = 0.90)
+165,1.0,1.2974462270736695,0.0,rice,,in-ensemble,mean response (d = 0.90)
+171,1.0,1.298673177957535,0.0,rice,,in-ensemble,mean response (d = 0.90)
+174,1.0,1.2544489097595215,0.0,rice,,in-ensemble,mean response (d = 0.90)
+177,1.0,1.8253999638557434,0.0,rice,,in-ensemble,mean response (d = 0.90)
+183,1.0,1.3125398075580597,0.0,rice,,in-ensemble,mean response (d = 0.90)
+186,1.0,1.2741252255439757,0.0,rice,,in-ensemble,mean response (d = 0.90)
+189,0.6,1.3336457848548888,0.005548155307769776,rice,,in-ensemble,mean response (d = 0.90)
+192,0.6,1.5165413284301759,0.011065797805786138,rice,,in-ensemble,mean response (d = 0.90)
+195,0.6,1.337908467054367,0.003983409404754656,rice,,in-ensemble,mean response (d = 0.90)
+201,1.0,1.2960167264938356,0.0,rice,,in-ensemble,mean response (d = 0.90)
+204,0.6,1.3628218054771424,0.005677425861358642,rice,,in-ensemble,mean response (d = 0.90)
+207,1.0,1.2609041023254395,0.0,rice,,in-ensemble,mean response (d = 0.90)
+210,0.6,1.330584477186203,0.0017060112953186212,rice,,in-ensemble,mean response (d = 0.90)
+213,1.0,1.3401272976398468,0.0,rice,,in-ensemble,mean response (d = 0.90)
+216,0.6,1.3391205656528473,0.0006097078323364479,rice,,in-ensemble,mean response (d = 0.90)
+219,0.6,1.8229436933994294,0.004889542460441598,rice,,in-ensemble,mean response (d = 0.90)
+222,0.2,1.3452913963794708,0.007498137950897243,rice,,in-ensemble,mean response (d = 0.90)
+231,1.0,1.3023705458641053,0.0,rice,,in-ensemble,mean response (d = 0.90)
+234,0.6,1.5481405520439149,0.005870220661163339,rice,,in-ensemble,mean response (d = 0.90)
+243,0.6,1.1267037516832352,0.00203593969345095,soybean,,in-ensemble,mean response (d = 0.90)
+246,0.6,1.0930812078714371,0.002096247673034668,soybean,,in-ensemble,mean response (d = 0.90)
+255,0.2,1.181012419462204,0.0365073561668396,soybean,,in-ensemble,mean response (d = 0.90)
+258,1.0,1.0584455308318137,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+267,1.0,1.1952719509601593,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+270,1.0,1.224026185274124,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+294,1.0,1.0506245869398119,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+303,0.4,1.2773311126232145,0.005702311992645259,soybean,,in-ensemble,mean response (d = 0.90)
+315,1.0,1.142577372789383,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+318,1.0,1.0584567078948022,0.0,soybean,,in-ensemble,mean response (d = 0.90)
+327,0.6,1.7687312102317811,0.00861354589462282,potato,,in-ensemble,mean response (d = 0.90)
+330,0.6,1.4647520780563354,0.006512107849121085,potato,,in-ensemble,mean response (d = 0.90)
+333,0.8,1.7664678478240965,0.006602401733398433,potato,,in-ensemble,mean response (d = 0.90)
+342,0.8,1.7361858487129211,0.002504583001136784,potato,,in-ensemble,mean response (d = 0.90)
+348,0.6,1.3890542721748351,0.009040803909301776,potato,,in-ensemble,mean response (d = 0.90)
+354,0.8,1.3978247237205506,0.009891152381896973,potato,,in-ensemble,mean response (d = 0.90)
+369,0.8,1.5123623633384704,0.006664075851440443,potato,,in-ensemble,mean response (d = 0.90)
+372,0.8,1.805318204561869,0.004964098135630301,potato,,in-ensemble,mean response (d = 0.90)
+378,0.4,1.8355427956581116,0.02117952823638918,potato,,in-ensemble,mean response (d = 0.90)
+381,0.8,1.7262419402599334,0.004374830722808842,potato,,in-ensemble,mean response (d = 0.90)
+390,1.0,1.7365604937076569,0.0,potato,,in-ensemble,mean response (d = 0.90)
+399,0.4,1.787539086341858,0.025762095451354994,potato,,in-ensemble,mean response (d = 0.90)
+0,0.0,1.574984511733055,0.12515044510364534,maize,,out-of-ensemble,mean response (d = 0.90)
+3,0.25,1.651172536611557,0.04530218839645386,maize,,out-of-ensemble,mean response (d = 0.90)
+6,0.25,1.4576704412698747,0.058002200722694436,maize,,out-of-ensemble,mean response (d = 0.90)
+24,0.25,1.2909402072429657,0.011958453059196461,maize,,out-of-ensemble,mean response (d = 0.90)
+30,0.0,1.4078150987625122,0.07243998050689698,maize,,out-of-ensemble,mean response (d = 0.90)
+33,0.0,1.365553191304207,0.06436280906200412,maize,,out-of-ensemble,mean response (d = 0.90)
+39,0.25,1.2967185825109482,0.04311713874340059,maize,,out-of-ensemble,mean response (d = 0.90)
+42,0.25,1.2859028667211532,0.04959954917430878,maize,,out-of-ensemble,mean response (d = 0.90)
+45,0.0,1.3574464678764344,0.09444653987884521,maize,,out-of-ensemble,mean response (d = 0.90)
+57,0.25,1.6108757585287095,0.07258920073509215,maize,,out-of-ensemble,mean response (d = 0.90)
+60,0.25,1.2093939065933226,0.03684639334678652,maize,,out-of-ensemble,mean response (d = 0.90)
+63,0.25,1.3129040986299514,0.06828123033046724,maize,,out-of-ensemble,mean response (d = 0.90)
+66,0.25,1.816258692741394,0.061470654606819136,maize,,out-of-ensemble,mean response (d = 0.90)
+69,0.25,1.6717867732048035,0.08677939176559449,maize,,out-of-ensemble,mean response (d = 0.90)
+72,0.75,1.7909547865390778,0.011368894577026362,maize,,out-of-ensemble,mean response (d = 0.90)
+75,0.25,1.285836711525917,0.04674634933471683,maize,,out-of-ensemble,mean response (d = 0.90)
+78,0.0,1.5183377265930176,0.16772543191909792,maize,,out-of-ensemble,mean response (d = 0.90)
+81,0.25,1.4728125542402268,0.10772305727005005,wheat,,out-of-ensemble,mean response (d = 0.90)
+93,0.25,1.7217315196990968,0.09779763519763945,wheat,,out-of-ensemble,mean response (d = 0.90)
+96,0.25,1.6485470414161683,0.0937756597995758,wheat,,out-of-ensemble,mean response (d = 0.90)
+99,0.25,1.4189894050359726,0.09392647445201874,wheat,,out-of-ensemble,mean response (d = 0.90)
+105,0.25,1.5897061556577683,0.09470912516117097,wheat,,out-of-ensemble,mean response (d = 0.90)
+111,0.25,1.4987855404615402,0.10907872915267947,wheat,,out-of-ensemble,mean response (d = 0.90)
+114,0.25,1.430775597691536,0.08829364776611331,wheat,,out-of-ensemble,mean response (d = 0.90)
+120,0.25,1.4126880675554276,0.09114041626453404,wheat,,out-of-ensemble,mean response (d = 0.90)
+123,0.25,1.6499635756015778,0.09719402194023136,wheat,,out-of-ensemble,mean response (d = 0.90)
+126,0.25,1.5435747653245926,0.10077558755874635,wheat,,out-of-ensemble,mean response (d = 0.90)
+129,0.25,1.5442886650562286,0.10192963778972627,wheat,,out-of-ensemble,mean response (d = 0.90)
+132,0.25,1.3597430825233459,0.08191072046756748,wheat,,out-of-ensemble,mean response (d = 0.90)
+138,0.25,1.533816123008728,0.1086925804615021,wheat,,out-of-ensemble,mean response (d = 0.90)
+144,0.25,1.801555898785591,0.08780733644962313,wheat,,out-of-ensemble,mean response (d = 0.90)
+147,0.25,1.6899620950222016,0.09948767423629765,wheat,,out-of-ensemble,mean response (d = 0.90)
+150,0.25,1.5490440040826798,0.11579178869724274,wheat,,out-of-ensemble,mean response (d = 0.90)
+159,0.25,1.5579673498868942,0.10408288538455968,wheat,,out-of-ensemble,mean response (d = 0.90)
+162,0.0,1.615429636836052,0.07928742468357086,rice,,out-of-ensemble,mean response (d = 0.90)
+165,0.0,1.240672528743744,0.03755872249603273,rice,,out-of-ensemble,mean response (d = 0.90)
+171,0.0,1.2423561960458755,0.035767045617103616,rice,,out-of-ensemble,mean response (d = 0.90)
+174,0.25,1.2068618535995483,0.020137444138526917,rice,,out-of-ensemble,mean response (d = 0.90)
+177,0.25,1.6855492889881134,0.04506176710128787,rice,,out-of-ensemble,mean response (d = 0.90)
+183,0.0,1.2561452865600584,0.03598008751869203,rice,,out-of-ensemble,mean response (d = 0.90)
+186,0.0,1.2127775758504868,0.04287722408771519,rice,,out-of-ensemble,mean response (d = 0.90)
+189,0.0,1.2700297415256498,0.06667379736900328,rice,,out-of-ensemble,mean response (d = 0.90)
+192,0.0,1.4151796221733093,0.07550072669982913,rice,,out-of-ensemble,mean response (d = 0.90)
+195,0.0,1.2733140110969543,0.06379638314247135,rice,,out-of-ensemble,mean response (d = 0.90)
+201,0.0,1.2462021827697753,0.02826759815216065,rice,,out-of-ensemble,mean response (d = 0.90)
+204,0.0,1.2943479895591736,0.07106138467788697,rice,,out-of-ensemble,mean response (d = 0.90)
+207,0.0,1.209112784266472,0.029004350304603604,rice,,out-of-ensemble,mean response (d = 0.90)
+210,0.0,1.2684131741523743,0.055912357568740884,rice,,out-of-ensemble,mean response (d = 0.90)
+213,0.0,1.281901904940605,0.033727988600730924,rice,,out-of-ensemble,mean response (d = 0.90)
+216,0.0,1.280206274986267,0.05048483014106753,rice,,out-of-ensemble,mean response (d = 0.90)
+219,0.0,1.7255139462649822,0.09359808042645457,rice,,out-of-ensemble,mean response (d = 0.90)
+222,0.0,1.2813195884227753,0.07003374099731446,rice,,out-of-ensemble,mean response (d = 0.90)
+231,0.0,1.2462757885456086,0.04233337044715882,rice,,out-of-ensemble,mean response (d = 0.90)
+234,0.0,1.4678902715444564,0.0815328508615494,rice,,out-of-ensemble,mean response (d = 0.90)
+243,1.0,1.1406791120767594,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+246,1.0,1.1522326946258545,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+255,0.0,1.2385182529687881,0.0333155483007431,soybean,,out-of-ensemble,mean response (d = 0.90)
+258,1.0,1.0674222245812417,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+267,1.0,1.2491350263357162,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+270,1.0,1.2448483258485794,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+294,1.0,1.0595545947551728,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+303,1.0,1.31923046708107,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+315,1.0,1.1556349635124208,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+318,1.0,1.0673749819397926,0.0,soybean,,out-of-ensemble,mean response (d = 0.90)
+327,0.25,1.7158775061368943,0.08041477203369143,potato,,out-of-ensemble,mean response (d = 0.90)
+330,0.25,1.4680352449417113,0.05857740044593815,potato,,out-of-ensemble,mean response (d = 0.90)
+333,0.25,1.742707598209381,0.04629935026168827,potato,,out-of-ensemble,mean response (d = 0.90)
+342,0.25,1.6646930314600468,0.06277580484747888,potato,,out-of-ensemble,mean response (d = 0.90)
+348,0.25,1.3776533365249635,0.061644387245178234,potato,,out-of-ensemble,mean response (d = 0.90)
+354,0.25,1.342755377292633,0.049634531140327454,potato,,out-of-ensemble,mean response (d = 0.90)
+369,0.25,1.4496000051498412,0.045656690001487754,potato,,out-of-ensemble,mean response (d = 0.90)
+372,0.25,1.7372307380040488,0.06925543944040935,potato,,out-of-ensemble,mean response (d = 0.90)
+378,0.25,1.7892321258783341,0.09739333391189578,potato,,out-of-ensemble,mean response (d = 0.90)
+381,0.25,1.655153226107359,0.06959992572665216,potato,,out-of-ensemble,mean response (d = 0.90)
+390,0.25,1.6679257526993752,0.036286617815494554,potato,,out-of-ensemble,mean response (d = 0.90)
+399,0.25,1.7163405686616897,0.11097801029682161,potato,,out-of-ensemble,mean response (d = 0.90)
+0,0.4,1.6838808584213258,0.019754917621612543,maize,,in-ensemble,fixed margin 0.92
+3,1.0,1.7749035716056825,0.0,maize,,in-ensemble,fixed margin 0.92
+6,1.0,1.4093973851203918,0.0,maize,,in-ensemble,fixed margin 0.92
+24,1.0,1.256314536333084,0.0,maize,,in-ensemble,fixed margin 0.92
+30,0.6,1.3783244979381561,0.0014812421798706232,maize,,in-ensemble,fixed margin 0.92
+33,0.8,1.3653762698173524,0.004387514591217045,maize,,in-ensemble,fixed margin 0.92
+39,1.0,1.2700623452663422,0.0,maize,,in-ensemble,fixed margin 0.92
+42,1.0,1.2534573435783387,0.0,maize,,in-ensemble,fixed margin 0.92
+45,0.6,1.3233503901958463,0.008151760101318373,maize,,in-ensemble,fixed margin 0.92
+57,1.0,1.7205878996849058,0.0,maize,,in-ensemble,fixed margin 0.92
+60,1.0,1.1710638624429701,0.0,maize,,in-ensemble,fixed margin 0.92
+63,1.0,1.2660706436634064,0.0,maize,,in-ensemble,fixed margin 0.92
+66,1.0,1.950558762550354,0.0,maize,,in-ensemble,fixed margin 0.92
+69,0.8,1.5821814560890197,0.0007174849510192871,maize,,in-ensemble,fixed margin 0.92
+72,1.0,1.9302230978012083,0.0,maize,,in-ensemble,fixed margin 0.92
+75,0.8,1.2786185085773467,0.0005006074905395507,maize,,in-ensemble,fixed margin 0.92
+78,0.2,1.4655298948287965,0.0278864073753357,maize,,in-ensemble,fixed margin 0.92
+81,0.8,1.449804277420044,0.0021520471572876064,wheat,,in-ensemble,fixed margin 0.92
+93,1.0,1.8155055785179137,0.0,wheat,,in-ensemble,fixed margin 0.92
+96,1.0,1.7317104840278623,0.0,wheat,,in-ensemble,fixed margin 0.92
+99,0.8,1.3811295354366302,0.001002237796783456,wheat,,in-ensemble,fixed margin 0.92
+105,0.8,1.5699574184417724,0.0005005478858947753,wheat,,in-ensemble,fixed margin 0.92
+111,0.8,1.5166213393211365,0.0009982824325561524,wheat,,in-ensemble,fixed margin 0.92
+114,0.8,1.503950800895691,0.0010206937789916993,wheat,,in-ensemble,fixed margin 0.92
+120,1.0,1.4182436859607699,0.0,wheat,,in-ensemble,fixed margin 0.92
+123,0.6,1.6329876041412354,0.002483747005462655,wheat,,in-ensemble,fixed margin 0.92
+126,0.6,1.5105926346778868,0.0018140578269958628,wheat,,in-ensemble,fixed margin 0.92
+129,0.8,1.5272311711311342,0.00018040657043456588,wheat,,in-ensemble,fixed margin 0.92
+132,1.0,1.319991376399994,0.0,wheat,,in-ensemble,fixed margin 0.92
+138,0.8,1.5587731528282167,0.0007740664482116744,wheat,,in-ensemble,fixed margin 0.92
+144,1.0,1.783273615837097,0.0,wheat,,in-ensemble,fixed margin 0.92
+147,1.0,1.6786879062652589,0.0,wheat,,in-ensemble,fixed margin 0.92
+150,0.8,1.5367945885658263,0.0024598884582519576,wheat,,in-ensemble,fixed margin 0.92
+159,0.8,1.5739196801185609,0.0013689208030700727,wheat,,in-ensemble,fixed margin 0.92
+162,1.0,1.6138618254661559,0.0,rice,,in-ensemble,fixed margin 0.92
+165,1.0,1.224273577928543,0.0,rice,,in-ensemble,fixed margin 0.92
+171,1.0,1.2252253043651582,0.0,rice,,in-ensemble,fixed margin 0.92
+174,1.0,1.2203488600254058,0.0,rice,,in-ensemble,fixed margin 0.92
+177,1.0,1.7800624513626098,0.0,rice,,in-ensemble,fixed margin 0.92
+183,1.0,1.235940854549408,0.0,rice,,in-ensemble,fixed margin 0.92
+186,1.0,1.2077788364887236,0.0,rice,,in-ensemble,fixed margin 0.92
+189,1.0,1.2527512049674987,0.0,rice,,in-ensemble,fixed margin 0.92
+192,1.0,1.4252189898490906,0.0,rice,,in-ensemble,fixed margin 0.92
+195,1.0,1.254343614578247,0.0,rice,,in-ensemble,fixed margin 0.92
+201,1.0,1.223354263305664,0.0,rice,,in-ensemble,fixed margin 0.92
+204,1.0,1.2744102418422698,0.0,rice,,in-ensemble,fixed margin 0.92
+207,1.0,1.208968323469162,0.0,rice,,in-ensemble,fixed margin 0.92
+210,1.0,1.2489747452735902,0.0,rice,,in-ensemble,fixed margin 0.92
+213,1.0,1.256994811296463,0.0,rice,,in-ensemble,fixed margin 0.92
+216,1.0,1.256575025320053,0.0,rice,,in-ensemble,fixed margin 0.92
+219,0.6,1.8229436933994294,0.004889542460441598,rice,,in-ensemble,fixed margin 0.92
+222,1.0,1.260994873046875,0.0,rice,,in-ensemble,fixed margin 0.92
+231,1.0,1.2296544909477234,0.0,rice,,in-ensemble,fixed margin 0.92
+234,1.0,1.4605117988586425,0.0,rice,,in-ensemble,fixed margin 0.92
+243,1.0,1.062350791990757,0.0,soybean,,in-ensemble,fixed margin 0.92
+246,1.0,1.067600114941597,0.0,soybean,,in-ensemble,fixed margin 0.92
+255,0.2,1.1479262548685074,0.020448527336120615,soybean,,in-ensemble,fixed margin 0.92
+258,1.0,1.0584455308318137,0.0,soybean,,in-ensemble,fixed margin 0.92
+267,1.0,1.1527664476633073,0.0,soybean,,in-ensemble,fixed margin 0.92
+270,1.0,1.1507738131284715,0.0,soybean,,in-ensemble,fixed margin 0.92
+294,1.0,1.0506245869398119,0.0,soybean,,in-ensemble,fixed margin 0.92
+303,1.0,1.2219664132595063,0.0,soybean,,in-ensemble,fixed margin 0.92
+315,1.0,1.0708339777588844,0.0,soybean,,in-ensemble,fixed margin 0.92
+318,1.0,1.0584567078948022,0.0,soybean,,in-ensemble,fixed margin 0.92
+327,0.8,1.7017258048057555,0.008262064456939711,potato,,in-ensemble,fixed margin 0.92
+330,0.8,1.3825895607471466,0.0018851637840270996,potato,,in-ensemble,fixed margin 0.92
+333,0.8,1.6225025534629822,0.0016707539558410644,potato,,in-ensemble,fixed margin 0.92
+342,0.8,1.7092541456222534,0.002504583001136784,potato,,in-ensemble,fixed margin 0.92
+348,0.8,1.3241013920307159,0.0022404718399047898,potato,,in-ensemble,fixed margin 0.92
+354,0.8,1.3232436525821687,0.005110707283020033,potato,,in-ensemble,fixed margin 0.92
+369,1.0,1.4022539889812469,0.0,potato,,in-ensemble,fixed margin 0.92
+372,0.8,1.7363359848658244,0.004964098135630301,potato,,in-ensemble,fixed margin 0.92
+378,0.6,1.7419264578819278,0.01662362098693848,potato,,in-ensemble,fixed margin 0.92
+381,0.8,1.6731081902980804,0.004374830722808842,potato,,in-ensemble,fixed margin 0.92
+390,1.0,1.7365604937076569,0.0,potato,,in-ensemble,fixed margin 0.92
+399,0.6,1.6749456882476808,0.01756981372833253,potato,,in-ensemble,fixed margin 0.92
+0,0.0,1.574984511733055,0.12515044510364534,maize,,out-of-ensemble,fixed margin 0.92
+3,0.25,1.651172536611557,0.04530218839645386,maize,,out-of-ensemble,fixed margin 0.92
+6,0.25,1.3325713515281676,0.023215857148170455,maize,,out-of-ensemble,fixed margin 0.92
+24,0.75,1.2190078109502793,0.000285249948501598,maize,,out-of-ensemble,fixed margin 0.92
+30,0.25,1.326203092932701,0.04274942874908447,maize,,out-of-ensemble,fixed margin 0.92
+33,0.25,1.2940962731838226,0.037322565913200406,maize,,out-of-ensemble,fixed margin 0.92
+39,0.25,1.2231272608041763,0.01506742537021638,maize,,out-of-ensemble,fixed margin 0.92
+42,0.25,1.2132124423980712,0.020663884282112133,maize,,out-of-ensemble,fixed margin 0.92
+45,0.0,1.2852109223604202,0.058870503306388905,maize,,out-of-ensemble,fixed margin 0.92
+57,0.25,1.6108757585287095,0.07258920073509215,maize,,out-of-ensemble,fixed margin 0.92
+60,0.75,1.138898628950119,0.0034721463918686024,maize,,out-of-ensemble,fixed margin 0.92
+63,0.25,1.2501725286245347,0.04124533534049993,maize,,out-of-ensemble,fixed margin 0.92
+66,0.25,1.816258692741394,0.061470654606819136,maize,,out-of-ensemble,fixed margin 0.92
+69,0.25,1.5489202439785004,0.05822686553001405,maize,,out-of-ensemble,fixed margin 0.92
+72,0.75,1.7909547865390778,0.011368894577026362,maize,,out-of-ensemble,fixed margin 0.92
+75,0.25,1.214580884575844,0.018172481656074574,maize,,out-of-ensemble,fixed margin 0.92
+78,0.0,1.3725178718566895,0.09914677143096923,maize,,out-of-ensemble,fixed margin 0.92
+81,0.25,1.4160597145557403,0.08783829808235172,wheat,,out-of-ensemble,fixed margin 0.92
+93,0.25,1.7217315196990968,0.09779763519763945,wheat,,out-of-ensemble,fixed margin 0.92
+96,0.25,1.6485470414161683,0.0937756597995758,wheat,,out-of-ensemble,fixed margin 0.92
+99,0.25,1.3014410316944123,0.05033037066459656,wheat,,out-of-ensemble,fixed margin 0.92
+105,0.25,1.5211888164281846,0.07600075602531434,wheat,,out-of-ensemble,fixed margin 0.92
+111,0.25,1.4462601244449615,0.09100747704505921,wheat,,out-of-ensemble,fixed margin 0.92
+114,0.25,1.430775597691536,0.08829364776611331,wheat,,out-of-ensemble,fixed margin 0.92
+120,0.25,1.3537905186414718,0.0700706511735916,wheat,,out-of-ensemble,fixed margin 0.92
+123,0.25,1.583161509037018,0.08077618479728702,wheat,,out-of-ensemble,fixed margin 0.92
+126,0.25,1.4671347558498382,0.07873443961143498,wheat,,out-of-ensemble,fixed margin 0.92
+129,0.25,1.4299557775259018,0.06729125082492832,wheat,,out-of-ensemble,fixed margin 0.92
+132,0.25,1.2578008830547334,0.04127907156944277,wheat,,out-of-ensemble,fixed margin 0.92
+138,0.25,1.4840503871440887,0.09301587045192719,wheat,,out-of-ensemble,fixed margin 0.92
+144,0.25,1.7298333197832108,0.07376728951931,wheat,,out-of-ensemble,fixed margin 0.92
+147,0.25,1.6268646359443664,0.08448775708675385,wheat,,out-of-ensemble,fixed margin 0.92
+150,0.25,1.446455493569374,0.08209819793701176,wheat,,out-of-ensemble,fixed margin 0.92
+159,0.25,1.5066485315561295,0.08879115581512453,wheat,,out-of-ensemble,fixed margin 0.92
+162,0.0,1.5426334559917452,0.057539087533950845,rice,,out-of-ensemble,fixed margin 0.92
+165,0.25,1.179564207792282,0.00979804992675784,rice,,out-of-ensemble,fixed margin 0.92
+171,0.25,1.1808932006359099,0.008687117695808433,rice,,out-of-ensemble,fixed margin 0.92
+174,0.25,1.2068618535995483,0.020137444138526917,rice,,out-of-ensemble,fixed margin 0.92
+177,0.25,1.6211979418992997,0.03336970508098605,rice,,out-of-ensemble,fixed margin 0.92
+183,0.25,1.1915229916572572,0.008848866820335421,rice,,out-of-ensemble,fixed margin 0.92
+186,0.25,1.1593853294849397,0.013072618842124933,rice,,out-of-ensemble,fixed margin 0.92
+189,0.0,1.2022222697734832,0.0274643361568451,rice,,out-of-ensemble,fixed margin 0.92
+192,0.0,1.3574803531169892,0.052742069959640536,rice,,out-of-ensemble,fixed margin 0.92
+195,0.25,1.2030895084142685,0.025772494077682506,rice,,out-of-ensemble,fixed margin 0.92
+201,0.5,1.1842468291521073,0.004909807443618769,rice,,out-of-ensemble,fixed margin 0.92
+204,0.0,1.2199058890342713,0.03056159615516668,rice,,out-of-ensemble,fixed margin 0.92
+207,0.0,1.209112784266472,0.029004350304603604,rice,,out-of-ensemble,fixed margin 0.92
+210,0.25,1.199775767326355,0.021093866229057318,rice,,out-of-ensemble,fixed margin 0.92
+213,0.5,1.2111989706754684,0.007890671491622953,rice,,out-of-ensemble,fixed margin 0.92
+216,0.25,1.2100163370370864,0.017638081312179588,rice,,out-of-ensemble,fixed margin 0.92
+219,0.0,1.7255139462649822,0.09359808042645457,rice,,out-of-ensemble,fixed margin 0.92
+222,0.0,1.2101548433303833,0.030458807945251465,rice,,out-of-ensemble,fixed margin 0.92
+231,0.25,1.1854343473911286,0.012530720233917242,rice,,out-of-ensemble,fixed margin 0.92
+234,0.0,1.3905763357877732,0.053464117646217335,rice,,out-of-ensemble,fixed margin 0.92
+243,1.0,1.0696203604340553,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+246,1.0,1.075771152973175,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+255,0.75,1.178128033876419,0.00365229249000551,soybean,,out-of-ensemble,fixed margin 0.92
+258,1.0,1.0674222245812417,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+267,1.0,1.16757855117321,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+270,1.0,1.1649101704359055,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+294,1.0,1.0595545947551728,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+303,1.0,1.2418320715427398,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+315,1.0,1.0775999411940576,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+318,1.0,1.0673749819397926,0.0,soybean,,out-of-ensemble,fixed margin 0.92
+327,0.25,1.6554404973983763,0.0665654540061951,potato,,out-of-ensemble,fixed margin 0.92
+330,0.25,1.3923981606960296,0.03743035793304447,potato,,out-of-ensemble,fixed margin 0.92
+333,0.25,1.5901400446891785,0.02202516794204712,potato,,out-of-ensemble,fixed margin 0.92
+342,0.25,1.6646930314600468,0.06277580484747888,potato,,out-of-ensemble,fixed margin 0.92
+348,0.25,1.3040624737739563,0.036380943655967724,potato,,out-of-ensemble,fixed margin 0.92
+354,0.25,1.2748880684375763,0.02632772624492649,potato,,out-of-ensemble,fixed margin 0.92
+369,0.25,1.377395448088646,0.026227679848671,potato,,out-of-ensemble,fixed margin 0.92
+372,0.25,1.6747987320025763,0.05584455827871959,potato,,out-of-ensemble,fixed margin 0.92
+378,0.25,1.7167058318853379,0.08214731812477116,potato,,out-of-ensemble,fixed margin 0.92
+381,0.25,1.596444707363844,0.0560984753072262,potato,,out-of-ensemble,fixed margin 0.92
+390,0.25,1.6679257526993752,0.036286617815494554,potato,,out-of-ensemble,fixed margin 0.92
+399,0.25,1.6419871926307676,0.09249104857444765,potato,,out-of-ensemble,fixed margin 0.92
+0,0.4,1.6838808584213258,0.019754917621612543,maize,,in-ensemble,fixed margin 0.94
+3,1.0,1.7749035716056825,0.0,maize,,in-ensemble,fixed margin 0.94
+6,1.0,1.307779598236084,0.0,maize,,in-ensemble,fixed margin 0.94
+24,1.0,1.1721940696239472,0.0,maize,,in-ensemble,fixed margin 0.94
+30,1.0,1.2848871076107025,0.0,maize,,in-ensemble,fixed margin 0.94
+33,1.0,1.264737355709076,0.0,maize,,in-ensemble,fixed margin 0.94
+39,1.0,1.181519228219986,0.0,maize,,in-ensemble,fixed margin 0.94
+42,1.0,1.1693839526176453,0.0,maize,,in-ensemble,fixed margin 0.94
+45,1.0,1.2576887905597687,0.0,maize,,in-ensemble,fixed margin 0.94
+57,1.0,1.7205878996849058,0.0,maize,,in-ensemble,fixed margin 0.94
+60,1.0,1.1176489558815956,0.0,maize,,in-ensemble,fixed margin 0.94
+63,1.0,1.189431470632553,0.0,maize,,in-ensemble,fixed margin 0.94
+66,1.0,1.950558762550354,0.0,maize,,in-ensemble,fixed margin 0.94
+69,1.0,1.4350338435173036,0.0,maize,,in-ensemble,fixed margin 0.94
+72,1.0,1.9302230978012083,0.0,maize,,in-ensemble,fixed margin 0.94
+75,1.0,1.1924504399299622,0.0,maize,,in-ensemble,fixed margin 0.94
+78,0.6,1.3625421488285065,0.006968791484832759,maize,,in-ensemble,fixed margin 0.94
+81,1.0,1.3535956251621246,0.0,wheat,,in-ensemble,fixed margin 0.94
+93,1.0,1.7317340779304504,0.0,wheat,,in-ensemble,fixed margin 0.94
+96,1.0,1.5970155906677246,0.0,wheat,,in-ensemble,fixed margin 0.94
+99,1.0,1.2982368671894073,0.0,wheat,,in-ensemble,fixed margin 0.94
+105,1.0,1.441725869178772,0.0,wheat,,in-ensemble,fixed margin 0.94
+111,1.0,1.4303098511695862,0.0,wheat,,in-ensemble,fixed margin 0.94
+114,1.0,1.4080060875415803,0.0,wheat,,in-ensemble,fixed margin 0.94
+120,1.0,1.3350478422641754,0.0,wheat,,in-ensemble,fixed margin 0.94
+123,1.0,1.4794959568977357,0.0,wheat,,in-ensemble,fixed margin 0.94
+126,1.0,1.371081886291504,0.0,wheat,,in-ensemble,fixed margin 0.94
+129,1.0,1.4176200926303864,0.0,wheat,,in-ensemble,fixed margin 0.94
+132,1.0,1.2588413226604462,0.0,wheat,,in-ensemble,fixed margin 0.94
+138,1.0,1.4529028165340425,0.0,wheat,,in-ensemble,fixed margin 0.94
+144,1.0,1.6356564545631407,0.0,wheat,,in-ensemble,fixed margin 0.94
+147,1.0,1.5471267104148865,0.0,wheat,,in-ensemble,fixed margin 0.94
+150,1.0,1.4518994140625001,0.0,wheat,,in-ensemble,fixed margin 0.94
+159,1.0,1.4525522947311402,0.0,wheat,,in-ensemble,fixed margin 0.94
+162,1.0,1.5085554611682892,0.0,rice,,in-ensemble,fixed margin 0.94
+165,1.0,1.1500847911834717,0.0,rice,,in-ensemble,fixed margin 0.94
+171,1.0,1.1507403987646103,0.0,rice,,in-ensemble,fixed margin 0.94
+174,1.0,1.1711821430921554,0.0,rice,,in-ensemble,fixed margin 0.94
+177,1.0,1.627518081665039,0.0,rice,,in-ensemble,fixed margin 0.94
+183,1.0,1.158139271736145,0.0,rice,,in-ensemble,fixed margin 0.94
+186,1.0,1.1661233556270598,0.0,rice,,in-ensemble,fixed margin 0.94
+189,1.0,1.1699553257226945,0.0,rice,,in-ensemble,fixed margin 0.94
+192,1.0,1.2897108972072602,0.0,rice,,in-ensemble,fixed margin 0.94
+195,1.0,1.1701255321502686,0.0,rice,,in-ensemble,fixed margin 0.94
+201,1.0,1.1496319782733917,0.0,rice,,in-ensemble,fixed margin 0.94
+204,1.0,1.1842426550388336,0.0,rice,,in-ensemble,fixed margin 0.94
+207,1.0,1.176049426794052,0.0,rice,,in-ensemble,fixed margin 0.94
+210,1.0,1.1667306512594222,0.0,rice,,in-ensemble,fixed margin 0.94
+213,1.0,1.1724941450357438,0.0,rice,,in-ensemble,fixed margin 0.94
+216,1.0,1.1717142927646638,0.0,rice,,in-ensemble,fixed margin 0.94
+219,0.6,1.8081455737352372,0.004889542460441598,rice,,in-ensemble,fixed margin 0.94
+222,1.0,1.1757897984981536,0.0,rice,,in-ensemble,fixed margin 0.94
+231,1.0,1.1545124721527098,0.0,rice,,in-ensemble,fixed margin 0.94
+234,1.0,1.3345847809314728,0.0,rice,,in-ensemble,fixed margin 0.94
+243,1.0,1.062350791990757,0.0,soybean,,in-ensemble,fixed margin 0.94
+246,1.0,1.067600114941597,0.0,soybean,,in-ensemble,fixed margin 0.94
+255,1.0,1.1058203703165055,0.0,soybean,,in-ensemble,fixed margin 0.94
+258,1.0,1.0584455308318137,0.0,soybean,,in-ensemble,fixed margin 0.94
+267,1.0,1.0762205922603607,0.0,soybean,,in-ensemble,fixed margin 0.94
+270,1.0,1.1183773142099382,0.0,soybean,,in-ensemble,fixed margin 0.94
+294,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.94
+303,1.0,1.1491046714782716,0.0,soybean,,in-ensemble,fixed margin 0.94
+315,1.0,1.0708339777588844,0.0,soybean,,in-ensemble,fixed margin 0.94
+318,1.0,1.0584567078948022,0.0,soybean,,in-ensemble,fixed margin 0.94
+327,0.8,1.576877303123474,0.002613346576690678,potato,,in-ensemble,fixed margin 0.94
+330,1.0,1.2831704747676849,0.0,potato,,in-ensemble,fixed margin 0.94
+333,1.0,1.4715089464187623,0.0,potato,,in-ensemble,fixed margin 0.94
+342,0.8,1.5882090955972672,5.065083503723589e-05,potato,,in-ensemble,fixed margin 0.94
+348,1.0,1.239917596578598,0.0,potato,,in-ensemble,fixed margin 0.94
+354,1.0,1.233711403608322,0.0,potato,,in-ensemble,fixed margin 0.94
+369,1.0,1.3045900571346283,0.0,potato,,in-ensemble,fixed margin 0.94
+372,0.8,1.6215538223584491,0.0023128398259480766,potato,,in-ensemble,fixed margin 0.94
+378,0.8,1.5783374285697938,0.0072244453430175826,potato,,in-ensemble,fixed margin 0.94
+381,0.8,1.5523739084601402,0.001751591563224797,potato,,in-ensemble,fixed margin 0.94
+390,1.0,1.7365604937076569,0.0,potato,,in-ensemble,fixed margin 0.94
+399,0.8,1.5257949566841125,0.00740674972534181,potato,,in-ensemble,fixed margin 0.94
+0,0.0,1.574984511733055,0.12515044510364534,maize,,out-of-ensemble,fixed margin 0.94
+3,0.25,1.651172536611557,0.04530218839645386,maize,,out-of-ensemble,fixed margin 0.94
+6,0.75,1.267537721991539,0.00533894300460816,maize,,out-of-ensemble,fixed margin 0.94
+24,1.0,1.1466220498085022,0.0,maize,,out-of-ensemble,fixed margin 0.94
+30,0.25,1.244262731075287,0.014952149987220775,maize,,out-of-ensemble,fixed margin 0.94
+33,0.25,1.2215338200330734,0.010096949338913003,maize,,out-of-ensemble,fixed margin 0.94
+39,1.0,1.1491034865379333,0.0,maize,,out-of-ensemble,fixed margin 0.94
+42,1.0,1.1414590299129486,0.0,maize,,out-of-ensemble,fixed margin 0.94
+45,0.25,1.2142776399850845,0.026812082529068026,maize,,out-of-ensemble,fixed margin 0.94
+57,0.25,1.6108757585287095,0.07258920073509215,maize,,out-of-ensemble,fixed margin 0.94
+60,1.0,1.0683297976851462,0.0,maize,,out-of-ensemble,fixed margin 0.94
+63,0.25,1.1882646441459657,0.013190621137619013,maize,,out-of-ensemble,fixed margin 0.94
+66,0.25,1.816258692741394,0.061470654606819136,maize,,out-of-ensemble,fixed margin 0.94
+69,0.25,1.4209329783916473,0.02760497629642486,maize,,out-of-ensemble,fixed margin 0.94
+72,0.75,1.7909547865390778,0.011368894577026362,maize,,out-of-ensemble,fixed margin 0.94
+75,1.0,1.1430504739284515,0.0,maize,,out-of-ensemble,fixed margin 0.94
+78,0.25,1.2984086960554122,0.06234574913978577,maize,,out-of-ensemble,fixed margin 0.94
+81,0.25,1.2995306432247162,0.045552250742912304,wheat,,out-of-ensemble,fixed margin 0.94
+93,0.25,1.6596549928188324,0.08209649026393892,wheat,,out-of-ensemble,fixed margin 0.94
+96,0.25,1.5301918476819991,0.06306361854076387,wheat,,out-of-ensemble,fixed margin 0.94
+99,0.25,1.2422196686267852,0.027088835835456876,wheat,,out-of-ensemble,fixed margin 0.94
+105,0.25,1.3778001368045807,0.036433109641075156,wheat,,out-of-ensemble,fixed margin 0.94
+111,0.25,1.3391945600509643,0.053040790557861345,wheat,,out-of-ensemble,fixed margin 0.94
+114,0.25,1.348316878080368,0.0597061187028885,wheat,,out-of-ensemble,fixed margin 0.94
+120,0.25,1.2949058085680007,0.04804008901119233,wheat,,out-of-ensemble,fixed margin 0.94
+123,0.25,1.4466811150312424,0.04590151011943819,wheat,,out-of-ensemble,fixed margin 0.94
+126,0.25,1.3124774545431137,0.03141242563724517,wheat,,out-of-ensemble,fixed margin 0.94
+129,0.25,1.3708722740411758,0.04898269772529604,wheat,,out-of-ensemble,fixed margin 0.94
+132,0.5,1.2066395729780197,0.019986552000045787,wheat,,out-of-ensemble,fixed margin 0.94
+138,0.25,1.3819942355155945,0.0597360044717789,wheat,,out-of-ensemble,fixed margin 0.94
+144,0.25,1.580597573518753,0.04410847723484043,wheat,,out-of-ensemble,fixed margin 0.94
+147,0.25,1.4977358549833297,0.05278176665306092,wheat,,out-of-ensemble,fixed margin 0.94
+150,0.25,1.3939870864152908,0.064401975274086,wheat,,out-of-ensemble,fixed margin 0.94
+159,0.25,1.4008200705051421,0.05639120340347292,wheat,,out-of-ensemble,fixed margin 0.94
+162,0.25,1.3920254588127137,0.0206281810998917,rice,,out-of-ensemble,fixed margin 0.94
+165,1.0,1.118803122639656,0.0,rice,,out-of-ensemble,fixed margin 0.94
+171,1.0,1.119736048579216,0.0,rice,,out-of-ensemble,fixed margin 0.94
+174,1.0,1.1377160519361496,0.0,rice,,out-of-ensemble,fixed margin 0.94
+177,0.5,1.5563185811042786,0.021749728918075584,rice,,out-of-ensemble,fixed margin 0.94
+183,1.0,1.1270582795143127,0.0,rice,,out-of-ensemble,fixed margin 0.94
+186,1.0,1.1060609728097917,0.0,rice,,out-of-ensemble,fixed margin 0.94
+189,0.75,1.1343046188354493,0.0011741340160369984,rice,,out-of-ensemble,fixed margin 0.94
+192,0.25,1.240854650735855,0.01009047627449039,rice,,out-of-ensemble,fixed margin 0.94
+195,0.75,1.1340054750442505,0.0010358959436416737,rice,,out-of-ensemble,fixed margin 0.94
+201,1.0,1.1223508775234223,0.0,rice,,out-of-ensemble,fixed margin 0.94
+204,0.75,1.1457138061523438,0.0020483374595642034,rice,,out-of-ensemble,fixed margin 0.94
+207,0.75,1.1394960463047028,0.001606208086013805,rice,,out-of-ensemble,fixed margin 0.94
+210,1.0,1.1321421951055526,0.0,rice,,out-of-ensemble,fixed margin 0.94
+213,1.0,1.140496227145195,0.0,rice,,out-of-ensemble,fixed margin 0.94
+216,1.0,1.1390237361192703,0.0,rice,,out-of-ensemble,fixed margin 0.94
+219,0.0,1.7255139462649822,0.09359808042645457,rice,,out-of-ensemble,fixed margin 0.94
+222,0.75,1.139895647764206,0.0018045276403427235,rice,,out-of-ensemble,fixed margin 0.94
+231,1.0,1.123540648818016,0.0,rice,,out-of-ensemble,fixed margin 0.94
+234,0.25,1.313051038980484,0.026184293627738997,rice,,out-of-ensemble,fixed margin 0.94
+243,1.0,1.0696203604340553,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+246,1.0,1.075771152973175,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+255,1.0,1.118125307559967,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+258,1.0,1.0674222245812417,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+267,1.0,1.0837532520294189,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+270,1.0,1.1649101704359055,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+294,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+303,1.0,1.162563827633858,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+315,1.0,1.0775999411940576,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+318,1.0,1.0673749819397926,0.0,soybean,,out-of-ensemble,fixed margin 0.94
+327,0.25,1.5276507914066315,0.03743912875652314,potato,,out-of-ensemble,fixed margin 0.94
+330,1.0,1.2410240650177002,0.0,potato,,out-of-ensemble,fixed margin 0.94
+333,0.75,1.4292119294404984,8.65399837493841e-05,potato,,out-of-ensemble,fixed margin 0.94
+342,0.25,1.5431941524147987,0.0367747873067856,potato,,out-of-ensemble,fixed margin 0.94
+348,0.25,1.2283711344003678,0.01018993556499484,potato,,out-of-ensemble,fixed margin 0.94
+354,0.25,1.2065490275621413,0.0022392988204956443,potato,,out-of-ensemble,fixed margin 0.94
+369,0.25,1.3041392892599106,0.00654624104499818,potato,,out-of-ensemble,fixed margin 0.94
+372,0.25,1.543934240937233,0.02797127564748128,potato,,out-of-ensemble,fixed margin 0.94
+378,0.25,1.5657161116600038,0.05051799416542055,potato,,out-of-ensemble,fixed margin 0.94
+381,0.25,1.5358487367630005,0.04255072325468065,potato,,out-of-ensemble,fixed margin 0.94
+390,0.25,1.6679257526993752,0.036286617815494554,potato,,out-of-ensemble,fixed margin 0.94
+399,0.25,1.490229880809784,0.05353857874870302,potato,,out-of-ensemble,fixed margin 0.94
+0,0.4,1.671613256931305,0.019754917621612543,maize,,in-ensemble,fixed margin 0.96
+3,1.0,1.7749035716056825,0.0,maize,,in-ensemble,fixed margin 0.96
+6,1.0,1.1710328710079192,0.0,maize,,in-ensemble,fixed margin 0.96
+24,1.0,1.0866515707969664,0.0,maize,,in-ensemble,fixed margin 0.96
+30,1.0,1.1906281220912933,0.0,maize,,in-ensemble,fixed margin 0.96
+33,1.0,1.1784438943862914,0.0,maize,,in-ensemble,fixed margin 0.96
+39,1.0,1.0911389762163162,0.0,maize,,in-ensemble,fixed margin 0.96
+42,1.0,1.0846793255209923,0.0,maize,,in-ensemble,fixed margin 0.96
+45,1.0,1.1717361754179,0.0,maize,,in-ensemble,fixed margin 0.96
+57,1.0,1.7205878996849058,0.0,maize,,in-ensemble,fixed margin 0.96
+60,1.0,1.0851627632975578,0.0,maize,,in-ensemble,fixed margin 0.96
+63,1.0,1.1110733085870743,0.0,maize,,in-ensemble,fixed margin 0.96
+66,1.0,1.950558762550354,0.0,maize,,in-ensemble,fixed margin 0.96
+69,1.0,1.2788763284683227,0.0,maize,,in-ensemble,fixed margin 0.96
+72,1.0,1.9302230978012083,0.0,maize,,in-ensemble,fixed margin 0.96
+75,1.0,1.1048216027021407,0.0,maize,,in-ensemble,fixed margin 0.96
+78,1.0,1.2172069156169891,0.0,maize,,in-ensemble,fixed margin 0.96
+81,1.0,1.240549305677414,0.0,wheat,,in-ensemble,fixed margin 0.96
+93,1.0,1.5831514739990236,0.0,wheat,,in-ensemble,fixed margin 0.96
+96,1.0,1.482583429813385,0.0,wheat,,in-ensemble,fixed margin 0.96
+99,1.0,1.2108936077356338,0.0,wheat,,in-ensemble,fixed margin 0.96
+105,1.0,1.3059852993488312,0.0,wheat,,in-ensemble,fixed margin 0.96
+111,1.0,1.3254007482528687,0.0,wheat,,in-ensemble,fixed margin 0.96
+114,1.0,1.2977900350093843,0.0,wheat,,in-ensemble,fixed margin 0.96
+120,1.0,1.22357257604599,0.0,wheat,,in-ensemble,fixed margin 0.96
+123,1.0,1.3323574304580688,0.0,wheat,,in-ensemble,fixed margin 0.96
+126,1.0,1.2615049552917479,0.0,wheat,,in-ensemble,fixed margin 0.96
+129,1.0,1.2900139272212983,0.0,wheat,,in-ensemble,fixed margin 0.96
+132,1.0,1.1692229437828066,0.0,wheat,,in-ensemble,fixed margin 0.96
+138,1.0,1.3284783673286438,0.0,wheat,,in-ensemble,fixed margin 0.96
+144,1.0,1.4605246567726133,0.0,wheat,,in-ensemble,fixed margin 0.96
+147,1.0,1.3910225319862366,0.0,wheat,,in-ensemble,fixed margin 0.96
+150,1.0,1.3233699929714202,0.0,wheat,,in-ensemble,fixed margin 0.96
+159,1.0,1.3234105479717253,0.0,wheat,,in-ensemble,fixed margin 0.96
+162,1.0,1.3633983159065246,0.0,rice,,in-ensemble,fixed margin 0.96
+165,1.0,1.0752697229385375,0.0,rice,,in-ensemble,fixed margin 0.96
+171,1.0,1.0755979263782502,0.0,rice,,in-ensemble,fixed margin 0.96
+174,1.0,1.0860227027535438,0.0,rice,,in-ensemble,fixed margin 0.96
+177,1.0,1.5000890636444093,0.0,rice,,in-ensemble,fixed margin 0.96
+183,1.0,1.079336661696434,0.0,rice,,in-ensemble,fixed margin 0.96
+186,1.0,1.097162237763405,0.0,rice,,in-ensemble,fixed margin 0.96
+189,1.0,1.0854504004120826,0.0,rice,,in-ensemble,fixed margin 0.96
+192,1.0,1.2192630326747893,0.0,rice,,in-ensemble,fixed margin 0.96
+195,1.0,1.0853135293722151,0.0,rice,,in-ensemble,fixed margin 0.96
+201,1.0,1.074972512125969,0.0,rice,,in-ensemble,fixed margin 0.96
+204,1.0,1.0927179116010666,0.0,rice,,in-ensemble,fixed margin 0.96
+207,1.0,1.0882842561602593,0.0,rice,,in-ensemble,fixed margin 0.96
+210,1.0,1.0836504670977594,0.0,rice,,in-ensemble,fixed margin 0.96
+213,1.0,1.0866300129890443,0.0,rice,,in-ensemble,fixed margin 0.96
+216,1.0,1.0859919077157973,0.0,rice,,in-ensemble,fixed margin 0.96
+219,1.0,1.6261100322008133,0.0,rice,,in-ensemble,fixed margin 0.96
+222,1.0,1.1222663962841035,0.0,rice,,in-ensemble,fixed margin 0.96
+231,1.0,1.0776346158981323,0.0,rice,,in-ensemble,fixed margin 0.96
+234,1.0,1.188582995533943,0.0,rice,,in-ensemble,fixed margin 0.96
+243,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+246,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+255,1.0,1.0524799939990044,0.0,soybean,,in-ensemble,fixed margin 0.96
+258,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+267,1.0,1.0762205922603607,0.0,soybean,,in-ensemble,fixed margin 0.96
+270,1.0,1.0752490782737731,0.0,soybean,,in-ensemble,fixed margin 0.96
+294,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+303,1.0,1.0748076483607292,0.0,soybean,,in-ensemble,fixed margin 0.96
+315,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+318,1.0,1.0,0.0,soybean,,in-ensemble,fixed margin 0.96
+327,1.0,1.4250419974327087,0.0,potato,,in-ensemble,fixed margin 0.96
+330,1.0,1.180253295302391,0.0,potato,,in-ensemble,fixed margin 0.96
+333,1.0,1.2949905800819397,0.0,potato,,in-ensemble,fixed margin 0.96
+342,1.0,1.447615647315979,0.0,potato,,in-ensemble,fixed margin 0.96
+348,1.0,1.15432451069355,0.0,potato,,in-ensemble,fixed margin 0.96
+354,1.0,1.1568325990438462,0.0,potato,,in-ensemble,fixed margin 0.96
+369,1.0,1.1880791211128234,0.0,potato,,in-ensemble,fixed margin 0.96
+372,1.0,1.4866427838802339,0.0,potato,,in-ensemble,fixed margin 0.96
+378,1.0,1.3933939623832703,0.0,potato,,in-ensemble,fixed margin 0.96
+381,1.0,1.4277512639760972,0.0,potato,,in-ensemble,fixed margin 0.96
+390,1.0,1.6953270196914674,0.0,potato,,in-ensemble,fixed margin 0.96
+399,1.0,1.370004369020462,0.0,potato,,in-ensemble,fixed margin 0.96
+0,0.0,1.574984511733055,0.12515044510364534,maize,,out-of-ensemble,fixed margin 0.96
+3,0.25,1.651172536611557,0.04530218839645386,maize,,out-of-ensemble,fixed margin 0.96
+6,1.0,1.1352796733379364,0.0,maize,,out-of-ensemble,fixed margin 0.96
+24,1.0,1.0735155552625657,0.0,maize,,out-of-ensemble,fixed margin 0.96
+30,1.0,1.1624965757131576,0.0,maize,,out-of-ensemble,fixed margin 0.96
+33,1.0,1.1486102551221848,0.0,maize,,out-of-ensemble,fixed margin 0.96
+39,1.0,1.0743568062782287,0.0,maize,,out-of-ensemble,fixed margin 0.96
+42,1.0,1.0701481476426125,0.0,maize,,out-of-ensemble,fixed margin 0.96
+45,0.75,1.1415502071380614,0.0009259909391403365,maize,,out-of-ensemble,fixed margin 0.96
+57,0.25,1.6108757585287095,0.07258920073509215,maize,,out-of-ensemble,fixed margin 0.96
+60,1.0,1.0683297976851462,0.0,maize,,out-of-ensemble,fixed margin 0.96
+63,1.0,1.1266444832086564,0.0,maize,,out-of-ensemble,fixed margin 0.96
+66,0.25,1.816258692741394,0.061470654606819136,maize,,out-of-ensemble,fixed margin 0.96
+69,0.75,1.2854366153478622,0.0021721154451370406,maize,,out-of-ensemble,fixed margin 0.96
+72,0.75,1.7909547865390778,0.011368894577026362,maize,,out-of-ensemble,fixed margin 0.96
+75,1.0,1.0712038710713387,0.0,maize,,out-of-ensemble,fixed margin 0.96
+78,0.25,1.2229688048362732,0.03024897873401647,maize,,out-of-ensemble,fixed margin 0.96
+81,0.5,1.1812084764242172,0.005920019745826732,wheat,,out-of-ensemble,fixed margin 0.96
+93,0.25,1.5293332159519195,0.04958266615867615,wheat,,out-of-ensemble,fixed margin 0.96
+96,0.5,1.4064869463443757,0.0307429999113083,wheat,,out-of-ensemble,fixed margin 0.96
+99,0.5,1.1823361963033676,0.00783598721027376,wheat,,out-of-ensemble,fixed margin 0.96
+105,0.75,1.2306296914815902,0.0025655567646026556,wheat,,out-of-ensemble,fixed margin 0.96
+111,0.25,1.2843749135732652,0.0331895858049393,wheat,,out-of-ensemble,fixed margin 0.96
+114,0.25,1.2642961859703064,0.02899512946605684,wheat,,out-of-ensemble,fixed margin 0.96
+120,0.5,1.1776241451501845,0.007005095481872559,wheat,,out-of-ensemble,fixed margin 0.96
+123,0.5,1.3021075546741485,0.011795172095298762,wheat,,out-of-ensemble,fixed margin 0.96
+126,0.5,1.2345715284347536,0.010338130593299855,wheat,,out-of-ensemble,fixed margin 0.96
+129,0.5,1.250557366013527,0.014072769880294794,wheat,,out-of-ensemble,fixed margin 0.96
+132,0.75,1.1550486207008361,0.003621435165405279,wheat,,out-of-ensemble,fixed margin 0.96
+138,0.5,1.276939684152603,0.02456746101379395,wheat,,out-of-ensemble,fixed margin 0.96
+144,0.5,1.4231819212436676,0.01572869122028353,wheat,,out-of-ensemble,fixed margin 0.96
+147,0.5,1.3616571962833404,0.02082914113998416,wheat,,out-of-ensemble,fixed margin 0.96
+150,0.25,1.285447922348976,0.027398791909217846,wheat,,out-of-ensemble,fixed margin 0.96
+159,0.5,1.2907575637102127,0.022455149888992332,wheat,,out-of-ensemble,fixed margin 0.96
+162,0.75,1.3146638095378875,0.0064010232686996515,rice,,out-of-ensemble,fixed margin 0.96
+165,1.0,1.0588534206151963,0.0,rice,,out-of-ensemble,fixed margin 0.96
+171,1.0,1.0593336194753646,0.0,rice,,out-of-ensemble,fixed margin 0.96
+174,1.0,1.0683720394968985,0.0,rice,,out-of-ensemble,fixed margin 0.96
+177,0.75,1.4226705729961395,0.007166087627410889,rice,,out-of-ensemble,fixed margin 0.96
+183,1.0,1.063024839758873,0.0,rice,,out-of-ensemble,fixed margin 0.96
+186,1.0,1.0526461124420168,0.0,rice,,out-of-ensemble,fixed margin 0.96
+189,1.0,1.0665866330265998,0.0,rice,,out-of-ensemble,fixed margin 0.96
+192,1.0,1.1811302870512008,0.0,rice,,out-of-ensemble,fixed margin 0.96
+195,1.0,1.0662217885255814,0.0,rice,,out-of-ensemble,fixed margin 0.96
+201,1.0,1.0606973856687545,0.0,rice,,out-of-ensemble,fixed margin 0.96
+204,1.0,1.072299498319626,0.0,rice,,out-of-ensemble,fixed margin 0.96
+207,1.0,1.068939359486103,0.0,rice,,out-of-ensemble,fixed margin 0.96
+210,1.0,1.0654123708605765,0.0,rice,,out-of-ensemble,fixed margin 0.96
+213,1.0,1.0698647558689118,0.0,rice,,out-of-ensemble,fixed margin 0.96
+216,1.0,1.068768748641014,0.0,rice,,out-of-ensemble,fixed margin 0.96
+219,0.25,1.520042385905981,0.03947457224130632,rice,,out-of-ensemble,fixed margin 0.96
+222,1.0,1.0695129215717316,0.0,rice,,out-of-ensemble,fixed margin 0.96
+231,1.0,1.0613646358251572,0.0,rice,,out-of-ensemble,fixed margin 0.96
+234,1.0,1.1566239804029466,0.0,rice,,out-of-ensemble,fixed margin 0.96
+243,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+246,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+255,1.0,1.05884540528059,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+258,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+267,1.0,1.0837532520294189,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+270,1.0,1.0824452370405195,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+294,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+303,1.0,1.0816388681530953,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+315,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+318,1.0,1.0,0.0,soybean,,out-of-ensemble,fixed margin 0.96
+327,0.25,1.3880624055862427,0.0073282659053802435,potato,,out-of-ensemble,fixed margin 0.96
+330,1.0,1.1616879224777221,0.0,potato,,out-of-ensemble,fixed margin 0.96
+333,1.0,1.2615919291973114,0.0,potato,,out-of-ensemble,fixed margin 0.96
+342,0.25,1.416363187134266,0.00994877070188524,potato,,out-of-ensemble,fixed margin 0.96
+348,1.0,1.1520609587430954,0.0,potato,,out-of-ensemble,fixed margin 0.96
+354,1.0,1.1378890454769135,0.0,potato,,out-of-ensemble,fixed margin 0.96
+369,1.0,1.153921404480934,0.0,potato,,out-of-ensemble,fixed margin 0.96
+372,0.25,1.4747222810983658,0.013639900088310286,potato,,out-of-ensemble,fixed margin 0.96
+378,0.25,1.4082748293876648,0.016848623752594022,potato,,out-of-ensemble,fixed margin 0.96
+381,0.25,1.4107643999159336,0.01469219401478769,potato,,out-of-ensemble,fixed margin 0.96
+390,0.25,1.6679257526993752,0.036286617815494554,potato,,out-of-ensemble,fixed margin 0.96
+399,0.25,1.3331454992294312,0.012408727407455467,potato,,out-of-ensemble,fixed margin 0.96

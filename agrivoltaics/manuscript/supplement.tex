@@ -16,7 +16,7 @@
 \linenumbers
 \biboptions{authoryear}
 
-\journal{Artificial Intelligence in Agriculture}
+\journal{Agricultural Systems}
 
 \begin{document}
 \begin{frontmatter}
@@ -34,6 +34,11 @@
 \input{sections/extra}
 \renewcommand{\appendix}{}
 \input{sections/appendix}
+
+\section{Design under shade-response uncertainty: conformal and learned margins}\label{sec:supp-design}
+\emph{Conformal risk control.} For each pair, the loss of a margin $d$ is the share of the held-out members under which the pair's mean test retention is below 0.9 (members 0, 3, 5, 8 and 10 of ensemble E2; the design belief is the mean of the other four). A margin is calibrated on the pairs of the two splits that are not the test split, excluding any pair that is also held out in the test split (a pair can be held out in several splits), by the smallest $d$ on a grid from 0.90 to 0.975 (step 0.005) with $n/(n+1)\,\hat R(d)+1/(n+1)\le\alpha$, $n$ the number of calibration pairs; the guarantee concerns the expected loss for a new pair, that is the average over members, and assumes exchangeable pairs, which spatial blocks and shared years only approximate. Table~\ref{tab:supconformal} gives the margins and the results by split. \emph{Learned design.} The network of Table~\ref{tab:suplearned} chooses among the ten densities of the grid (0.05 to 0.50) or no array; its inputs are, at each density, the mean, minimum and maximum over the other four members of the historical (2001--2014) mean retention, together with a crop indicator and the absolute latitude, and its loss is the expected value over the softmax of $-\mathrm{LER}+\lambda\,\mathbf{1}[r<0.9]$ under the held-out member; the decision is the argmax. Because the network sees the spread between members and the margins see only their mean, the comparison is not between identical information; the margins have one parameter that is read off the test results and the network is fitted on training pairs, and the comparison favours the margins in that respect. The oracle (design under the true response) reaches 86.6\% of pairs at the floor and an LER of 1.486 inside the ensemble and 87.8\% and 1.283 outside it. The numbers of this section come from the re-run of the pipeline described in the main text.
+\input{tables/supconformal}
+\input{tables/suplearned}
 
 \section{Shade-response model, ensembles and economics: further tables}\label{sup:model}
 \input{tables/mlcv}

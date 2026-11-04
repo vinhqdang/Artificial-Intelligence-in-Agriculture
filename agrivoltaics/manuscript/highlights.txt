@@ -1,6 +1,6 @@
 Highlights
-- Light sharing lets trackers carry 2-3x more modules at a 90% yield floor.
-- A neural controller adds 0.007 LER over a tuned window, nil at equal retention.
-- Mean-response designs leave 71% of pairs at the floor; an oracle reaches 87%.
-- Conformal margins hold inside the ensemble; no rule is safe outside it.
-- Plants beat agrivoltaics above 48 USD/MWh (64 at equal capex per watt).
+- Light sharing lets trackers carry 2-3x more modules at a strict 90% yield floor.
+- A neural controller adds 0.007 LER over a tuned window, null at equal retention.
+- Mean-response designs leave 70% of pairs at the floor; an oracle reaches 87%.
+- Conformal margins hold inside the ensemble; a learned design does worse.
+- Even with the mean met, 24-31% of seasons miss the 90% yield floor.

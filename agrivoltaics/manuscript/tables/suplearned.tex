@@ -1,0 +1,30 @@
+\begin{table}[t]
+\centering\small
+\caption{Learned design network (one hidden layer of 32 units, 400 full-batch Adam steps at a learning rate of 0.01 with weight decay $10^{-3}$, inputs standardised on the training pairs, three seeds): compliance and LER of the pairs (mean over seeds, splits and held-out members or responses), and LER minus that of the fixed-margin frontier at the same compliance with a 95\% cluster-bootstrap interval over pairs (500 resamples). Negative values mean that the network is worse than a margin. The network has the inputs described in the main text and is trained on the pairs of two splits that are not in the test split.}\label{tab:suplearned}
+\begin{tabular}{lcccc}
+\toprule
+Truth & $\lambda$ & Pairs at floor (\%) & LER & LER minus margin frontier\\
+\midrule
+inside & 0.5 & 44.4 & 1.645 & --\\
+inside & 0.6 & 75.1 & 1.456 & -0.020 (-0.037, -0.003)\\
+inside & 0.7 & 81.8 & 1.414 & -0.038 (-0.056, -0.023)\\
+inside & 0.8 & 84.2 & 1.401 & -0.044 (-0.061, -0.024)\\
+inside & 0.9 & 84.9 & 1.385 & -0.058 (-0.077, -0.036)\\
+inside & 1 & 86.7 & 1.378 & -0.057 (-0.076, -0.032)\\
+inside & 1.25 & 91.2 & 1.355 & -0.055 (-0.079, -0.032)\\
+inside & 1.5 & 94.2 & 1.342 & -0.054 (-0.076, +0.015)\\
+inside & 2 & 96.7 & 1.330 & -0.009 (-0.071, +0.070)\\
+inside & 3 & 97.6 & 1.320 & +0.009 (-0.070, +0.077)\\
+outside & 0.5 & 19.8 & 1.568 & --\\
+outside & 0.6 & 30.8 & 1.395 & -0.001 (-0.027, +0.021)\\
+outside & 0.7 & 34.8 & 1.359 & -0.009 (-0.028, +0.014)\\
+outside & 0.8 & 35.1 & 1.345 & -0.020 (-0.038, -0.001)\\
+outside & 0.9 & 36.3 & 1.330 & -0.028 (-0.049, -0.007)\\
+outside & 1 & 36.2 & 1.328 & -0.031 (-0.050, -0.010)\\
+outside & 1.25 & 39.3 & 1.307 & -0.037 (-0.055, -0.019)\\
+outside & 1.5 & 41.2 & 1.295 & -0.044 (-0.061, -0.027)\\
+outside & 2 & 42.5 & 1.285 & -0.051 (-0.067, -0.033)\\
+outside & 3 & 44.7 & 1.275 & -0.057 (-0.071, -0.039)\\
+\bottomrule
+\end{tabular}
+\end{table}

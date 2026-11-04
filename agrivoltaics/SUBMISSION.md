@@ -36,6 +36,7 @@ Open items before submitting:
 - Research data: deposit the code and results in a repository (for example Zenodo) and cite the DOI; the journal requires deposit or a statement of why not.
 - Declaration of generative AI use: the journal requires a statement before the reference list when such tools were used in preparing the manuscript; decide on the wording (Elsevier policy).
 - Read the editorial directions linked from the journal's aims and scope; check the fit once more (whole-farm or landscape-level systems focus).
-- The numbers in the new design section come from a re-run of the pipeline after the computing environment was rebuilt (weather re-downloaded, caches rebuilt); they differ by one or two points from the older design tables in the supplement. Re-run the whole pipeline, or keep the statement in the text, before submission.
+- The numbers in the design section come from a re-run of the pipeline after the computing environment was rebuilt (weather re-downloaded, caches rebuilt); at pair level they agree with the older design tables of the supplement (70% and LER 1.493 for the mean-response design). The controller and economic results are still those of the original run.
+- Round-9 review fixes: pair-level analysis of the design section without overlap between calibration and test pairs, per-crop conformal calibration dropped, learned design compared with the margin frontier with bootstrap intervals, text qualified (single-axis trackers, strict 90% floor, maize).
 - Cover letter; suggested reviewers if wanted.
 - Compile with the fonts and class used here; check the PDF once more for tables and figure legibility at journal size.
