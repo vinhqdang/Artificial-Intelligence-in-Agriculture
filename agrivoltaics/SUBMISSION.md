@@ -61,3 +61,11 @@ Open items before submitting:
 - Files for upload: `agrivoltaics/submission_ComputersElectronicsAgriculture/` (cover letter, abstract, highlights, graphical abstract, LaTeX source zip, manuscript PDF 23 pages, supplement PDF 49 pages, title/abstract/keywords text).
 - Fit risk: the journal treats prototyping on public data without the authors' own experiments as preliminary; a scope return is possible. Fallbacks: Smart Agricultural Technology, Biosystems Engineering.
 - Open items: generative-AI declaration (decide and add if applicable), deposit of code and results with a DOI (the data statement says it will be cited before publication), cover-letter date, submission date and reference number once known.
+
+## Third submission: Computers and Electronics in Agriculture — submitted
+- Submitted: November 2026 (date of the submission-system confirmation to be added).
+- Repository state at submission: commit `289a23c` on `main`.
+- Files submitted (all in `agrivoltaics/submission_ComputersElectronicsAgriculture/`): cover letter, abstract, highlights, graphical abstract, manuscript (LaTeX source zip and PDF, 23 pages), supplementary material (49 pages). Declaration of competing interests was completed in the submission system.
+- Manuscript reference number: to be added when the confirmation e-mail arrives.
+- Still open: the generative-AI declaration (decide and, if applicable, add), the deposit of code and results with a DOI (the data statement says it will be cited before publication), and the date and reference number above.
+- If returned for scope again: Smart Agricultural Technology or Biosystems Engineering.
