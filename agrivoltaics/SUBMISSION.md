@@ -54,3 +54,10 @@ Open items before submitting:
 - Editorial decision, reported 2026-11-08: rejected without review because the manuscript does not fit the scope of the journal; the Editor-in-Chief suggested a more agricultural-technology oriented journal.
 - Both submissions so far (Artificial Intelligence in Agriculture, AIA-D-26-01992; Agricultural Systems, AGSY-D-26-04991) were returned at the initial editorial check, the first without reasons.
 - Next step: choose a journal closer to agricultural technology, engineering or energy and reformat; the compact text, supplement, figures, graphical abstract and cover-letter template are in `agrivoltaics/submission_AgriculturalSystems/` and `agrivoltaics/pdf/`.
+
+## Third submission: Computers and Electronics in Agriculture (package ready)
+- Reformatted for the journal's guide for authors: unstructured abstract of 241 words (limit 250), 7 keywords, 5 highlights of 74 to 81 characters (limit 85), graphical abstract, numbered sections, LaTeX source, Option C data statement.
+- New title: "Differentiable simulation for agrivoltaic tracker control under a yield floor: what learning adds and what shade-response uncertainty costs". The text is reframed around the investigator-developed tools (differentiable simulator, gradient-trained controller, conformal design); economics, global potential and warming are one short subsection, details in the supplement. The text states that the evaluation is by simulation on public data.
+- Files for upload: `agrivoltaics/submission_ComputersElectronicsAgriculture/` (cover letter, abstract, highlights, graphical abstract, LaTeX source zip, manuscript PDF 23 pages, supplement PDF 49 pages, title/abstract/keywords text).
+- Fit risk: the journal treats prototyping on public data without the authors' own experiments as preliminary; a scope return is possible. Fallbacks: Smart Agricultural Technology, Biosystems Engineering.
+- Open items: generative-AI declaration (decide and add if applicable), deposit of code and results with a DOI (the data statement says it will be cited before publication), cover-letter date, submission date and reference number once known.
