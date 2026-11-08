@@ -48,3 +48,9 @@ Open items before submitting:
 - Manuscript reference number: to be added when the confirmation e-mail arrives.
 - Still open: the generative-AI declaration (decide and, if applicable, add), the deposit of code and results in a repository with a DOI (the cover letter and data statement say it will be cited before publication), and the date and reference number above.
 - Keep the build reproducible: `manuscript/build.sh` compiles the supplement and the main text together; the submission package was compiled standalone from the zip.
+
+## Outcome of the Agricultural Systems submission
+- Manuscript reference: AGSY-D-26-04991.
+- Editorial decision, reported 2026-11-08: rejected without review because the manuscript does not fit the scope of the journal; the Editor-in-Chief suggested a more agricultural-technology oriented journal.
+- Both submissions so far (Artificial Intelligence in Agriculture, AIA-D-26-01992; Agricultural Systems, AGSY-D-26-04991) were returned at the initial editorial check, the first without reasons.
+- Next step: choose a journal closer to agricultural technology, engineering or energy and reformat; the compact text, supplement, figures, graphical abstract and cover-letter template are in `agrivoltaics/submission_AgriculturalSystems/` and `agrivoltaics/pdf/`.
